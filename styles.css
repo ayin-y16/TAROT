@@ -1340,289 +1340,44 @@ img {
   }
 }
 
-/* Full-screen physical deck override */
-.page--draw {
-  overflow: visible;
+/* =========================================================
+   Final Responsive Overrides
+   统一处理背景、牌堆布局和移动端触顶渲染
+========================================================= */
+
+/* 防止移动端上下回弹造成页面层闪烁 */
+html,
+body {
+  overscroll-behavior-y: none;
 }
 
-.draw-layout {
-  grid-template-rows: minmax(500px, 68vh) auto minmax(150px, 0.34fr);
-  overflow: visible;
+body {
+  overflow-x: hidden;
+  overflow-anchor: none;
 }
 
-.deck-viewport {
-  height: min(68vh, 720px);
-  min-height: 500px;
-  overflow: visible;
-  mask-image: none;
-  -webkit-mask-image: none;
-  touch-action: none;
-}
-
-.deck-track {
-  top: 31%;
-}
-
-.deck-card {
-  transition:
-    transform 0.1s cubic-bezier(0.16, 0.9, 0.24, 1.08),
-    opacity 0.14s ease,
-    filter 0.18s ease,
-    box-shadow 0.2s ease;
-}
-
-.deck-viewport.is-dragging .deck-card {
-  transition-duration: 0.035s;
-}
-
-.deck-card.is-active {
-  animation: selected-card-glow 1.8s ease-in-out infinite;
-}
-
-@media (max-width: 767px) and (orientation: portrait) {
-  .draw-layout {
-    grid-template-columns: minmax(0, 45%) minmax(0, 55%);
-    grid-template-rows: minmax(360px, 1fr) auto;
-    overflow: visible;
-  }
-
-  .deck-viewport {
-    height: 100%;
-    min-height: 360px;
-    grid-column: 1;
-    grid-row: 1;
-    overflow: visible;
-    touch-action: pan-x;
-    mask-image: none;
-    -webkit-mask-image: none;
-  }
-
-  .deck-track {
-    top: 50%;
-  }
-
-  .drawn-area {
-    grid-column: 2;
-    grid-row: 1;
-  }
-
-  .draw-control-panel {
-    grid-column: 1 / -1;
-    grid-row: 2;
-  }
-}
-
-@media (max-height: 600px) and (orientation: landscape) {
-  .draw-layout {
-    grid-template-rows: minmax(300px, 72vh) auto minmax(70px, 0.22fr);
-  }
-
-  .deck-viewport {
-    height: 72vh;
-    min-height: 300px;
-  }
-
-  .deck-track {
-    top: 27%;
-  }
-}
-
-/* 牌背编号：去掉圆圈，改为灰黑色文字 */
-.deck-card__number {
-  width: auto;
-  aspect-ratio: auto;
-  border: 0;
-  border-radius: 0;
-  color: #4a4a4a;
-  background: transparent;
-  box-shadow: none;
-  font-family: Georgia, "Times New Roman", serif;
-  font-weight: 600;
-  line-height: 1;
-  transform: translateY(-3px);
-}
-
-/* 修复手机竖屏：已抽牌区域的牌背显示 */
-@media (max-width: 767px) and (orientation: portrait) {
-  .drawn-area {
-    overflow: visible;
-  }
-
-  .drawn-cards {
-    width: 100%;
-    overflow: visible;
-  }
-
-  .drawn-slot {
-    width: min(100%, 104px);
-  }
-
-  /* 三张牌时缩小每张牌 */
-  .drawn-slot:has(~ .drawn-slot:nth-child(3)),
-  .drawn-slot:nth-child(3) ~ .drawn-slot {
-    width: min(30vw, 82px);
-  }
-
-  .drawn-slot__card {
-    display: block;
-    min-height: 126px;
-    background-image: var(--card-back-image);
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-  }
-
-  /* 三张牌时同步缩短高度，保持比例 */
-  .drawn-slot:has(~ .drawn-slot:nth-child(3)) .drawn-slot__card,
-  .drawn-slot:nth-child(3) ~ .drawn-slot .drawn-slot__card {
-    min-height: 100px;
-  }
-}
-
-/* 手机竖屏：三张牌的结果页改为左右滑动，一屏查看一张解读 */
-@media (max-width: 767px) and (orientation: portrait) {
-  .result-reading {
-    width: 100%;
-    padding: 18px 0 25px;
-    overflow: hidden;
-  }
-
-  /* 仅三张牌阵启用横向滑动 */
-  .result-cards:has(.result-card:nth-child(3)) {
-    display: flex;
-    width: 100%;
-    max-width: none;
-    padding: 0;
-    overflow-x: auto;
-    overflow-y: visible;
-    gap: 0;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-  }
-
-  .result-cards:has(.result-card:nth-child(3))::-webkit-scrollbar {
-    display: none;
-  }
-
-  /* 每张牌连同其完整解读占据一个屏幕宽度 */
-  .result-cards:has(.result-card:nth-child(3)) .result-card {
-    width: 100%;
-    min-width: 100%;
-    flex: 0 0 100%;
-    padding: 0 4px 12px;
-    scroll-snap-align: center;
-    scroll-snap-stop: always;
-  }
-
-  /* 横向轻扫优先，文字内容仍可正常上下滚动 */
-  .result-cards:has(.result-card:nth-child(3)) .result-card__interpretation {
-    width: min(100%, 360px);
-  }
-}
-
-/* 横屏：保留无缝全屏牌堆，同时为已抽牌区预留首屏空间。 */
-@media (orientation: landscape) and (min-width: 768px) {
-  .draw-layout {
-    grid-template-rows: minmax(360px, 58vh) auto minmax(118px, 0.3fr);
-  }
-
-  .deck-viewport {
-    height: min(58vh, 610px);
-    min-height: 360px;
-  }
-
-  .drawn-area {
-    min-height: 118px;
-  }
-
-  .drawn-cards {
-    min-height: 108px;
-    gap: clamp(14px, 3vw, 34px);
-  }
-
-  .drawn-slot {
-    width: clamp(58px, 8vw, 94px);
-  }
-}
-
-/* 手机竖屏：独立调整 Y 轴 */
-@media (max-width: 767px) and (orientation: portrait) {
-  .page--draw .deck-track {
-    transform: translateY(68px); /* 牌堆：负数上移，正数下移 */
-  }
-
-  .page--draw .draw-control-panel {
-    position: relative;
-    z-index: 20;
-    transform: translateY(-90px); /* 提示与按钮：负数上移，正数下移 */
-  }
-}
-
-/* 电脑横屏：独立调整 Y 轴 */
-@media (min-width: 768px) and (orientation: landscape) {
-  .page--draw .deck-track {
-    transform: translateY(42px); /* 牌堆 */
-  }
-
-  .page--draw .draw-control-panel {
-    position: relative;
-    z-index: 20;
-    transform: translateY(-130px); /* 提示与按钮 */
-  }
-/* 横屏：只让当前高出来的高亮牌下移，不移动整个牌堆 */
-  .page--draw .deck-card.is-active {
-    top: 40px;
-  }
-
-  /* 横屏：已抽出的牌整体上移 */
-  .page--draw .drawn-area {
-    transform: translateY(-100px);
-  }
-}
-
-/* 手机竖屏：牌库筛选标签横向滑动，首个“全部”完整显示 */
-@media (max-width: 767px) and (orientation: portrait) {
-  .page--library .library-toolbar {
-    min-width: 0;
-    overflow: visible;
-  }
-
-  .page--library #library-filters.filter-row {
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: flex-start !important;
-    align-items: center;
-    gap: 8px;
-
-    /* 不再使用负 margin 或扩大宽度，避免第一个标签被页面裁掉 */
-    width: 100%;
-    min-width: 0;
-    margin: 0;
-    padding: 2px 1px 10px;
-
-    overflow-x: auto;
-    overflow-y: hidden;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
-    touch-action: pan-x;
-    overscroll-behavior-x: contain;
-  }
-
-  .page--library #library-filters.filter-row::-webkit-scrollbar {
-    display: none;
-  }
-
-  .page--library #library-filters.filter-row .filter-chip {
-    flex: 0 0 auto;
-    white-space: nowrap;
-  }
-}
-
-/* 全站背景层级：页面内容 > 宝石动效 > 纹理 > 紫色遮罩 > 背景图 */
+/* 背景使用稳定的大视口高度，避免地址栏变化导致背景缩放 */
 .background-layer {
+  position: fixed;
   z-index: -4;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  background-color: #000;
+  background-image: var(--bg-image);
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: cover;
+  filter: brightness(1.8) saturate(0.64) contrast(1.08);
+  transform: none;
+  will-change: auto;
+}
+
+@supports (height: 100lvh) {
+  .background-layer {
+    height: 100lvh;
+  }
 }
 
 .background-overlay {
@@ -1643,19 +1398,17 @@ img {
   pointer-events: none;
 }
 
-/* 确保所有页面、按钮和表单始终在动效上面。 */
 .page {
   position: relative;
   z-index: 1;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .gemstone-orbit {
-    opacity: 0.55;
-  }
+/* 抽牌页不让浏览器接管上下回弹 */
+.page--draw {
+  overflow: visible;
+  overscroll-behavior: none;
 }
 
-/* 抽牌页保持牌堆完整溢出显示；拖动手势不交给浏览器页面滚动。 */
 #draw-page .deck-viewport {
   overflow: visible;
   touch-action: none;
@@ -1664,20 +1417,412 @@ img {
   -webkit-mask-image: none;
 }
 
-/* 背景图：固定比例、固定位置，不跟随页面滚动或内容高度变化。 */
-.background-layer {
-  position: fixed;
-  z-index: -4;
-  inset: 0;
-  pointer-events: none;
-  background-color: #000;
-  background-image: var(--bg-image);
-  background-repeat: no-repeat;
-  background-position: center top;
-  background-size: auto 100%;
-  transform: none;
+/* 牌堆卡牌的稳定渲染层 */
+.deck-card {
+  will-change: transform, opacity, filter;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform-style: preserve-3d;
+  transition:
+    transform 100ms cubic-bezier(0.16, 0.9, 0.24, 1.08),
+    opacity 140ms ease,
+    box-shadow 180ms ease;
 }
 
+/* 拖动时不等待 transition，避免触顶时多帧叠加 */
+.deck-viewport.is-dragging .deck-card {
+  transition: none;
+}
+
+/*
+ * 保留高亮效果，但不再让高亮动画修改 filter。
+ * filter 和 JS 的 transform 同时变化时，部分手机浏览器会闪屏。
+ */
+.deck-card.is-active {
+  border-color: var(--gold-bright);
+  filter: brightness(1.2) saturate(1.15);
+  animation: selected-card-glow 2.2s ease-in-out infinite;
+}
+
+@keyframes selected-card-glow {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 2px rgba(227, 196, 255, 0.28),
+      0 17px 38px rgba(0, 0, 0, 0.68),
+      0 0 22px rgba(137, 232, 215, 0.34),
+      0 0 42px rgba(176, 123, 255, 0.24);
+  }
+
+  50% {
+    box-shadow:
+      0 0 0 2px rgba(227, 196, 255, 0.42),
+      0 17px 38px rgba(0, 0, 0, 0.68),
+      0 0 30px rgba(137, 232, 215, 0.58),
+      0 0 70px rgba(176, 123, 255, 0.42);
+  }
+}
+
+/*
+ * 触顶时原来的 deck-bump 会给整个牌堆 viewport 添加 transform，
+ * 和牌堆内部卡牌的 transform 叠加后容易闪烁。
+ * 桌面端保留反馈，手机端改为不移动整个容器。
+ */
+.deck-viewport.is-bumping {
+  animation: deck-bump 0.26s ease-out;
+}
+
+@keyframes deck-bump {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  35% {
+    transform: translate3d(7px, 0, 0);
+  }
+}
+
+/* 牌背编号 */
+.deck-card__number {
+  width: auto;
+  aspect-ratio: auto;
+  border: 0;
+  border-radius: 0;
+  color: #4a4a4a;
+  background: transparent;
+  box-shadow: none;
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 600;
+  line-height: 1;
+  transform: translateY(-3px);
+}
+
+/* 桌面端抽牌布局 */
+@media (min-width: 768px) {
+  .draw-layout {
+    grid-template-rows: minmax(360px, 58vh) auto minmax(118px, 0.3fr);
+    overflow: visible;
+  }
+
+  .deck-viewport {
+    height: min(58vh, 610px);
+    min-height: 360px;
+  }
+
+  .deck-track {
+    top: 31%;
+    transform: translateY(42px);
+  }
+
+  .draw-control-panel {
+    position: relative;
+    z-index: 20;
+    transform: translateY(-130px);
+  }
+
+  .drawn-area {
+    min-height: 118px;
+    transform: translateY(-100px);
+  }
+
+  .drawn-cards {
+    min-height: 108px;
+    gap: clamp(14px, 3vw, 34px);
+  }
+
+  .drawn-slot {
+    width: clamp(58px, 8vw, 94px);
+  }
+
+  .deck-card.is-active {
+    top: 40px;
+  }
+}
+
+/* 小高度横屏 */
+@media (max-height: 600px) and (orientation: landscape) {
+  :root {
+    --deck-card-w: clamp(64px, 12vw, 104px);
+    --result-card-w: clamp(105px, 17vh, 155px);
+  }
+
+  .page {
+    padding-top: max(10px, env(safe-area-inset-top));
+    padding-bottom: max(10px, env(safe-area-inset-bottom));
+  }
+
+  .page-header {
+    min-height: 38px;
+  }
+
+  .icon-button {
+    width: 34px;
+    height: 34px;
+  }
+
+  .draw-layout {
+    grid-template-rows: minmax(300px, 72vh) auto minmax(70px, 0.22fr);
+  }
+
+  .deck-viewport {
+    height: 72vh;
+    min-height: 300px;
+  }
+
+  .deck-track {
+    top: 27%;
+  }
+
+  .draw-control-panel {
+    gap: 5px;
+    padding: 2px 0;
+  }
+
+  .draw-prompt__hint {
+    display: none;
+  }
+
+  .drawn-area,
+  .drawn-cards {
+    min-height: 80px;
+  }
+
+  .drawn-slot {
+    width: clamp(55px, 8vw, 82px);
+  }
+
+  .result-reading {
+    padding-top: 12px;
+  }
+
+  .result-card__interpretation {
+    padding-top: 7px;
+  }
+}
+
+/* 手机竖屏 */
+@media (max-width: 767px) and (orientation: portrait) {
+  :root {
+    --deck-card-w: clamp(108px, 30vw, 132px);
+    --result-card-w: min(58vw, 215px);
+  }
+
+  .page {
+    padding-right: 14px;
+    padding-left: 14px;
+  }
+
+  .spread-choice-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .spread-choice-card {
+    min-height: 220px;
+  }
+
+  .draw-layout {
+    min-height: calc(100svh - 75px);
+    grid-template-columns: minmax(0, 45%) minmax(0, 55%);
+    grid-template-rows: minmax(360px, 1fr) auto;
+    overflow: visible;
+  }
+
+  .deck-viewport {
+    width: 100%;
+    height: 100%;
+    min-height: 360px;
+    grid-column: 1;
+    grid-row: 1;
+    overflow: visible;
+    touch-action: pan-x;
+  }
+
+  .deck-track {
+    top: 50%;
+    left: 50%;
+    transform: translateY(68px);
+  }
+
+  .deck-focus-ring {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) translateX(12px);
+  }
+
+  .drawn-area {
+    min-height: 0;
+    padding: 5px 5px 90px;
+    overflow: visible;
+    grid-column: 2;
+    grid-row: 1;
+    place-items: center;
+  }
+
+  .drawn-cards {
+    width: 100%;
+    min-height: 0;
+    overflow: visible;
+    flex-direction: column;
+    gap: 11px;
+  }
+
+  .drawn-slot {
+    width: min(100%, 104px);
+    flex-direction: row;
+    gap: 6px;
+  }
+
+  .drawn-slot__label {
+    width: 1em;
+    font-size: 0.67rem;
+    line-height: 1.3;
+    writing-mode: vertical-rl;
+  }
+
+  .drawn-slot__card {
+    display: block;
+    min-height: 126px;
+    background-image: var(--card-back-image);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  /* 三张牌时缩小已抽取牌 */
+  .drawn-slot:has(~ .drawn-slot:nth-child(3)),
+  .drawn-slot:nth-child(3) ~ .drawn-slot {
+    width: min(30vw, 82px);
+  }
+
+  .drawn-slot:has(~ .drawn-slot:nth-child(3)) .drawn-slot__card,
+  .drawn-slot:nth-child(3) ~ .drawn-slot .drawn-slot__card {
+    min-height: 100px;
+  }
+
+  .draw-control-panel {
+    position: relative;
+    z-index: 20;
+    padding: 8px 3px 10px;
+    grid-column: 1 / -1;
+    grid-row: 2;
+    transform: translateY(-90px);
+  }
+
+  .draw-control-panel .primary-button {
+    min-height: 38px;
+    padding: 8px 14px;
+    font-size: 0.8rem;
+  }
+
+  .draw-prompt__hint,
+  .deck-counter {
+    display: none;
+  }
+
+  /*
+   * 手机触顶时不移动整个 viewport。
+   * 牌堆滑动和高亮仍然保留，只取消容易引起闪屏的边界抖动。
+   */
+  .deck-viewport.is-bumping {
+    animation: none;
+  }
+
+  /* 三张牌结果页横向滑动 */
+  .result-reading {
+    width: 100%;
+    padding: 18px 0 25px;
+    overflow: hidden;
+  }
+
+  .result-cards:has(.result-card:nth-child(3)) {
+    display: flex;
+    width: 100%;
+    max-width: none;
+    gap: 0;
+    overflow-x: auto;
+    overflow-y: visible;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .result-cards:has(.result-card:nth-child(3))::-webkit-scrollbar {
+    display: none;
+  }
+
+  .result-cards:has(.result-card:nth-child(3)) .result-card {
+    width: 100%;
+    min-width: 100%;
+    flex: 0 0 100%;
+    padding: 0 4px 12px;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+  }
+
+  .result-cards:has(.result-card:nth-child(3)) .result-card__interpretation {
+    width: min(100%, 360px);
+  }
+
+  .result-cards {
+    grid-template-columns: 1fr;
+    gap: 38px;
+  }
+
+  .result-actions {
+    position: sticky;
+    bottom: 0;
+    padding: 13px 0 max(7px, env(safe-area-inset-bottom));
+    background: linear-gradient(transparent, rgba(9, 7, 19, 0.95) 38%);
+  }
+
+  .library-list {
+    grid-template-columns: 1fr;
+  }
+
+  .card-detail-content {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .detail-card-summary {
+    position: static;
+  }
+
+  .detail-card-summary__image {
+    width: min(190px, 62vw);
+  }
+
+  .page--library #library-filters.filter-row {
+    display: flex;
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+    padding: 2px 1px 10px;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 8px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x;
+    overscroll-behavior-x: contain;
+  }
+
+  .page--library #library-filters.filter-row::-webkit-scrollbar {
+    display: none;
+  }
+
+  .page--library #library-filters .filter-chip {
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+}
+
+/* 背景音乐按钮 */
 .music-toggle {
   position: fixed;
   z-index: 50;
@@ -1714,6 +1859,7 @@ img {
   }
 }
 
+/* 正文间距 */
 .full-interpretation p,
 .detail-meaning-panel__full p {
   margin: 0 0 8px;
@@ -1732,21 +1878,14 @@ img {
   font-size: 1rem;
 }
 
-/* 竖屏移动端：避免浏览器地址栏变化导致背景缩放 */
-@media (max-width: 767px) and (orientation: portrait) {
-  .background-layer {
-    width: 100vw;
-    height: 100lvh;
-    background-size: auto 100lvh;
-    background-position: center top;
+/* 无障碍：用户主动关闭动画时仍然保留布局和功能 */
+@media (prefers-reduced-motion: reduce) {
+  .gemstone-orbit {
+    opacity: 0.55;
   }
 
-  .deck-viewport.is-dragging .deck-card {
-    transition: none;
-  }
-
-  .deck-viewport.is-dragging .deck-card.is-active {
+  .deck-card.is-active,
+  .deck-viewport.is-bumping {
     animation: none;
-    filter: brightness(1.2) saturate(1.12);
   }
 }
