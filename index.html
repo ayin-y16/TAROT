@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta
+      name="description"
+      content="一个支持单牌与过去、现在、未来三牌阵的宝石塔罗抽牌网页。"
+    />
+    <title>宝石塔罗</title>
+
+    <!-- 可选：网络可用时加载更适合塔罗主题的字体；不可用时自动使用系统字体。 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Noto+Serif+SC:wght@300;400;500;600&display=swap"
+  rel="stylesheet"
+/>
+
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+
+<button
+  class="music-toggle"
+  type="button"
+  data-action="toggle-music"
+  aria-label="播放背景音乐"
+  aria-pressed="false"
+  title="播放背景音乐"
+>
+  ♪
+</button>
+
+<audio id="background-music" preload="metadata" loop></audio>
+
+  <body>
+    <div id="app" class="app-shell">
+      <!-- 背景层：路径将在 app.js 的 SITE_CONFIG 中统一配置 -->
+      <div class="background-layer" aria-hidden="true"></div>
+      <div class="background-overlay" aria-hidden="true"></div>
+      <div class="grain-layer" aria-hidden="true"></div>
+      <!-- 全站宝石名称同心圆动效：位于背景与页面内容之间。 -->
+      <canvas id="gemstone-orbit" class="gemstone-orbit" aria-hidden="true"></canvas>
+
+      <!-- =========================================================
+           首页：选择牌阵
+      ========================================================== -->
+      <main id="home-page" class="page page--home is-active" data-page="home">
+        <section class="home-hero" aria-labelledby="home-title">
+          <p class="eyebrow">GEMSTONE TAROT</p>
+          <h1 id="home-title" class="site-title">宝石塔罗</h1>
+          <p class="home-intro">让宝石与塔罗，为你指引此刻的方向。</p>
+
+          <div class="spread-choice-grid" aria-label="选择牌阵">
+            <button
+              class="spread-choice-card"
+              type="button"
+              data-action="start-reading"
+              data-spread="three"
+            >
+              <span class="spread-choice-card__ornament" aria-hidden="true">✦</span>
+              <span class="spread-choice-card__count">THREE CARDS</span>
+              <strong class="spread-choice-card__title">时间之流</strong>
+              <span class="spread-choice-card__description">
+                抽取三张牌，解读过去、现在与未来。
+              </span>
+              <span class="spread-choice-card__positions" aria-hidden="true">
+                <i>过去</i><i>现在</i><i>未来</i>
+              </span>
+            </button>
+
+            <button
+              class="spread-choice-card"
+              type="button"
+              data-action="start-reading"
+              data-spread="single"
+            >
+              <span class="spread-choice-card__ornament" aria-hidden="true">✦</span>
+              <span class="spread-choice-card__count">ONE CARD</span>
+              <strong class="spread-choice-card__title">单牌解读</strong>
+              <span class="spread-choice-card__description">
+                抽取一张牌，获得当下的指引。
+              </span>
+              <span class="spread-choice-card__positions" aria-hidden="true">
+                <i>此刻的指引</i>
+              </span>
+            </button>
+          </div>
+
+          <button
+            class="text-button home-library-link"
+            type="button"
+            data-action="open-library"
+          >
+            浏览完整牌库
+          </button>
+        </section>
+      </main>
+
+      <!-- =========================================================
+           抽牌页
+      ========================================================== -->
+      <main id="draw-page" class="page page--draw" data-page="draw" hidden>
+        <header class="page-header draw-header">
+          <button class="icon-button" type="button" data-action="back-home" aria-label="返回首页">
+            <span aria-hidden="true">←</span>
+          </button>
+
+          <div class="draw-header__title-group">
+            <p id="draw-spread-kicker" class="eyebrow">THREE CARDS</p>
+            <h2 id="draw-spread-title">时间之流</h2>
+          </div>
+
+          <button
+            class="icon-button"
+            type="button"
+            data-action="open-library"
+            aria-label="查看牌库"
+          >
+            <span aria-hidden="true">☷</span>
+          </button>
+        </header>
+
+        <section class="draw-layout" aria-label="抽牌区域">
+          
+          <!-- 扇形牌堆视口。所有卡牌由 app.js 动态生成。 -->
+          <section
+            id="deck-viewport"
+            class="deck-viewport"
+            aria-label="塔罗牌堆，可拖动或滚动选择卡牌"
+            tabindex="0"
+          >
+            <div id="deck-track" class="deck-track"></div>
+
+           
+          </section>
+
+          <!-- 操作提示与抽牌按钮 -->
+          <div class="draw-control-panel">
+           <div class="draw-prompt">
+             <span class="draw-prompt__star" aria-hidden="true">✦</span>
+             <p>选择为你解读难题的宝石</p>
+             <span class="draw-prompt__hint">拖动、滚动、轻扫，或按数字选择牌背</span>
+           </div>
+
+           <button
+               id="draw-current-card"
+               class="primary-button"
+               type="button"
+               data-action="draw-current-card"
+           >
+                抽取这张牌
+           </button>
+         </div>
+
+          <!-- 已经抽出的背面牌；由 app.js 动态生成。 -->
+          <section id="drawn-area" class="drawn-area" aria-label="已抽取的卡牌">
+            <div id="drawn-cards" class="drawn-cards"></div>
+          </section>
+        </section>
+      </main>
+
+      <!-- =========================================================
+           结果页：翻牌与解读
+      ========================================================== -->
+      <main id="result-page" class="page page--result" data-page="result" hidden>
+        <header class="page-header result-header">
+          <button class="icon-button" type="button" data-action="back-home" aria-label="返回首页">
+            <span aria-hidden="true">←</span>
+          </button>
+
+          <div class="result-header__title-group">
+            <p class="eyebrow">YOUR READING</p>
+            <h2 id="result-title">时间之流</h2>
+          </div>
+
+          <button
+            class="icon-button"
+            type="button"
+            data-action="open-library"
+            aria-label="查看牌库"
+          >
+            <span aria-hidden="true">☷</span>
+          </button>
+        </header>
+
+        <!-- 翻牌阶段与结果解读阶段共享此容器。 -->
+        <section id="result-reading" class="result-reading" aria-live="polite">
+          <div id="result-cards" class="result-cards"></div>
+        </section>
+
+        <footer id="result-actions" class="result-actions" hidden>
+          <button class="secondary-button" type="button" data-action="restart-reading">
+            重新抽牌
+          </button>
+          <button class="primary-button" type="button" data-action="open-library">
+            查看牌库
+          </button>
+        </footer>
+      </main>
+
+      <!-- =========================================================
+           牌库列表页
+      ========================================================== -->
+      <main id="library-page" class="page page--library" data-page="library" hidden>
+        <header class="page-header library-header">
+          <button class="icon-button" type="button" data-action="go-back" aria-label="返回上一页">
+            <span aria-hidden="true">←</span>
+          </button>
+
+          <div class="library-header__title-group">
+            <p class="eyebrow">TAROT ARCHIVE</p>
+            <h2>宝石牌库</h2>
+          </div>
+
+          <span class="header-spacer" aria-hidden="true"></span>
+        </header>
+
+        <section class="library-toolbar" aria-label="牌库筛选与搜索">
+          <label class="search-field">
+            <span class="sr-only">搜索卡牌</span>
+            <input
+              id="library-search"
+              type="search"
+              autocomplete="off"
+              placeholder="搜索牌名或宝石名称"
+            />
+            <span aria-hidden="true">⌕</span>
+          </label>
+
+          <div id="library-filters" class="filter-row" role="group" aria-label="牌库分类">
+            <button class="filter-chip is-active" type="button" data-filter="all">全部</button>
+            <button class="filter-chip" type="button" data-filter="major">大阿尔卡那</button>
+            <button class="filter-chip" type="button" data-filter="wands">权杖</button>
+            <button class="filter-chip" type="button" data-filter="cups">圣杯</button>
+            <button class="filter-chip" type="button" data-filter="swords">宝剑</button>
+            <button class="filter-chip" type="button" data-filter="pentacles">星币</button>
+          </div>
+        </section>
+
+        <section id="library-list" class="library-list" aria-label="78 张塔罗牌列表"></section>
+      </main>
+
+      <!-- =========================================================
+           牌库详情页
+      ========================================================== -->
+      <main id="card-detail-page" class="page page--detail" data-page="detail" hidden>
+        <header class="page-header detail-header">
+          <button class="icon-button" type="button" data-action="back-library" aria-label="返回牌库">
+            <span aria-hidden="true">←</span>
+          </button>
+
+          <div class="detail-header__title-group">
+            <p class="eyebrow">CARD ARCHIVE</p>
+            <h2>卡牌释义</h2>
+          </div>
+
+          <span class="header-spacer" aria-hidden="true"></span>
+        </header>
+
+        <!-- 详情内容由 app.js 依照所选卡牌动态产生。 -->
+        <article id="card-detail-content" class="card-detail-content"></article>
+      </main>
+
+      <!-- 全局 Toast 提示。 -->
+      <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+    </div>
+
+    <!-- JavaScript 请放在 body 结尾，确保 DOM 已加载。 -->
+    <script src="./app.js"></script>
+
+<script>
+  (() => {
+    const drawPage = document.getElementById('draw-page');
+
+    const isDrawPageOpen = () =>
+      drawPage && !drawPage.hidden;
+
+    // 手机触摸拖动：不让浏览器把抽牌操作变成页面上下滑动。
+    document.addEventListener(
+      'touchmove',
+      (event) => {
+        if (isDrawPageOpen() && drawPage.contains(event.target)) {
+          event.preventDefault();
+        }
+      },
+      { passive: false }
+    );
+
+    // 电脑鼠标滚轮／触控板：在抽牌页内不滚动整张页面。
+    // 你的 app.js 原有的牌堆滚动选择逻辑仍会收到 wheel 事件。
+    document.addEventListener(
+      'wheel',
+      (event) => {
+        if (isDrawPageOpen() && drawPage.contains(event.target)) {
+          event.preventDefault();
+        }
+      },
+      { passive: false }
+    );
+  })();
+</script>
+  </body>
+</html>

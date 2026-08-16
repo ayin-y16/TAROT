@@ -1,0 +1,1715 @@
+:root {
+  --bg-image: url('./assets/background-placeholder.svg');
+  --card-back-image: url('./assets/card-back-placeholder.svg');
+  --card-face-placeholder: url('./assets/card-face-placeholder.svg');
+
+  --ink: #f4f0ff;
+  --muted: rgba(224, 216, 241, 0.72);
+  --faint: rgba(213, 201, 237, 0.42);
+  --moon: #dfe8ff;
+  --amethyst: #a98ae0;
+  --amethyst-bright: #d9bdff;
+  --gem: #82ead7;
+  --gold: #ddc18a;
+  --gold-bright: #fff0bd;
+  --night: #090713;
+  --panel: rgba(18, 12, 34, 0.72);
+  --panel-strong: rgba(10, 6, 21, 0.9);
+  --line: rgba(211, 190, 255, 0.28);
+  --shadow: 0 20px 48px rgba(0, 0, 0, 0.56);
+
+  --card-ratio: 1.618;
+  --deck-card-w: clamp(84px, 10vw, 150px);
+  --result-card-w: clamp(134px, 15vw, 210px);
+
+  --serif: 'Noto Serif SC', 'Songti SC', serif;
+  --display: 'Cormorant Garamond', 'Noto Serif SC', serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background: var(--night);
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  overflow-x: hidden;
+  color: var(--ink);
+  background: var(--night);
+  font-family: var(--serif);
+  font-weight: 300;
+  letter-spacing: 0.035em;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:focus-visible,
+input:focus-visible {
+  outline: 1px solid var(--gold-bright);
+  outline-offset: 4px;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+.app-shell {
+  position: relative;
+  min-height: 100vh;
+  isolation: isolate;
+}
+
+.background-layer,
+.background-overlay,
+.grain-layer {
+  position: fixed;
+  z-index: -3;
+  inset: 0;
+  pointer-events: none;
+}
+
+.background-layer {
+  background: var(--bg-image) center / cover;
+  filter: brightness(1.8) saturate(0.64) contrast(1.08);
+  transform: scale(1.04);
+}
+
+.background-overlay {
+  z-index: -2;
+  background:
+    radial-gradient(ellipse at 50% 5%, rgba(123, 91, 198, 0.19), transparent 35%),
+    radial-gradient(circle at 76% 72%, rgba(73, 220, 205, 0.09), transparent 22%),
+    radial-gradient(circle at 18% 80%, rgba(180, 127, 255, 0.1), transparent 22%),
+    linear-gradient(145deg, rgba(4, 3, 10, 0.92), rgba(18, 10, 38, 0.69) 52%, rgba(3, 3, 9, 0.93));
+}
+
+.grain-layer {
+  z-index: -1;
+  opacity: 0.14;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.58) 0.35px, transparent 0.65px);
+  background-size: 5px 5px;
+  mix-blend-mode: soft-light;
+}
+
+.page {
+  width: min(1440px, 100%);
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: max(24px, env(safe-area-inset-top)) clamp(18px, 5vw, 72px) max(24px, env(safe-area-inset-bottom));
+}
+
+.page.is-active {
+  animation: page-in 0.5s ease both;
+}
+
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(9px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.eyebrow {
+  margin: 0;
+  color: var(--amethyst-bright);
+  font-family: var(--display);
+  font-size: 0.76rem;
+  font-weight: 400;
+  letter-spacing: 0.3em;
+}
+
+.site-title,
+.page-header h2 {
+  margin: 0;
+  font-family: var(--serif);
+  font-weight: 300;
+}
+
+.text-button,
+.icon-button,
+.filter-chip {
+  border: 0;
+  color: var(--ink);
+  background: transparent;
+}
+
+/* Home */
+.page--home {
+  display: grid;
+  min-height: 100svh;
+  place-items: center;
+}
+
+.home-hero {
+  width: min(880px, 100%);
+  text-align: center;
+}
+
+.home-hero .eyebrow {
+  margin-bottom: 12px;
+}
+
+.site-title {
+  font-size: clamp(2.65rem, 7vw, 5.4rem);
+  font-weight: 300;
+  letter-spacing: 0.2em;
+  text-indent: 0.2em;
+  text-shadow: 0 0 32px rgba(190, 151, 255, 0.38), 0 4px 28px #000;
+}
+
+.home-intro {
+  max-width: 32rem;
+  margin: 20px auto 46px;
+  color: var(--muted);
+  font-size: clamp(0.94rem, 2vw, 1.08rem);
+  line-height: 2;
+}
+
+.spread-choice-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(16px, 3vw, 30px);
+}
+
+.spread-choice-card {
+  position: relative;
+  display: flex;
+  min-height: 286px;
+  padding: 34px 28px 28px;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  color: var(--ink);
+  background: linear-gradient(145deg, rgba(59, 39, 91, 0.5), rgba(8, 6, 18, 0.86));
+  box-shadow: var(--shadow);
+  transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+.spread-choice-card::before {
+  position: absolute;
+  inset: 8px;
+  border: 1px solid rgba(213, 190, 255, 0.15);
+  border-radius: 10px;
+  content: '';
+}
+
+.spread-choice-card::after {
+  position: absolute;
+  top: -80%;
+  left: -30%;
+  width: 45%;
+  height: 230%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.16), transparent);
+  content: '';
+  transform: rotate(25deg);
+  transition: left 0.8s ease;
+}
+
+.spread-choice-card:hover {
+  border-color: rgba(219, 192, 255, 0.84);
+  box-shadow: 0 0 30px rgba(174, 121, 255, 0.22), var(--shadow);
+  transform: translateY(-7px);
+}
+
+.spread-choice-card:hover::after {
+  left: 115%;
+}
+
+.spread-choice-card__ornament {
+  color: var(--gem);
+  font-size: 1.35rem;
+  text-shadow: 0 0 16px var(--gem);
+  animation: gem-pulse 2.8s ease-in-out infinite;
+}
+
+@keyframes gem-pulse {
+  50% {
+    opacity: 0.68;
+    transform: scale(1.18) rotate(15deg);
+  }
+}
+
+.spread-choice-card__count {
+  margin-top: 20px;
+  color: var(--amethyst-bright);
+  font-family: var(--display);
+  font-size: 0.73rem;
+  letter-spacing: 0.2em;
+}
+
+.spread-choice-card__title {
+  margin-top: 14px;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 300;
+}
+
+.spread-choice-card__description {
+  max-width: 15rem;
+  margin-top: 14px;
+  color: var(--muted);
+  font-size: 0.86rem;
+  line-height: 1.8;
+}
+
+.spread-choice-card__positions {
+  display: flex;
+  margin-top: auto;
+  gap: 7px;
+  color: rgba(239, 232, 255, 0.7);
+  font-size: 0.72rem;
+}
+
+.spread-choice-card__positions i {
+  min-width: 45px;
+  padding: 5px 7px;
+  border: 1px solid rgba(205, 185, 255, 0.26);
+  border-radius: 999px;
+  font-style: normal;
+}
+
+.home-library-link {
+  margin-top: 30px;
+  padding: 8px 14px;
+  color: var(--muted);
+  text-decoration: underline;
+  text-decoration-color: rgba(213, 190, 255, 0.4);
+  text-underline-offset: 6px;
+}
+
+.home-library-link:hover {
+  color: var(--amethyst-bright);
+}
+
+/* Shared header */
+.page-header {
+  display: grid;
+  min-height: 48px;
+  grid-template-columns: 48px 1fr 48px;
+  align-items: center;
+}
+
+.icon-button {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: rgba(11, 7, 24, 0.42);
+  font-size: 1.2rem;
+  transition: 0.25s ease;
+}
+
+.icon-button:hover {
+  border-color: var(--amethyst-bright);
+  color: var(--gold-bright);
+  background: rgba(81, 55, 120, 0.45);
+  box-shadow: 0 0 18px rgba(178, 129, 255, 0.22);
+  transform: translateY(-2px);
+}
+
+.draw-header__title-group,
+.result-header__title-group,
+.library-header__title-group,
+.detail-header__title-group {
+  text-align: center;
+}
+
+.page-header .eyebrow {
+  margin-bottom: 3px;
+  font-size: 0.63rem;
+}
+
+.page-header h2 {
+  font-size: clamp(1.1rem, 3vw, 1.48rem);
+}
+
+.header-spacer {
+  width: 42px;
+  height: 42px;
+}
+
+/* Draw page */
+.page--draw,
+.page--result {
+  display: flex;
+  min-height: 100svh;
+  flex-direction: column;
+}
+
+.draw-layout {
+  position: relative;
+  display: grid;
+  min-height: 0;
+  flex: 1;
+  grid-template-rows: minmax(340px, 1fr) auto minmax(175px, 0.52fr);
+  align-items: center;
+}
+
+.deck-viewport {
+  position: relative;
+  width: 100%;
+  height: min(54vh, 465px);
+  min-height: 335px;
+  overflow: hidden;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+  mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+}
+
+.deck-track {
+  position: absolute;
+  top: 38%;
+  left: 50%;
+  width: 0;
+  height: 0;
+}
+
+.deck-card {
+  position: absolute;
+  width: var(--deck-card-w);
+  aspect-ratio: 1 / var(--card-ratio);
+  overflow: hidden;
+  border: 1px solid rgba(231, 216, 255, 0.54);
+  border-radius: 9px;
+  background: #1d1336;
+  box-shadow: 0 13px 24px rgba(0, 0, 0, 0.5);
+  transform-origin: 50% 115%;
+  transition:
+    transform 0.13s cubic-bezier(0.18, 0.88, 0.22, 1.18),
+    opacity 0.16s ease,
+    filter 0.18s ease,
+    box-shadow 0.2s ease;
+  will-change: transform, opacity;
+}
+
+.deck-card::before {
+  position: absolute;
+  z-index: 1;
+  inset: 5px;
+  border: 1px solid rgba(222, 202, 255, 0.37);
+  border-radius: 5px;
+  content: '';
+  pointer-events: none;
+}
+
+.deck-card__back {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: var(--card-back-image) center / cover;
+}
+
+.deck-card__number {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  width: 39%;
+  aspect-ratio: 1;
+  place-items: center;
+  border: 1px solid rgba(235, 222, 255, 0.68);
+  border-radius: 50%;
+  color: #f7efff;
+  background: rgba(13, 8, 27, 0.64);
+  box-shadow: 0 0 13px rgba(166, 112, 255, 0.28);
+  font-family: var(--display);
+  font-size: clamp(0.9rem, 2.3vw, 1.38rem);
+  font-weight: 500;
+}
+
+.deck-card.is-active {
+  border-color: var(--gold-bright);
+  filter: brightness(1.2) saturate(1.15);
+  box-shadow:
+    0 0 0 2px rgba(227, 196, 255, 0.28),
+    0 17px 38px rgba(0, 0, 0, 0.68),
+    0 0 22px rgba(137, 232, 215, 0.42),
+    0 0 60px rgba(176, 123, 255, 0.31);
+  animation: selected-card-glow 2.2s ease-in-out infinite;
+}
+
+@keyframes selected-card-glow {
+  0%,
+  100% {
+    filter: brightness(1.15) saturate(1.08);
+  }
+
+  50% {
+    filter: brightness(1.32) saturate(1.22);
+  }
+}
+
+.deck-viewport.is-dragging .deck-card {
+  transition-duration: 0.07s;
+}
+
+.deck-viewport.is-bumping {
+  animation: deck-bump 0.26s ease-out;
+}
+
+@keyframes deck-bump {
+  0% { transform: translateX(0); }
+  35% { transform: translateX(7px); }
+  100% { transform: translateX(0); }
+}
+
+.deck-focus-ring {
+  position: absolute;
+  top: 38%;
+  left: 50%;
+  width: calc(var(--deck-card-w) + 19px);
+  aspect-ratio: 1 / var(--card-ratio);
+  border: 1px solid rgba(244, 228, 188, 0.5);
+  border-radius: 12px;
+  opacity: 0.55;
+  transform: translate(-50%, -50%) translateY(-35px);
+  box-shadow: 0 0 22px rgba(137, 232, 215, 0.18);
+  pointer-events: none;
+}
+
+.draw-control-panel {
+  z-index: 5;
+  display: flex;
+  padding: 8px 0 14px;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.draw-prompt {
+  display: grid;
+  max-width: min(92vw, 430px);
+  justify-items: center;
+  text-align: center;
+}
+
+.draw-prompt__star {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--gem);
+  font-size: 1rem;
+  text-shadow: 0 0 10px var(--gem), 0 0 22px rgba(130, 234, 215, 0.45);
+  animation: gem-pulse 2.8s ease-in-out infinite;
+}
+
+.draw-prompt p {
+  margin: 0;
+  color: rgba(246, 241, 255, 0.92);
+  font-size: clamp(0.83rem, 1.5vw, 0.98rem);
+  font-weight: 300;
+  line-height: 1.55;
+  letter-spacing: 0.08em;
+}
+
+.draw-prompt__hint {
+  display: block;
+  margin-top: 5px;
+  color: var(--faint);
+  font-size: 0.65rem;
+  letter-spacing: 0.04em;
+}
+
+.deck-counter {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.76rem;
+}
+
+.primary-button,
+.secondary-button {
+  min-height: 44px;
+  padding: 10px 23px;
+  border-radius: 999px;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  transition: 0.25s ease;
+}
+
+.primary-button {
+  border: 1px solid rgba(227, 212, 255, 0.78);
+  color: #160d28;
+  background: linear-gradient(135deg, #f1e3ff, #bda3e7 55%, #8fd9d0);
+  box-shadow: 0 0 22px rgba(170, 118, 255, 0.25), 0 8px 23px rgba(0, 0, 0, 0.38);
+}
+
+.primary-button:hover:not(:disabled) {
+  filter: brightness(1.12);
+  transform: translateY(-3px);
+}
+
+.secondary-button {
+  border: 1px solid var(--line);
+  color: var(--ink);
+  background: rgba(21, 13, 39, 0.6);
+}
+
+.secondary-button:hover {
+  border-color: var(--amethyst-bright);
+  box-shadow: 0 0 18px rgba(176, 123, 255, 0.18);
+  transform: translateY(-3px);
+}
+
+.drawn-area {
+  display: grid;
+  min-height: 168px;
+  place-items: center;
+}
+
+.drawn-cards {
+  display: flex;
+  min-height: 155px;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(15px, 4vw, 52px);
+}
+
+.drawn-slot {
+  display: flex;
+  width: clamp(80px, 10vw, 132px);
+  flex-direction: column;
+  align-items: center;
+  gap: 9px;
+}
+
+.drawn-slot__card {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / var(--card-ratio);
+  overflow: hidden;
+  border: 1px solid rgba(227, 211, 255, 0.64);
+  border-radius: 9px;
+  background: var(--card-back-image) center / cover;
+  box-shadow: 0 0 20px rgba(140, 232, 215, 0.15), var(--shadow);
+  
+}
+
+.drawn-slot__card::after {
+  position: absolute;
+  inset: 5px;
+  border: 1px solid rgba(224, 204, 255, 0.36);
+  border-radius: 5px;
+  content: '';
+}
+
+@keyframes drawn-arrive {
+  from {
+    opacity: 0;
+    transform: translateY(-150px) scale(0.55) rotate(-14deg);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotate(0);
+  }
+}
+
+/* 已存在的牌只跟随布局改变位置与尺寸，不重复播放抽牌入场动画。 */
+.drawn-slot {
+  transition:
+    width 320ms cubic-bezier(0.22, 0.8, 0.25, 1),
+    transform 320ms cubic-bezier(0.22, 0.8, 0.25, 1);
+}
+
+.drawn-slot__card {
+  transition:
+    width 320ms cubic-bezier(0.22, 0.8, 0.25, 1),
+    height 320ms cubic-bezier(0.22, 0.8, 0.25, 1),
+    transform 320ms cubic-bezier(0.22, 0.8, 0.25, 1);
+}
+
+/* 只有 JS 标记为本次新抽出的牌才播放动画。 */
+.drawn-slot.is-newly-drawn .drawn-slot__card {
+  animation: drawn-arrive 0.68s cubic-bezier(0.17, 0.84, 0.32, 1.2) both;
+}
+
+.drawn-slot__label {
+  color: var(--moon);
+  font-size: 0.73rem;
+}
+
+/* Result */
+.result-reading {
+  display: grid;
+  padding: clamp(22px, 5vh, 58px) 0 25px;
+  flex: 1;
+  place-items: start center;
+}
+
+.result-cards {
+  display: grid;
+  width: 100%;
+  max-width: 1250px;
+  grid-template-columns: repeat(var(--result-count, 3), minmax(0, 1fr));
+  gap: clamp(18px, 3.6vw, 52px);
+  align-items: start;
+}
+
+.result-card {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: center;
+  animation: result-card-in 0.55s ease both;
+}
+
+@keyframes result-card-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.result-card__position {
+  min-height: 24px;
+  margin: 0 0 12px;
+  color: var(--amethyst-bright);
+  font-family: var(--display);
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+}
+
+.tarot-flip-card {
+  width: var(--result-card-w);
+  max-width: 100%;
+  aspect-ratio: 1 / var(--card-ratio);
+  perspective: 1100px;
+}
+
+.tarot-flip-card__inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+}
+
+.tarot-flip-card.is-revealed .tarot-flip-card__inner {
+  animation: flip-card 0.9s cubic-bezier(0.2, 0.76, 0.25, 1) forwards;
+}
+
+@keyframes flip-card {
+  from { transform: rotateY(0); }
+  to { transform: rotateY(180deg); }
+}
+
+.tarot-flip-card__face {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border: 1px solid rgba(232, 217, 255, 0.7);
+  border-radius: 11px;
+  backface-visibility: hidden;
+  box-shadow: 0 0 24px rgba(140, 232, 215, 0.14), var(--shadow);
+}
+
+.tarot-flip-card__back {
+  background: var(--card-back-image) center / cover;
+}
+
+.tarot-flip-card__front {
+  background: #21163a;
+  transform: rotateY(180deg);
+}
+
+.tarot-flip-card__front img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.tarot-flip-card__front img.is-reversed {
+  transform: rotate(180deg);
+}
+
+.result-card__interpretation {
+  width: min(100%, 320px);
+  padding-top: 17px;
+  text-align: center;
+}
+
+.result-card__orientation {
+  margin: 0 0 5px;
+  color: var(--moon);
+  font-family: var(--display);
+  font-size: 0.88rem;
+  letter-spacing: 0.12em;
+}
+
+.moon-phase {
+  display: inline-block;
+  margin-right: 3px;
+  font-size: 0.9rem;
+  vertical-align: -0.03em;
+}
+
+.moon-phase--full {
+  color: #f5f1ff;
+  text-shadow: 0 0 8px #e5dcff, 0 0 18px rgba(175, 205, 255, 0.7);
+}
+
+.moon-phase--new {
+  color: #171020;
+  text-shadow: 0 0 0 1px #cbb7ed, 0 0 8px rgba(201, 172, 245, 0.4);
+}
+
+.result-card__name {
+  margin: 0;
+  font-size: clamp(1.18rem, 2vw, 1.5rem);
+  font-weight: 400;
+}
+
+.result-card__gemstone {
+  margin: 6px 0 12px;
+  color: var(--gem);
+  font-size: 0.8rem;
+}
+
+.result-card__short-text {
+  margin: 0;
+  color: rgba(246, 241, 255, 0.92);
+  font-size: 0.86rem;
+  line-height: 1.85;
+}
+
+.keyword-list {
+  display: flex;
+  margin-top: 14px;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 7px;
+}
+
+.keyword-chip {
+  padding: 6px 13px;
+  border: 1px solid rgba(142, 233, 217, 0.48);
+  border-radius: 999px;
+  color: var(--moon);
+  background: rgba(46, 33, 75, 0.56);
+  font-size: 0.75rem;
+  transition: 0.22s ease;
+}
+
+.keyword-chip:hover,
+.keyword-chip.is-selected {
+  border-color: var(--gem);
+  color: #111022;
+  background: var(--gem);
+  box-shadow: 0 0 18px rgba(130, 234, 215, 0.4);
+}
+
+.full-interpretation {
+  max-height: 0;
+  margin: 0;
+  overflow: hidden;
+  color: var(--muted);
+  opacity: 0;
+  text-align: left;
+  font-size: 0.84rem;
+  line-height: 1.9;
+  white-space: pre-line;
+  transition: max-height 0.45s ease, opacity 0.3s ease, margin 0.3s ease;
+}
+
+.full-interpretation.is-open {
+  max-height: 640px;
+  margin-top: 15px;
+  opacity: 1;
+}
+
+.result-actions {
+  display: flex;
+  padding: 12px 0 4px;
+  justify-content: center;
+  gap: 12px;
+}
+
+/* Library */
+.page--library,
+.page--detail {
+  min-height: 100svh;
+}
+
+.library-toolbar {
+  display: grid;
+  padding: 30px 0 22px;
+  gap: 15px;
+}
+
+.search-field {
+  position: relative;
+  display: block;
+  width: min(520px, 100%);
+  margin: 0 auto;
+}
+
+.search-field input {
+  width: 100%;
+  padding: 12px 42px 12px 16px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  outline: 0;
+  color: var(--ink);
+  background: rgba(10, 7, 23, 0.72);
+}
+
+.search-field input::placeholder {
+  color: var(--faint);
+}
+
+.search-field > span:last-child {
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  color: var(--gem);
+  font-size: 1.25rem;
+  transform: translateY(-55%);
+  pointer-events: none;
+}
+
+.filter-row {
+  display: flex;
+  justify-content: center;
+  overflow-x: auto;
+  gap: 8px;
+  scrollbar-width: none;
+}
+
+.filter-row::-webkit-scrollbar {
+  display: none;
+}
+
+.filter-chip {
+  flex: 0 0 auto;
+  padding: 7px 11px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 0.73rem;
+}
+
+.filter-chip:hover,
+.filter-chip.is-active {
+  border-color: var(--amethyst-bright);
+  color: #170d28;
+  background: var(--amethyst-bright);
+}
+
+.library-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(245px, 1fr));
+  gap: 12px;
+}
+
+.library-item {
+  display: grid;
+  min-height: 118px;
+  padding: 10px;
+  grid-template-columns: 60px 1fr auto;
+  align-items: center;
+  gap: 13px;
+  border: 1px solid rgba(207, 185, 250, 0.2);
+  border-radius: 12px;
+  color: var(--ink);
+  background: rgba(15, 10, 30, 0.66);
+  text-align: left;
+  transition: 0.25s ease;
+}
+
+.library-item:hover {
+  border-color: rgba(213, 190, 255, 0.78);
+  background: rgba(52, 34, 81, 0.7);
+  box-shadow: 0 0 20px rgba(160, 112, 235, 0.13);
+  transform: translateY(-3px);
+}
+
+.library-item__image {
+  width: 60px;
+  aspect-ratio: 1 / var(--card-ratio);
+  overflow: hidden;
+  border: 1px solid rgba(225, 209, 255, 0.38);
+  border-radius: 6px;
+  background: #21163a;
+}
+
+.library-item__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.library-item__category {
+  margin: 0 0 4px;
+  color: var(--amethyst-bright);
+  font-size: 0.64rem;
+}
+
+.library-item__name {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.library-item__gemstone {
+  margin: 6px 0 0;
+  color: var(--gem);
+  font-size: 0.76rem;
+}
+
+.library-item__arrow {
+  color: var(--moon);
+  font-size: 1.2rem;
+}
+
+.library-empty {
+  padding: 45px 15px;
+  grid-column: 1 / -1;
+  color: var(--muted);
+  text-align: center;
+}
+
+/* Card detail */
+.card-detail-content {
+  display: grid;
+  max-width: 1220px;
+  margin: 0 auto;
+  padding: clamp(28px, 6vh, 70px) 0;
+  grid-template-columns: minmax(190px, 0.8fr) minmax(250px, 1fr) minmax(250px, 1fr);
+  align-items: start;
+  gap: clamp(20px, 4vw, 55px);
+}
+
+.detail-card-summary {
+  position: sticky;
+  top: 25px;
+  text-align: center;
+}
+
+.detail-card-summary__image {
+  width: min(100%, 255px);
+  margin: 0 auto;
+  aspect-ratio: 1 / var(--card-ratio);
+  overflow: hidden;
+  border: 1px solid rgba(230, 214, 255, 0.7);
+  border-radius: 11px;
+  box-shadow: 0 0 26px rgba(138, 231, 215, 0.12), var(--shadow);
+}
+
+.detail-card-summary__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.detail-card-summary__category {
+  margin: 17px 0 4px;
+  color: var(--amethyst-bright);
+  font-size: 0.72rem;
+}
+
+.detail-card-summary h1 {
+  margin: 0;
+  font-size: clamp(1.55rem, 3vw, 2.1rem);
+  font-weight: 300;
+}
+
+.detail-card-summary__gemstone {
+  margin: 9px 0 0;
+  color: var(--gem);
+}
+
+.detail-meaning-panel {
+  min-height: 100%;
+  padding: clamp(19px, 3vw, 30px);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: rgba(15, 10, 31, 0.66);
+}
+
+.detail-meaning-panel--upright {
+  box-shadow: inset 0 1px 0 rgba(235, 227, 255, 0.1), 0 0 22px rgba(157, 211, 255, 0.05);
+}
+
+.detail-meaning-panel--reversed {
+  background: rgba(27, 15, 42, 0.74);
+}
+
+.detail-meaning-panel__label {
+  display: block;
+  margin-bottom: 12px;
+  color: var(--moon);
+  font-family: var(--display);
+  font-size: 0.9rem;
+  letter-spacing: 0.14em;
+}
+
+.detail-meaning-panel h2 {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.detail-meaning-panel__keywords {
+  display: flex;
+  margin: 17px 0 20px;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.detail-meaning-panel__keywords span {
+  padding: 5px 10px;
+  border: 1px solid rgba(130, 234, 215, 0.35);
+  border-radius: 999px;
+  color: var(--gem);
+  font-size: 0.72rem;
+}
+
+.detail-meaning-panel__full {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.89rem;
+  line-height: 1.95;
+  white-space: pre-line;
+}
+
+/* Toast */
+.toast {
+  position: fixed;
+  z-index: 30;
+  bottom: calc(24px + env(safe-area-inset-bottom));
+  left: 50%;
+  max-width: min(90vw, 430px);
+  padding: 10px 16px;
+  border: 1px solid rgba(216, 193, 255, 0.5);
+  border-radius: 999px;
+  color: var(--ink);
+  opacity: 0;
+  background: rgba(13, 8, 28, 0.93);
+  box-shadow: 0 0 18px rgba(138, 231, 215, 0.15), var(--shadow);
+  text-align: center;
+  transform: translate(-50%, 18px);
+  transition: 0.25s ease;
+  pointer-events: none;
+}
+
+.toast.is-visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+/* Mobile portrait: deck on the left, selected cards on the right */
+@media (max-width: 767px) and (orientation: portrait) {
+  :root {
+    --deck-card-w: clamp(108px, 30vw, 132px);
+    --result-card-w: min(58vw, 215px);
+  }
+
+  .page {
+    padding-right: 14px;
+    padding-left: 14px;
+  }
+
+  .spread-choice-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .spread-choice-card {
+    min-height: 220px;
+  }
+
+  .draw-layout {
+    min-height: calc(100svh - 75px);
+    grid-template-columns: 45% 55%;
+    grid-template-rows: 1fr auto;
+    align-items: stretch;
+  }
+
+  .deck-viewport {
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    grid-row: 1 / 3;
+    touch-action: pan-x;
+    mask-image: linear-gradient(to bottom, transparent, #000 9%, #000 91%, transparent);
+  }
+
+  .deck-track {
+    top: 50%;
+    left: 50%;
+  }
+
+  .deck-focus-ring {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) translateX(12px);
+  }
+
+  .draw-control-panel {
+    padding: 8px 3px 10px;
+    grid-column: 1 / -1;
+    grid-row: 2;
+    align-self: end;
+  }
+
+  .draw-prompt {
+    max-width: 96vw;
+  }
+
+  .draw-prompt__hint,
+  .deck-counter {
+    display: none;
+  }
+
+  .draw-control-panel .primary-button {
+    min-height: 38px;
+    padding: 8px 14px;
+    font-size: 0.8rem;
+  }
+
+  .drawn-area {
+    min-height: 0;
+    padding: 5px 5px 90px;
+    grid-column: 2;
+    grid-row: 1;
+    place-items: center;
+  }
+
+  .drawn-cards {
+    min-height: 0;
+    flex-direction: column;
+    gap: 11px;
+  }
+
+  .drawn-slot {
+    width: min(100%, 104px);
+    flex-direction: row;
+    gap: 6px;
+  }
+
+  .drawn-slot__label {
+    width: 1em;
+    font-size: 0.67rem;
+    line-height: 1.3;
+    writing-mode: vertical-rl;
+  }
+
+  .result-cards {
+    grid-template-columns: 1fr;
+    gap: 38px;
+  }
+
+  .result-card__interpretation {
+    width: min(100%, 360px);
+  }
+
+  .result-actions {
+    position: sticky;
+    bottom: 0;
+    padding: 13px 0 max(7px, env(safe-area-inset-bottom));
+    background: linear-gradient(transparent, rgba(9, 7, 19, 0.95) 38%);
+  }
+
+  .library-list {
+    grid-template-columns: 1fr;
+  }
+
+  .card-detail-content {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .detail-card-summary {
+    position: static;
+  }
+
+  .detail-card-summary__image {
+    width: min(190px, 62vw);
+  }
+}
+
+/* Small-height landscape, including phones in landscape */
+@media (max-height: 600px) and (orientation: landscape) {
+  :root {
+    --deck-card-w: clamp(64px, 12vw, 104px);
+    --result-card-w: clamp(105px, 17vh, 155px);
+  }
+
+  .page {
+    padding-top: max(10px, env(safe-area-inset-top));
+    padding-bottom: max(10px, env(safe-area-inset-bottom));
+  }
+
+  .page-header {
+    min-height: 38px;
+  }
+
+  .icon-button {
+    width: 34px;
+    height: 34px;
+  }
+
+  .draw-layout {
+    grid-template-rows: minmax(215px, 1fr) auto minmax(105px, 0.4fr);
+  }
+
+  .deck-viewport {
+    height: 60vh;
+    min-height: 210px;
+  }
+
+  .draw-control-panel {
+    gap: 5px;
+    padding: 2px 0;
+  }
+
+  .draw-prompt__hint {
+    display: none;
+  }
+
+  .drawn-area,
+  .drawn-cards {
+    min-height: 80px;
+  }
+
+  .drawn-slot {
+    width: clamp(55px, 8vw, 82px);
+  }
+
+  .result-reading {
+    padding-top: 12px;
+  }
+
+  .result-card__interpretation {
+    padding-top: 7px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Full-screen physical deck override */
+.page--draw {
+  overflow: visible;
+}
+
+.draw-layout {
+  grid-template-rows: minmax(500px, 68vh) auto minmax(150px, 0.34fr);
+  overflow: visible;
+}
+
+.deck-viewport {
+  height: min(68vh, 720px);
+  min-height: 500px;
+  overflow: visible;
+  mask-image: none;
+  -webkit-mask-image: none;
+  touch-action: none;
+}
+
+.deck-track {
+  top: 31%;
+}
+
+.deck-card {
+  transition:
+    transform 0.1s cubic-bezier(0.16, 0.9, 0.24, 1.08),
+    opacity 0.14s ease,
+    filter 0.18s ease,
+    box-shadow 0.2s ease;
+}
+
+.deck-viewport.is-dragging .deck-card {
+  transition-duration: 0.035s;
+}
+
+.deck-card.is-active {
+  animation: selected-card-glow 1.8s ease-in-out infinite;
+}
+
+@media (max-width: 767px) and (orientation: portrait) {
+  .draw-layout {
+    grid-template-columns: minmax(0, 45%) minmax(0, 55%);
+    grid-template-rows: minmax(360px, 1fr) auto;
+    overflow: visible;
+  }
+
+  .deck-viewport {
+    height: 100%;
+    min-height: 360px;
+    grid-column: 1;
+    grid-row: 1;
+    overflow: visible;
+    touch-action: pan-x;
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+
+  .deck-track {
+    top: 50%;
+  }
+
+  .drawn-area {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .draw-control-panel {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+}
+
+@media (max-height: 600px) and (orientation: landscape) {
+  .draw-layout {
+    grid-template-rows: minmax(300px, 72vh) auto minmax(70px, 0.22fr);
+  }
+
+  .deck-viewport {
+    height: 72vh;
+    min-height: 300px;
+  }
+
+  .deck-track {
+    top: 27%;
+  }
+}
+
+/* 牌背编号：去掉圆圈，改为灰黑色文字 */
+.deck-card__number {
+  width: auto;
+  aspect-ratio: auto;
+  border: 0;
+  border-radius: 0;
+  color: #4a4a4a;
+  background: transparent;
+  box-shadow: none;
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 600;
+  line-height: 1;
+  transform: translateY(-3px);
+}
+
+/* 修复手机竖屏：已抽牌区域的牌背显示 */
+@media (max-width: 767px) and (orientation: portrait) {
+  .drawn-area {
+    overflow: visible;
+  }
+
+  .drawn-cards {
+    width: 100%;
+    overflow: visible;
+  }
+
+  .drawn-slot {
+    width: min(100%, 104px);
+  }
+
+  /* 三张牌时缩小每张牌 */
+  .drawn-slot:has(~ .drawn-slot:nth-child(3)),
+  .drawn-slot:nth-child(3) ~ .drawn-slot {
+    width: min(30vw, 82px);
+  }
+
+  .drawn-slot__card {
+    display: block;
+    min-height: 126px;
+    background-image: var(--card-back-image);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  /* 三张牌时同步缩短高度，保持比例 */
+  .drawn-slot:has(~ .drawn-slot:nth-child(3)) .drawn-slot__card,
+  .drawn-slot:nth-child(3) ~ .drawn-slot .drawn-slot__card {
+    min-height: 100px;
+  }
+}
+
+/* 手机竖屏：三张牌的结果页改为左右滑动，一屏查看一张解读 */
+@media (max-width: 767px) and (orientation: portrait) {
+  .result-reading {
+    width: 100%;
+    padding: 18px 0 25px;
+    overflow: hidden;
+  }
+
+  /* 仅三张牌阵启用横向滑动 */
+  .result-cards:has(.result-card:nth-child(3)) {
+    display: flex;
+    width: 100%;
+    max-width: none;
+    padding: 0;
+    overflow-x: auto;
+    overflow-y: visible;
+    gap: 0;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .result-cards:has(.result-card:nth-child(3))::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* 每张牌连同其完整解读占据一个屏幕宽度 */
+  .result-cards:has(.result-card:nth-child(3)) .result-card {
+    width: 100%;
+    min-width: 100%;
+    flex: 0 0 100%;
+    padding: 0 4px 12px;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+  }
+
+  /* 横向轻扫优先，文字内容仍可正常上下滚动 */
+  .result-cards:has(.result-card:nth-child(3)) .result-card__interpretation {
+    width: min(100%, 360px);
+  }
+}
+
+/* 横屏：保留无缝全屏牌堆，同时为已抽牌区预留首屏空间。 */
+@media (orientation: landscape) and (min-width: 768px) {
+  .draw-layout {
+    grid-template-rows: minmax(360px, 58vh) auto minmax(118px, 0.3fr);
+  }
+
+  .deck-viewport {
+    height: min(58vh, 610px);
+    min-height: 360px;
+  }
+
+  .drawn-area {
+    min-height: 118px;
+  }
+
+  .drawn-cards {
+    min-height: 108px;
+    gap: clamp(14px, 3vw, 34px);
+  }
+
+  .drawn-slot {
+    width: clamp(58px, 8vw, 94px);
+  }
+}
+
+/* 手机竖屏：独立调整 Y 轴 */
+@media (max-width: 767px) and (orientation: portrait) {
+  .page--draw .deck-track {
+    transform: translateY(68px); /* 牌堆：负数上移，正数下移 */
+  }
+
+  .page--draw .draw-control-panel {
+    position: relative;
+    z-index: 20;
+    transform: translateY(-90px); /* 提示与按钮：负数上移，正数下移 */
+  }
+}
+
+/* 电脑横屏：独立调整 Y 轴 */
+@media (min-width: 768px) and (orientation: landscape) {
+  .page--draw .deck-track {
+    transform: translateY(42px); /* 牌堆 */
+  }
+
+  .page--draw .draw-control-panel {
+    position: relative;
+    z-index: 20;
+    transform: translateY(-130px); /* 提示与按钮 */
+  }
+/* 横屏：只让当前高出来的高亮牌下移，不移动整个牌堆 */
+  .page--draw .deck-card.is-active {
+    top: 40px;
+  }
+
+  /* 横屏：已抽出的牌整体上移 */
+  .page--draw .drawn-area {
+    transform: translateY(-100px);
+  }
+}
+
+/* 手机竖屏：牌库筛选标签横向滑动，首个“全部”完整显示 */
+@media (max-width: 767px) and (orientation: portrait) {
+  .page--library .library-toolbar {
+    min-width: 0;
+    overflow: visible;
+  }
+
+  .page--library #library-filters.filter-row {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start !important;
+    align-items: center;
+    gap: 8px;
+
+    /* 不再使用负 margin 或扩大宽度，避免第一个标签被页面裁掉 */
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+    padding: 2px 1px 10px;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x;
+    overscroll-behavior-x: contain;
+  }
+
+  .page--library #library-filters.filter-row::-webkit-scrollbar {
+    display: none;
+  }
+
+  .page--library #library-filters.filter-row .filter-chip {
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+}
+
+/* 全站背景层级：页面内容 > 宝石动效 > 纹理 > 紫色遮罩 > 背景图 */
+.background-layer {
+  z-index: -4;
+}
+
+.background-overlay {
+  z-index: -3;
+}
+
+.grain-layer {
+  z-index: -2;
+}
+
+.gemstone-orbit {
+  position: fixed;
+  z-index: -1;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+/* 确保所有页面、按钮和表单始终在动效上面。 */
+.page {
+  position: relative;
+  z-index: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gemstone-orbit {
+    opacity: 0.55;
+  }
+}
+
+/* 抽牌页保持牌堆完整溢出显示；拖动手势不交给浏览器页面滚动。 */
+#draw-page .deck-viewport {
+  overflow: visible;
+  touch-action: none;
+  overscroll-behavior: contain;
+  mask-image: none;
+  -webkit-mask-image: none;
+}
+
+/* 背景图：固定比例、固定位置，不跟随页面滚动或内容高度变化。 */
+.background-layer {
+  position: fixed;
+  z-index: -4;
+  inset: 0;
+  pointer-events: none;
+  background-color: #000;
+  background-image: var(--bg-image);
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: auto 100%;
+  transform: none;
+}
+
+.music-toggle {
+  position: fixed;
+  z-index: 50;
+  right: 18px;
+  bottom: max(18px, env(safe-area-inset-bottom));
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  padding: 0;
+  border: 1px solid rgba(217, 189, 255, 0.46);
+  border-radius: 50%;
+  color: var(--ink);
+  background: rgba(9, 7, 19, 0.78);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.36);
+  cursor: pointer;
+  font-family: Georgia, "Noto Serif SC", serif;
+  font-size: 23px;
+  line-height: 1;
+}
+
+.music-toggle:hover,
+.music-toggle:focus-visible,
+.music-toggle.is-playing {
+  border-color: var(--gem);
+  color: var(--gem);
+  background: rgba(28, 20, 48, 0.94);
+}
+
+@media (max-width: 767px) {
+  .music-toggle {
+    right: 12px;
+    bottom: max(12px, env(safe-area-inset-bottom));
+  }
+}
