@@ -46,7 +46,12 @@ const CATEGORY_LABELS = {
 
 const state = {
   page: 'home',
+
+  // 详情页使用
   previousPage: 'home',
+
+  // 专门记录进入牌库前的页面
+  libraryReturnPage: 'home',
   spreadKey: 'three',
   deck: [],
   selectedIndex: 0,
@@ -189,19 +194,28 @@ function handleClick(event) {
       drawCurrentCard();
       break;
 
-    case 'back-home':
-      stopDeckInertia();
-      goToPage('home');
-      break;
+case 'back-home':
+  stopDeckInertia();
+  goToPage('home');
+  break;
 
-    case 'open-library':
-      stopDeckInertia();
-      state.previousPage = state.page;
+case 'open-library':
+  stopDeckInertia();
+
+  // 记录进入牌库之前的页面：
+  // home / draw / result
+  if (state.page !== 'library' && state.page !== 'detail') {
+    state.libraryReturnPage = state.page;
+  }
+
       goToPage('library');
       break;
 
-    case 'go-back':
-      goToPage(state.previousPage || 'home');
+   case 'go-back':
+      stopDeckInertia();
+
+  // 从牌库返回进入牌库前的页面
+    goToPage(state.libraryReturnPage || 'home');
       break;
 
     case 'restart-reading':

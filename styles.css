@@ -1889,3 +1889,21 @@ body {
     animation: none;
   }
 }
+
+/* 移动端不要为 78 张牌全部创建 GPU 合成层。 */
+@media (max-width: 767px) and (orientation: portrait) {
+  .deck-card {
+    will-change: auto;
+  }
+
+  /* 仅当前选中牌保留独立合成层，保证高亮动画平滑。 */
+  .deck-card.is-active {
+    will-change: transform, filter;
+  }
+
+  /* 背景图不使用 filter，避免和大量 transform 图层争夺纹理缓存。 */
+  .background-layer {
+    filter: none;
+    -webkit-filter: none;
+  }
+}
