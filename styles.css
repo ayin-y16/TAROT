@@ -1731,3 +1731,22 @@ img {
   margin: 14px 0 4px;
   font-size: 1rem;
 }
+
+/* 竖屏移动端：避免浏览器地址栏变化导致背景缩放 */
+@media (max-width: 767px) and (orientation: portrait) {
+  .background-layer {
+    width: 100vw;
+    height: 100lvh;
+    background-size: auto 100lvh;
+    background-position: center top;
+  }
+
+  .deck-viewport.is-dragging .deck-card {
+    transition: none;
+  }
+
+  .deck-viewport.is-dragging .deck-card.is-active {
+    animation: none;
+    filter: brightness(1.2) saturate(1.12);
+  }
+}
