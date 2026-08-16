@@ -1713,3 +1713,21 @@ img {
     bottom: max(12px, env(safe-area-inset-bottom));
   }
 }
+
+.full-interpretation p,
+.detail-meaning-panel__full p {
+  margin: 0 0 8px;
+  line-height: 1.7;
+}
+
+.full-interpretation h3,
+.detail-meaning-panel__full h3 {
+  margin: 0 0 12px;
+  font-size: 1.25rem;
+}
+
+.full-interpretation h4,
+.detail-meaning-panel__full h4 {
+  margin: 14px 0 4px;
+  font-size: 1rem;
+}
