@@ -1890,20 +1890,36 @@ body {
   }
 }
 
-/* 移动端不要为 78 张牌全部创建 GPU 合成层。 */
+/* 手机抽牌页：锁定在稳定视口内，不能被牌堆的溢出区域撑大。 */
 @media (max-width: 767px) and (orientation: portrait) {
-  .deck-card {
-    will-change: auto;
+  html:has(#draw-page:not([hidden])),
+  body:has(#draw-page:not([hidden])) {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    overscroll-behavior: none;
   }
 
-  /* 仅当前选中牌保留独立合成层，保证高亮动画平滑。 */
-  .deck-card.is-active {
-    will-change: transform, filter;
+  #draw-page:not([hidden]) {
+    position: fixed;
+    z-index: 10;
+    inset: 0;
+    width: 100%;
+    min-height: 0;
+    height: 100svh;
+    overflow: hidden;
+    overscroll-behavior: none;
   }
 
-  /* 背景图不使用 filter，避免和大量 transform 图层争夺纹理缓存。 */
-  .background-layer {
-    filter: none;
-    -webkit-filter: none;
+  /* 牌堆可在抽牌页内移动，但不得扩大整个页面的可滚动尺寸。 */
+  #draw-page .draw-layout {
+    min-height: 0;
+    height: calc(100svh - 75px);
+    overflow: hidden;
+  }
+
+  #draw-page .deck-viewport {
+    overflow: hidden;
+    touch-action: none;
   }
 }
