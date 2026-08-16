@@ -285,30 +285,24 @@
 
 <script>
   (() => {
-    const drawPage = document.getElementById('draw-page');
+    // 抽牌页由 app.js 在 <html> 上切换 is-draw-page 类。
+    // 在该页内彻底拦截浏览器的滚动与缩放默认行为，
+    // 避免滑动抽牌时背景被放大、音乐按钮随页面错位。
+    const isDrawLocked = () =>
+      document.documentElement.classList.contains('is-draw-page');
 
-    const isDrawPageOpen = () =>
-      drawPage && !drawPage.hidden;
-
-    // 手机触摸拖动：不让浏览器把抽牌操作变成页面上下滑动。
     document.addEventListener(
       'touchmove',
       (event) => {
-        if (isDrawPageOpen() && drawPage.contains(event.target)) {
-          event.preventDefault();
-        }
+        if (isDrawLocked()) event.preventDefault();
       },
       { passive: false }
     );
 
-    // 电脑鼠标滚轮／触控板：在抽牌页内不滚动整张页面。
-    // 你的 app.js 原有的牌堆滚动选择逻辑仍会收到 wheel 事件。
     document.addEventListener(
       'wheel',
       (event) => {
-        if (isDrawPageOpen() && drawPage.contains(event.target)) {
-          event.preventDefault();
-        }
+        if (isDrawLocked()) event.preventDefault();
       },
       { passive: false }
     );

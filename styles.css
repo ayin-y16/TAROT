@@ -1356,18 +1356,26 @@ body {
   overflow-anchor: none;
 }
 
+/* 抽牌页彻底锁定滚动与缩放，避免背景被放大、音乐按钮随页面错位 */
+html.is-draw-page,
+html.is-draw-page body {
+  overflow: hidden;
+  touch-action: none;
+  overscroll-behavior: none;
+}
+
 /* 背景使用稳定的大视口高度，避免地址栏变化导致背景缩放 */
 .background-layer {
   position: fixed;
   z-index: -4;
   inset: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   pointer-events: none;
   background-color: #000;
   background-image: var(--bg-image);
   background-repeat: no-repeat;
-  background-position: center top;
+  background-position: center;
   background-size: cover;
   filter: brightness(1.8) saturate(0.64) contrast(1.08);
   transform: none;
@@ -1839,6 +1847,8 @@ body {
   background: rgba(9, 7, 19, 0.78);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.36);
   cursor: pointer;
+  /* 提升为独立合成层，规避 iOS 上 fixed 元素在页面滚动/回弹时的漂移 */
+  transform: translateZ(0);
   font-family: Georgia, "Noto Serif SC", serif;
   font-size: 23px;
   line-height: 1;
@@ -1890,36 +1900,20 @@ body {
   }
 }
 
-/* 手机抽牌页：锁定在稳定视口内，不能被牌堆的溢出区域撑大。 */
+/* 移动端不要为 78 张牌全部创建 GPU 合成层。 */
 @media (max-width: 767px) and (orientation: portrait) {
-  html:has(#draw-page:not([hidden])),
-  body:has(#draw-page:not([hidden])) {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    overscroll-behavior: none;
+  .deck-card {
+    will-change: auto;
   }
 
-  #draw-page:not([hidden]) {
-    position: fixed;
-    z-index: 10;
-    inset: 0;
-    width: 100%;
-    min-height: 0;
-    height: 100svh;
-    overflow: hidden;
-    overscroll-behavior: none;
+  /* 仅当前选中牌保留独立合成层，保证高亮动画平滑。 */
+  .deck-card.is-active {
+    will-change: transform, filter;
   }
 
-  /* 牌堆可在抽牌页内移动，但不得扩大整个页面的可滚动尺寸。 */
-  #draw-page .draw-layout {
-    min-height: 0;
-    height: calc(100svh - 75px);
-    overflow: hidden;
-  }
-
-  #draw-page .deck-viewport {
-    overflow: hidden;
-    touch-action: none;
+  /* 背景图不使用 filter，避免和大量 transform 图层争夺纹理缓存。 */
+  .background-layer {
+    filter: none;
+    -webkit-filter: none;
   }
 }

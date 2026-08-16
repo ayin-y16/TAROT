@@ -56,6 +56,7 @@ const state = {
   deck: [],
   selectedIndex: 0,
   deckPosition: 0,
+  deckCardElements: [],
   renderFrame: null,
   drawnCards: [],
     newestDrawnCardIndex: -1,
@@ -78,7 +79,6 @@ const elements = {
   deckViewport: document.querySelector('#deck-viewport'),
   drawButton: document.querySelector('#draw-current-card'),
   drawnCards: document.querySelector('#drawn-cards'),
-  deckCounter: document.querySelector('#deck-counter'),
   drawTitle: document.querySelector('#draw-spread-title'),
   drawKicker: document.querySelector('#draw-spread-kicker'),
   resultTitle: document.querySelector('#result-title'),
@@ -238,6 +238,10 @@ case 'open-library':
 function goToPage(pageName) {
   state.page = pageName;
 
+  // 抽牌页锁定滚动与缩放（配合 CSS 的 .is-draw-page 规则），
+  // 避免滑动抽牌时背景被放大、音乐按钮随页面错位。
+  document.documentElement.classList.toggle('is-draw-page', pageName === 'draw');
+
   elements.pages.forEach((page) => {
     const active = page.dataset.page === pageName;
     page.hidden = !active;
@@ -320,13 +324,59 @@ function setDeckPosition(nextPosition, immediate = false) {
   }
 }
 
+/*
+ * 牌堆 DOM 只在「牌组发生变化」时（开局、抽走一张）重建一次。
+ * 拖动、惯性、滚轮等高频更新只修改每张牌的 transform / opacity，
+ * 不再每帧重建 78 个节点的 innerHTML，避免重排造成的卡顿与背景抖动。
+ */
+function buildDeckCards() {
+  if (!elements.deckTrack) return;
+
+  elements.deckTrack.innerHTML = '';
+  state.deckCardElements = state.deck.map((card, index) => {
+    const button = document.createElement('button');
+    button.className = 'deck-card';
+    button.type = 'button';
+    button.dataset.deckIndex = String(index);
+    button.setAttribute('aria-label', `选择本轮洗牌后的第 ${card.deckOrder} 张牌`);
+    button.innerHTML =
+      '<span class="deck-card__back">' +
+      '<span class="deck-card__number">' +
+      String(card.deckOrder).padStart(2, '0') +
+      '</span></span>';
+
+    button.addEventListener('click', () => {
+      const clickedIndex = Number(button.dataset.deckIndex);
+
+      if (clickedIndex === state.selectedIndex) {
+        drawCurrentCard();
+        return;
+      }
+
+      stopDeckInertia();
+      setDeckPosition(clickedIndex, true);
+    });
+
+    elements.deckTrack.appendChild(button);
+    return button;
+  });
+}
+
 function renderDeck() {
   if (state.page !== 'draw' || !elements.deckTrack || !elements.deckViewport) return;
 
   if (!state.deck.length) {
-    elements.deckTrack.innerHTML = '';
+    if (state.deckCardElements.length) {
+      elements.deckTrack.innerHTML = '';
+      state.deckCardElements = [];
+    }
     updateDrawControls();
     return;
+  }
+
+  // 牌组数量变化（开局或抽走一张）时才重建节点，其余情况只更新样式。
+  if (state.deckCardElements.length !== state.deck.length) {
+    buildDeckCards();
   }
 
   const compact = isCompactPortrait();
@@ -339,8 +389,10 @@ function renderDeck() {
   const spacing = compact ? 0 : cardWidth * 0.54;
   const centeredIndex = Math.round(state.deckPosition);
 
-  elements.deckTrack.innerHTML = state.deck.map((card, index) => {
-    // 核心：这里是连续小数，不再是每次只移动一张。
+  state.deck.forEach((card, index) => {
+    const cardElement = state.deckCardElements[index];
+    if (!cardElement) return;
+
     const distance = index - state.deckPosition;
     const absoluteDistance = Math.abs(distance);
     const active = index === centeredIndex;
@@ -365,40 +417,15 @@ function renderDeck() {
       scale = Math.max(0.7, 1 - absoluteDistance * 0.032) + (active ? 0.085 : 0);
     }
 
-    const transform = `translate(-50%, -50%) translate(${x}px, ${y}px) rotate(${angle}deg) scale(${scale})`;
+    cardElement.style.transform =
+      `translate(-50%, -50%) translate(${x}px, ${y}px) rotate(${angle}deg) scale(${scale})`;
+    cardElement.style.opacity = visible ? '1' : '0';
+    cardElement.style.zIndex = String(300 - Math.round(absoluteDistance * 10));
+    cardElement.style.pointerEvents = visible ? 'auto' : 'none';
 
-    return `
-      <button
-        class="deck-card ${active ? 'is-active' : ''}"
-        type="button"
-        data-deck-index="${index}"
-        aria-label="选择本轮洗牌后的第 ${card.deckOrder} 张牌"
-        style="
-          z-index: ${300 - Math.round(absoluteDistance * 10)};
-          opacity: ${visible ? 1 : 0};
-          pointer-events: ${visible ? 'auto' : 'none'};
-          transform: ${transform};
-        "
-      >
-        <span class="deck-card__back">
-          <span class="deck-card__number">${String(card.deckOrder).padStart(2, '0')}</span>
-        </span>
-      </button>
-    `;
-  }).join('');
-
-  elements.deckTrack.querySelectorAll('[data-deck-index]').forEach((cardElement) => {
-    cardElement.addEventListener('click', () => {
-      const clickedIndex = Number(cardElement.dataset.deckIndex);
-
-      if (clickedIndex === state.selectedIndex) {
-        drawCurrentCard();
-        return;
-      }
-
-      stopDeckInertia();
-      setDeckPosition(clickedIndex, true);
-    });
+    if (active !== cardElement.classList.contains('is-active')) {
+      cardElement.classList.toggle('is-active', active);
+    }
   });
 
   updateDrawControls();
@@ -601,10 +628,6 @@ function handleDeckKeydown(event) {
     event.preventDefault();
     drawCurrentCard();
   }
-}
-
-function selectDeckOffset(offset) {
-  setDeckPosition(state.deckPosition + offset, true);
 }
 
 function drawCurrentCard() {
