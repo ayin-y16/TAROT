@@ -425,8 +425,10 @@
     let lastFgX = 0, lastFgY = 0;     // 上次写入前景 CSS 变量的偏移（用于跳过微小变化）
     const nebulaParallax = 8;         // 氛围星云视差位移(px)
     const starParallax = 22;          // 星点最大视差位移(px，乘以各自景深)
-    const foregroundParallax = 24;    // 前景 PNG 视差位移(px)，限额较小：图仅比中景大 10%
     const fgEl = document.querySelector('.foreground-layer');
+    // 更稳妥的触屏判定：用 (hover: none) 判断，避免 Android「桌面站点」模式或指针能力误报把手机判成桌面
+    const isTouch = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+    const foregroundParallax = isTouch ? 14 : 24;
 
     // 远处氛围星云：大片柔光团，缓慢漂移 + 明暗呼吸（衬托主星系，比之前更明显）
     const nebulaPalette = ['#7c3aed', '#2563eb', '#0d9488', '#db2777', '#4f46e5'];
@@ -602,12 +604,65 @@
       resizeTimer = setTimeout(resize, 250);
     });
 
-    // 指针移动 → 动态视差（鼠标交互）；触屏用 pointer 事件同样生效
-    window.addEventListener('pointermove', (e) => {
-      pTargetX = (e.clientX / window.innerWidth - 0.5) * 2;
-      pTargetY = (e.clientY / window.innerHeight - 0.5) * 2;
-    }, { passive: true });
-    window.addEventListener('pointerleave', () => { pTargetX = 0; pTargetY = 0; });
+    // 视差输入分流：
+    //  - 桌面（精确指针）→ 鼠标 pointermove
+    //  - 触屏 → 优先陀螺仪（需 HTTPS / iOS 授权），并始终绑定「触摸滑动」作为降级，
+    //           即便陀螺仪不可用（HTTP 局域网、权限被拒），手指滑动也能驱动视差
+    const clamp = (v) => Math.max(-1, Math.min(1, v));
+    if (!isTouch) {
+      window.addEventListener('pointermove', (e) => {
+        pTargetX = (e.clientX / window.innerWidth - 0.5) * 2;
+        pTargetY = (e.clientY / window.innerHeight - 0.5) * 2;
+      }, { passive: true });
+      window.addEventListener('pointerleave', () => { pTargetX = 0; pTargetY = 0; });
+    } else {
+      // 触摸滑动降级：手指在屏幕上的位置实时驱动视差（不依赖陀螺仪/HTTPS）
+      const onTouchMove = (e) => {
+        if (!e.touches || !e.touches.length) return;
+        const t = e.touches[0];
+        pTargetX = clamp((t.clientX / window.innerWidth - 0.5) * 2);
+        pTargetY = clamp((t.clientY / window.innerHeight - 0.5) * 2);
+      };
+      window.addEventListener('touchmove', onTouchMove, { passive: true });
+
+      // 陀螺仪：用设备倾斜替代鼠标，前景与星空反向错位产生伪立体感
+      let gyroBound = false;
+      const enableGyro = () => {
+        const DOE = window.DeviceOrientationEvent;
+        if (!DOE) {
+          // iOS 在非 HTTPS 下不暴露该 API，是最常见的「没反应」原因
+          console.warn('[视差] 本设备/浏览器未暴露 DeviceOrientationEvent（多见于 iOS 非 HTTPS 环境），已退回触摸滑动。');
+          return;
+        }
+        let baseGamma = null, baseBeta = null; // 中性基准：以首次有效读数为「居中」，避免平持即满偏
+        const onOrientation = (e) => {
+          if (e.gamma == null && e.beta == null) return;
+          // 以首次有效读数为中性基准：用户任意持机角度都视为居中，转动手机才驱动视差（手感更自然）
+          if (baseGamma == null) { baseGamma = e.gamma || 0; baseBeta = e.beta || 0; }
+          // gamma 左右倾斜、beta 前后倾斜，均相对中性基准，÷35 → ±35° 即满视差
+          const gx = clamp(((e.gamma || 0) - baseGamma) / 35);
+          const gy = clamp(((e.beta || 0) - baseBeta) / 35);
+          pTargetX = gx;
+          pTargetY = gy;
+        };
+        const attach = () => {
+          if (gyroBound) return;
+          gyroBound = true;
+          window.addEventListener('deviceorientation', onOrientation, { passive: true });
+          console.info('[视差] 陀螺仪已启用，倾斜手机即可驱动视差。');
+        };
+        // iOS 13+ 需在用户手势中申请权限（首次触摸/点击时触发）；非安全上下文会 reject
+        if (typeof DOE.requestPermission === 'function') {
+          DOE.requestPermission()
+            .then((s) => { if (s === 'granted') attach(); else console.warn('[视差] 陀螺仪权限被拒绝，已退回触摸滑动。'); })
+            .catch((err) => console.warn('[视差] 申请陀螺仪权限失败（通常需 HTTPS 安全上下文）：', err));
+        } else {
+          attach(); // Android 等无需权限，直接绑定
+        }
+      };
+      window.addEventListener('touchstart', enableGyro, { once: true, passive: true });
+      window.addEventListener('pointerdown', enableGyro, { once: true, passive: true });
+    }
 
     buildSprites(); // 预渲染星芒/星点精灵（只建一次，与分辨率无关）
     resize();

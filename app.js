@@ -44,23 +44,6 @@ const CATEGORY_LABELS = {
   pentacles: '星币',
 };
 
-const CIRCUIT_VARIANTS = ['circuit-radial', 'circuit-vertical', 'circuit-corner', 'circuit-hex'];
-
-function randomCircuitClass() {
-  return CIRCUIT_VARIANTS[Math.floor(Math.random() * CIRCUIT_VARIANTS.length)];
-}
-
-function assignCircuitPatterns(root = document) {
-  // 选牌阵页：两张卡片固定分配两个明显不同的电路变体（radial / hex），
-  // 并由 CSS 错开底纹相位，避免两张看起来太相似。底纹为静态，不再漂移。
-  const spreadVariants = ['circuit-radial', 'circuit-hex'];
-  const cards = root.querySelectorAll('.spread-choice-card');
-  cards.forEach((el, i) => {
-    CIRCUIT_VARIANTS.forEach((v) => el.classList.remove(v));
-    el.classList.add(spreadVariants[i % spreadVariants.length]);
-  });
-}
-
 const state = {
   page: 'home',
 
@@ -127,7 +110,6 @@ function initialize() {
   preloadImage(SITE_CONFIG.cardBackImage);
   if (SITE_CONFIG.backgroundImage) preloadImage(SITE_CONFIG.backgroundImage);
 
-  assignCircuitPatterns();
   initializeGemstoneOrbit();
   bindEvents();
   goToPage('home');
