@@ -166,7 +166,9 @@ function handleClick(event) {
   if (target.classList.contains('keyword-chip')) {
     const interpretation = target.closest('.result-card__interpretation');
     interpretation?.querySelector('.full-interpretation')?.classList.toggle('is-open');
-    target.classList.toggle('is-selected');
+    // 联动：点击任一关键词，整组关键词一起高亮，而不是逐个点亮。
+    const list = interpretation?.querySelector('.keyword-list');
+    if (list) list.classList.toggle('is-selected');
     return;
   }
 
@@ -270,6 +272,8 @@ function startReading(spreadKey) {
  state.deckPosition = state.selectedIndex;
  state.drawnCards = [];
  state.newestDrawnCardIndex = -1;
+ // 重置牌堆 DOM 缓存，强制重建（清除上一局遗留的空位标记）。
+ state.deckCardElements = [];
 
   const spread = SITE_CONFIG.spreads[state.spreadKey];
 
@@ -347,6 +351,14 @@ function buildDeckCards() {
 
     button.addEventListener('click', () => {
       const clickedIndex = Number(button.dataset.deckIndex);
+      const clickedCard = state.deck[clickedIndex];
+
+      // 已抽走的空位不可再选：跳到最近的未抽牌。
+      if (clickedCard && clickedCard.isDrawn) {
+        const next = findNextUndrawnIndex(clickedIndex);
+        if (next !== -1) setDeckPosition(next, true);
+        return;
+      }
 
       if (clickedIndex === state.selectedIndex) {
         drawCurrentCard();
@@ -393,9 +405,10 @@ function renderDeck() {
     const cardElement = state.deckCardElements[index];
     if (!cardElement) return;
 
+    const isEmpty = !!card.isDrawn;
     const distance = index - state.deckPosition;
     const absoluteDistance = Math.abs(distance);
-    const active = index === centeredIndex;
+    const active = index === centeredIndex && !isEmpty;
     const visible = absoluteDistance <= visibleRange;
 
     let x;
@@ -419,9 +432,14 @@ function renderDeck() {
 
     cardElement.style.transform =
       `translate(-50%, -50%) translate(${x}px, ${y}px) rotate(${angle}deg) scale(${scale})`;
-    cardElement.style.opacity = visible ? '1' : '0';
+    cardElement.style.opacity = visible ? (isEmpty ? '0.4' : '1') : '0';
     cardElement.style.zIndex = String(300 - Math.round(absoluteDistance * 10));
-    cardElement.style.pointerEvents = visible ? 'auto' : 'none';
+    cardElement.style.pointerEvents = (visible && !isEmpty) ? 'auto' : 'none';
+    cardElement.setAttribute('aria-disabled', isEmpty ? 'true' : 'false');
+
+    if (isEmpty !== cardElement.classList.contains('is-empty')) {
+      cardElement.classList.toggle('is-empty', isEmpty);
+    }
 
     if (active !== cardElement.classList.contains('is-active')) {
       cardElement.classList.toggle('is-active', active);
@@ -642,10 +660,22 @@ function drawCurrentCard() {
 
   if (!state.deck.length) return;
 
-  const [card] = state.deck.splice(state.selectedIndex, 1);
+  const selected = state.deck[state.selectedIndex];
+
+  // 当前居中位置若已是抽过的空位，自动跳到下一张未抽出的牌再抽。
+  if (!selected || selected.isDrawn) {
+    const next = findNextUndrawnIndex(state.selectedIndex);
+    if (next === -1) return;
+    setDeckPosition(next, true);
+    return;
+  }
+
+  // 不真正删除这张牌，只在原位标记为「已抽走」，牌堆留下一个空位，
+  // 更接近现实中抽牌后留下的缺口；其余牌保持各自序号不乱。
+  selected.isDrawn = true;
 
   state.drawnCards.push({
-    ...card,
+    ...selected,
     orientation: Math.random() >= 0.5 ? 'upright' : 'reversed',
     position: positions[state.drawnCards.length],
   });
@@ -653,19 +683,28 @@ function drawCurrentCard() {
   // 仅标记本次刚抽出的牌；下一次渲染时，只有它会播放抽牌动画。
   state.newestDrawnCardIndex = state.drawnCards.length - 1;
 
-state.deckPosition = clamp(
-  state.deckPosition,
-  0,
-  Math.max(0, state.deck.length - 1),
-);
-state.selectedIndex = Math.round(state.deckPosition);
+  // 抽完后自动把选框移到下一张未抽出的牌，空位留在原位。
+  const next = findNextUndrawnIndex(state.selectedIndex);
+  if (next !== -1) setDeckPosition(next, true);
 
   renderDrawnCards();
   renderDeck();
 
-if (state.drawnCards.length === positions.length) {
-  showToast('所有卡牌已抽取，点击“解读”查看结果。');
+  if (state.drawnCards.length === positions.length) {
+    showToast('所有卡牌已抽取，点击“解读”查看结果。');
+  }
 }
+
+/* 从 fromIndex 出发环形查找下一张尚未抽走的牌，找不到返回 -1。 */
+function findNextUndrawnIndex(fromIndex) {
+  const total = state.deck.length;
+
+  for (let step = 1; step <= total; step += 1) {
+    const index = (fromIndex + step) % total;
+    if (!state.deck[index].isDrawn) return index;
+  }
+
+  return -1;
 }
 
 function renderDrawnCards() {

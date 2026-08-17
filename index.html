@@ -306,6 +306,16 @@
       },
       { passive: false }
     );
+
+    // 双指捏合缩放是 iOS 的 gesture 事件，touchmove.preventDefault 挡不住。
+    // 必须在 gesturestart/change/end 上拦截，否则整页（含 fixed 背景与音乐按钮）会被放大。
+    const blockGesture = (event) => {
+      if (isDrawLocked()) event.preventDefault();
+    };
+
+    ['gesturestart', 'gesturechange', 'gestureend'].forEach((type) => {
+      document.addEventListener(type, blockGesture, { passive: false });
+    });
   })();
 </script>
   </body>
