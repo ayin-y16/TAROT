@@ -2,6 +2,7 @@
   --honeycomb-bg: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%2776.210%27%20height%3D%2766.000%27%20viewBox%3D%270%200%2076.210%2066.000%27%3E%3Cdefs%3E%3ClinearGradient%20id%3D%27hg%27%20x1%3D%270%27%20y1%3D%270%27%20x2%3D%270%27%20y2%3D%2766.000%27%20gradientUnits%3D%27userSpaceOnUse%27%3E%3Cstop%20offset%3D%270%25%27%20stop-color%3D%27%238fb6cf%27/%3E%3Cstop%20offset%3D%27100%25%27%20stop-color%3D%27%23486b86%27/%3E%3C/linearGradient%3E%3Cfilter%20id%3D%27hglow%27%20x%3D%27-20%25%27%20y%3D%27-20%25%27%20width%3D%27140%25%27%20height%3D%27140%25%27%3E%3CfeGaussianBlur%20stdDeviation%3D%270.4%27/%3E%3C/filter%3E%3C/defs%3E%3Cg%20fill%3D%27none%27%20stroke%3D%27url%28%23hg%29%27%20stroke-width%3D%271%27%20stroke-linejoin%3D%27round%27%20opacity%3D%270.22%27%20filter%3D%27url%28%23hglow%29%27%3E%3Cpolygon%20points%3D%27-19.05%2C-55.00%200.00%2C-44.00%200.00%2C-22.00%20-19.05%2C-11.00%20-38.11%2C-22.00%20-38.11%2C-44.00%27/%3E%3Cpolygon%20points%3D%2719.05%2C-55.00%2038.11%2C-44.00%2038.11%2C-22.00%2019.05%2C-11.00%20-0.00%2C-22.00%200.00%2C-44.00%27/%3E%3Cpolygon%20points%3D%2757.16%2C-55.00%2076.21%2C-44.00%2076.21%2C-22.00%2057.16%2C-11.00%2038.11%2C-22.00%2038.11%2C-44.00%27/%3E%3Cpolygon%20points%3D%2795.26%2C-55.00%20114.32%2C-44.00%20114.32%2C-22.00%2095.26%2C-11.00%2076.21%2C-22.00%2076.21%2C-44.00%27/%3E%3Cpolygon%20points%3D%27133.37%2C-55.00%20152.42%2C-44.00%20152.42%2C-22.00%20133.37%2C-11.00%20114.32%2C-22.00%20114.32%2C-44.00%27/%3E%3Cpolygon%20points%3D%27171.47%2C-55.00%20190.53%2C-44.00%20190.53%2C-22.00%20171.47%2C-11.00%20152.42%2C-22.00%20152.42%2C-44.00%27/%3E%3Cpolygon%20points%3D%27-38.11%2C-22.00%20-19.05%2C-11.00%20-19.05%2C11.00%20-38.11%2C22.00%20-57.16%2C11.00%20-57.16%2C-11.00%27/%3E%3Cpolygon%20points%3D%270.00%2C-22.00%2019.05%2C-11.00%2019.05%2C11.00%200.00%2C22.00%20-19.05%2C11.00%20-19.05%2C-11.00%27/%3E%3Cpolygon%20points%3D%2738.11%2C-22.00%2057.16%2C-11.00%2057.16%2C11.00%2038.11%2C22.00%2019.05%2C11.00%2019.05%2C-11.00%27/%3E%3Cpolygon%20points%3D%2776.21%2C-22.00%2095.26%2C-11.00%2095.26%2C11.00%2076.21%2C22.00%2057.16%2C11.00%2057.16%2C-11.00%27/%3E%3Cpolygon%20points%3D%27114.32%2C-22.00%20133.37%2C-11.00%20133.37%2C11.00%20114.32%2C22.00%2095.26%2C11.00%2095.26%2C-11.00%27/%3E%3Cpolygon%20points%3D%27152.42%2C-22.00%20171.47%2C-11.00%20171.47%2C11.00%20152.42%2C22.00%20133.37%2C11.00%20133.37%2C-11.00%27/%3E%3Cpolygon%20points%3D%27-19.05%2C11.00%200.00%2C22.00%200.00%2C44.00%20-19.05%2C55.00%20-38.11%2C44.00%20-38.11%2C22.00%27/%3E%3Cpolygon%20points%3D%2719.05%2C11.00%2038.11%2C22.00%2038.11%2C44.00%2019.05%2C55.00%20-0.00%2C44.00%200.00%2C22.00%27/%3E%3Cpolygon%20points%3D%2757.16%2C11.00%2076.21%2C22.00%2076.21%2C44.00%2057.16%2C55.00%2038.11%2C44.00%2038.11%2C22.00%27/%3E%3Cpolygon%20points%3D%2795.26%2C11.00%20114.32%2C22.00%20114.32%2C44.00%2095.26%2C55.00%2076.21%2C44.00%2076.21%2C22.00%27/%3E%3Cpolygon%20points%3D%27133.37%2C11.00%20152.42%2C22.00%20152.42%2C44.00%20133.37%2C55.00%20114.32%2C44.00%20114.32%2C22.00%27/%3E%3Cpolygon%20points%3D%27171.47%2C11.00%20190.53%2C22.00%20190.53%2C44.00%20171.47%2C55.00%20152.42%2C44.00%20152.42%2C22.00%27/%3E%3Cpolygon%20points%3D%27-38.11%2C44.00%20-19.05%2C55.00%20-19.05%2C77.00%20-38.11%2C88.00%20-57.16%2C77.00%20-57.16%2C55.00%27/%3E%3Cpolygon%20points%3D%270.00%2C44.00%2019.05%2C55.00%2019.05%2C77.00%200.00%2C88.00%20-19.05%2C77.00%20-19.05%2C55.00%27/%3E%3Cpolygon%20points%3D%2738.11%2C44.00%2057.16%2C55.00%2057.16%2C77.00%2038.11%2C88.00%2019.05%2C77.00%2019.05%2C55.00%27/%3E%3Cpolygon%20points%3D%2776.21%2C44.00%2095.26%2C55.00%2095.26%2C77.00%2076.21%2C88.00%2057.16%2C77.00%2057.16%2C55.00%27/%3E%3Cpolygon%20points%3D%27114.32%2C44.00%20133.37%2C55.00%20133.37%2C77.00%20114.32%2C88.00%2095.26%2C77.00%2095.26%2C55.00%27/%3E%3Cpolygon%20points%3D%27152.42%2C44.00%20171.47%2C55.00%20171.47%2C77.00%20152.42%2C88.00%20133.37%2C77.00%20133.37%2C55.00%27/%3E%3Cpolygon%20points%3D%27-19.05%2C77.00%200.00%2C88.00%200.00%2C110.00%20-19.05%2C121.00%20-38.11%2C110.00%20-38.11%2C88.00%27/%3E%3Cpolygon%20points%3D%2719.05%2C77.00%2038.11%2C88.00%2038.11%2C110.00%2019.05%2C121.00%20-0.00%2C110.00%200.00%2C88.00%27/%3E%3Cpolygon%20points%3D%2757.16%2C77.00%2076.21%2C88.00%2076.21%2C110.00%2057.16%2C121.00%2038.11%2C110.00%2038.11%2C88.00%27/%3E%3Cpolygon%20points%3D%2795.26%2C77.00%20114.32%2C88.00%20114.32%2C110.00%2095.26%2C121.00%2076.21%2C110.00%2076.21%2C88.00%27/%3E%3Cpolygon%20points%3D%27133.37%2C77.00%20152.42%2C88.00%20152.42%2C110.00%20133.37%2C121.00%20114.32%2C110.00%20114.32%2C88.00%27/%3E%3Cpolygon%20points%3D%27171.47%2C77.00%20190.53%2C88.00%20190.53%2C110.00%20171.47%2C121.00%20152.42%2C110.00%20152.42%2C88.00%27/%3E%3Cpolygon%20points%3D%27-38.11%2C110.00%20-19.05%2C121.00%20-19.05%2C143.00%20-38.11%2C154.00%20-57.16%2C143.00%20-57.16%2C121.00%27/%3E%3Cpolygon%20points%3D%270.00%2C110.00%2019.05%2C121.00%2019.05%2C143.00%200.00%2C154.00%20-19.05%2C143.00%20-19.05%2C121.00%27/%3E%3Cpolygon%20points%3D%2738.11%2C110.00%2057.16%2C121.00%2057.16%2C143.00%2038.11%2C154.00%2019.05%2C143.00%2019.05%2C121.00%27/%3E%3Cpolygon%20points%3D%2776.21%2C110.00%2095.26%2C121.00%2095.26%2C143.00%2076.21%2C154.00%2057.16%2C143.00%2057.16%2C121.00%27/%3E%3Cpolygon%20points%3D%27114.32%2C110.00%20133.37%2C121.00%20133.37%2C143.00%20114.32%2C154.00%2095.26%2C143.00%2095.26%2C121.00%27/%3E%3Cpolygon%20points%3D%27152.42%2C110.00%20171.47%2C121.00%20171.47%2C143.00%20152.42%2C154.00%20133.37%2C143.00%20133.37%2C121.00%27/%3E%3C/g%3E%3C/svg%3E");
   --bg-image: url('./assets/background.png');
   --card-back-image: url('./assets/card-back.jpg');
+  --fg-image: url('./assets/foreground.png');
   --card-face-placeholder: url('./assets/card-face-placeholder.svg');
 
   --ink: rgb(241, 247, 254);
@@ -92,22 +93,71 @@ img {
   isolation: isolate;
 }
 
+/* 背景分层（从底到顶）：
+   -6  最底层流转呼吸光（亮度克制，不超过星星）
+   -5  星空粒子层（会移动；不含旋转星系）
+   -4  中景 PNG（不移动，位置与当前背景图完全一致）
+   -3  前景 PNG（会移动，指针视差；图本身比中景大 10%）
+   -2  暗化 / 晕影 overlay
+   -1  颗粒质感
+   全部位于内容(0)之下，由 .app-shell 的 isolation 隔离。 */
 .background-layer,
 .background-overlay,
-.grain-layer {
+.grain-layer,
+.foreground-layer,
+.bg-glow-layer {
   position: fixed;
-  z-index: -3;
   inset: 0;
   pointer-events: none;
 }
 
+/* 最底层：流转 + 呼吸的宇宙辉光（亮度克制，位于星空之下，不会盖过星星） */
+.bg-glow-layer {
+  z-index: -6;
+  background:
+    radial-gradient(circle at 22% 28%, rgba(86, 120, 214, 0.20), transparent 40%),
+    radial-gradient(circle at 80% 64%, rgba(126, 86, 206, 0.18), transparent 42%),
+    radial-gradient(circle at 52% 82%, rgba(40, 160, 190, 0.16), transparent 44%);
+  background-size: 160% 160%, 150% 150%, 175% 175%;
+  background-position: 0% 0%, 100% 100%, 50% 50%;
+  animation: bgGlowBreath 20s ease-in-out infinite;
+}
+
+@keyframes bgGlowBreath {
+  0%   { opacity: 0.5;  background-position: 0% 0%, 100% 100%, 50% 50%; }
+  50%  { opacity: 0.95; background-position: 16% 14%, 84% 86%, 42% 60%; }
+  100% { opacity: 0.5;  background-position: 0% 0%, 100% 100%, 50% 50%; }
+}
+
+/* 星空粒子层：Canvas 渲染（见 index.html 底部脚本），位于中景 PNG 之下（z-index:-5），
+   会随指针做视差移动；不含旋转星系。透过半透明背景图隐约闪烁。 */
+#starfield {
+  position: fixed;
+  display: block;
+  inset: 0;
+  z-index: -5;
+  background: #05080f;
+  pointer-events: none;
+}
+
+/* 中景 PNG：不移动，位置与当前背景图完全一致（center/cover + scale(1.04)） */
 .background-layer {
+  z-index: -4;
   background: var(--bg-image) center / cover;
   /* 注意：不要用 opacity，否则整张 PNG 图层会被统一压成半透明，
      导致背后星空在「不透明」区域也透出 28%。保留 PNG 自身 alpha：
      透明处透出星空/星云，不透明处真正遮住星空。 */
   filter: brightness(1.5) saturate(0.66) contrast(1.05);
   transform: scale(1.04);
+}
+
+/* 前景 PNG：会移动（指针视差）。图本身比中景大 10%，这里再用 scale(1.06)
+   预留少量过沿，配合有限位移，移动时不露边。位移由 JS 写入 --fg-x / --fg-y。 */
+.foreground-layer {
+  z-index: -3;
+  background: var(--fg-image) center / cover;
+  transform: scale(1.06) translate(var(--fg-x, 0px), var(--fg-y, 0px));
+  will-change: transform;
 }
 
 .background-overlay {
@@ -125,17 +175,6 @@ img {
   background-image: radial-gradient(rgba(255, 255, 255, 0.58) 0.35px, transparent 0.65px);
   background-size: 5px 5px;
   mix-blend-mode: soft-light;
-}
-/* ── 星空闪烁背景层：位于所有背景之下（z-index:-4），透过半透明背景图与暗化遮罩隐约闪烁 ── */
-/* ── 星空粒子层：Canvas 渲染（见 index.html 底部脚本），位于所有背景之下（z-index:-4），
-   透过半透明背景图隐约闪烁；比 CSS 渐变方案更省、且支持粒子缓慢漂移。 ── */
-#starfield {
-  position: fixed;
-  display: block;
-  inset: 0;
-  z-index: -4;
-  background: #05080f;
-  pointer-events: none;
 }
 
 
@@ -820,82 +859,41 @@ img {
    2) .energy-layer 正面卡面内，color-dodge 做「爆光 → 斜向扫光」，
       闪光发生在翻转途中，不延迟到翻完才亮。 */
 
-/* 1) 边缘溢光层：翻牌时从卡牌四周溢出光晕 */
+/* 1) 边缘溢光层：用户要求只保留卡面前面的圆形发光，故停用此背后的模糊溢光层，
+   以避免每帧 blur(40px) 缩放动画的渲染开销（display:none 后不再参与绘制）。 */
 .overflow-glow {
-  position: absolute;
-  top: -10%;
-  left: -10%;
-  width: 120%;
-  height: 120%;
-  background: radial-gradient(circle, var(--glow-color) 0%, transparent 70%);
-  opacity: 0;
-  filter: blur(40px);
-  pointer-events: none;
-  z-index: -1;
-  transition: opacity 0.3s;
+  display: none;
 }
 
-.tarot-flip-card.is-revealed .overflow-glow {
-  animation: spillOut 0.9s ease-in-out forwards;
-}
-
-@keyframes spillOut {
-  0%   { opacity: 0;   transform: scale(0.8); }
-  40%  { opacity: 0.6; transform: scale(1.2); }
-  100% { opacity: 0;   transform: scale(1.4); }
-}
-
-/* 2) 卡面能量叠加层：color-dodge 比 screen 更绚丽猛烈 */
+/* 2) 卡面能量叠加层：纯径向圆形发光（无扫光），覆盖整张牌，丝滑渐变。
+   背景渐变设为静态，动画只驱动 opacity + transform，避免每帧重算渐变（性能优化）。 */
 .energy-layer {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   z-index: 10;
   pointer-events: none;
   opacity: 0;
   mix-blend-mode: color-dodge;
   border-radius: 11px;
   will-change: opacity, transform;
+  background: radial-gradient(circle at 50% 50%,
+    rgba(255, 255, 255, 0.9) 0%,
+    var(--accent-color) 20%,
+    var(--glow-color) 46%,
+    transparent 100%);
 }
 
 .tarot-flip-card.is-revealed .energy-layer {
-  /* 0.05s 起跳、0.9s 收尾，与 0.9s 翻牌同步，落定即淡尽 */
-  animation: energyReaction 0.9s ease-out 0.05s forwards;
+  /* 与 0.9s 翻牌基本同步，丝滑缓动、落定即淡尽 */
+  animation: energyReaction 1s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
 }
 
+/* 纯圆形发光：opacity 渐入渐出 + 轻微膨胀（面积放大覆盖整张牌）。
+   不放 background，避免每帧重算渐变。 */
 @keyframes energyReaction {
-  0% {
-    opacity: 0;
-    background: radial-gradient(circle at 50% 50%, white 0%, var(--glow-color) 20%, transparent 60%);
-    transform: scale(0.8);
-  }
-  20% {
-    opacity: 1;
-    /* 瞬间极强光爆 */
-    background: radial-gradient(circle at 50% 50%, white 0%, var(--accent-color) 40%, #000 80%);
-    transform: scale(1.1);
-  }
-  40% {
-    opacity: 0.8;
-    /* 转化为斜向扫光（左上到右下） */
-    background: linear-gradient(135deg,
-      transparent 0%,
-      rgba(255, 255, 255, 0) 20%,
-      rgba(255, 255, 255, 0.8) 45%,
-      var(--glow-color) 50%,
-      rgba(255, 255, 255, 0.8) 55%,
-      transparent 80%);
-    background-size: 300% 300%;
-    background-position: 100% 100%;
-    transform: scale(1);
-  }
-  100% {
-    opacity: 0;
-    background-position: 0% 0%;
-    transform: scale(1);
-  }
+  0%   { opacity: 0;    transform: scale(0.85); }
+  35%  { opacity: 0.85; transform: scale(1.0); }
+  100% { opacity: 0;    transform: scale(1.08); }
 }
 
 .tarot-flip-card__face {

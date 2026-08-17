@@ -759,6 +759,7 @@ function showResults() {
   if (!state.drawnCards.length) return;
 
   gemstoneOrbit?.burst();
+  gemstoneOrbit?.pulse(); // 进入结果页：宝石名字收拢快转，翻牌时缓动回归
   goToPage('result');
   renderResults();
 }
@@ -1163,6 +1164,11 @@ function createGemstoneOrbit(canvas, gemstoneNames) {
     dpr: 1,
     startedAt: performance.now(),
     burstStartedAt: 0,
+    lastNow: 0,
+    pulseStartedAt: 0,
+    pulseDuration: 1300,   // 脉冲总时长(ms)：点击解读→收拢快转→翻牌时缓动回归
+    pulsePeak: 2.6,        // 旋转加速峰值倍率（相对原速）
+    pulseShrink: 0.12,     // 向内收拢比例（12%）
     frame: null,
   };
 
@@ -1297,6 +1303,9 @@ const rebuildRings = () => {
       // 偶数圈顺时针、奇数圈逆时针；越外层速度越慢。
       speed: (baseSpeeds[visibleIndex % baseSpeeds.length]
         / (1 + visibleIndex * 0.08)),
+
+      // 当前旋转角（弧度），由 draw 每帧累加，保证转速平滑变化时角度连续无跳变。
+      angle: ring.phase,
     }));
 };
 
@@ -1335,6 +1344,12 @@ const rebuildRings = () => {
         twinkle: Math.random() * Math.PI * 2,
       };
     });
+  };
+
+  // 点击解读时触发：宝石名字向内收拢 + 快速旋转，随后在翻牌过程中缓动回归。
+  const pulse = () => {
+    if (reducedMotion.matches) return;
+    orbit.pulseStartedAt = performance.now();
   };
 
   const drawParticles = (now, burstProgress) => {
@@ -1409,12 +1424,23 @@ const drawTextOnInwardArc = ({
 
   const draw = (now) => {
     const config = getGemstoneOrbitConfig();
-    const elapsed = (now - orbit.startedAt) / 1000;
     const burstElapsed = orbit.burstStartedAt ? now - orbit.burstStartedAt : Infinity;
     const burstProgress = Math.min(1, burstElapsed / config.burstDuration);
-    const speedMultiplier = burstProgress < 1
-      ? 1 + (1 - burstProgress) * 5
-      : 1;
+
+    // 帧间隔（秒）：累加旋转角用，限制单帧步长避免切后台回来大跳。
+    if (!orbit.lastNow) orbit.lastNow = now;
+    let dt = (now - orbit.lastNow) / 1000;
+    orbit.lastNow = now;
+    if (dt < 0) dt = 0;
+    if (dt > 0.05) dt = 0.05;
+
+    // 脉冲：点击解读时宝石名字向内收拢 + 快速旋转，随后（翻牌时）缓动回归原位/原速。
+    const pulseElapsed = orbit.pulseStartedAt ? now - orbit.pulseStartedAt : Infinity;
+    const pPulse = pulseElapsed < orbit.pulseDuration ? pulseElapsed / orbit.pulseDuration : 1;
+    const ramp = Math.pow(1 - Math.min(1, Math.max(0, pPulse)), 2); // 1→0 平滑衰减
+    const radiusFactor = 1 - orbit.pulseShrink * ramp;
+    const speedMultiplier = 1 + orbit.pulsePeak * ramp;
+
     const centerX = orbit.width * config.x;
     const centerY = orbit.height * GEMSTONE_CENTER_Y;
     const shortEdge = Math.min(orbit.width, orbit.height);
@@ -1426,8 +1452,10 @@ const drawTextOnInwardArc = ({
     context.font = `300 ${config.fontSize}px "Noto Serif SC", serif`;
 
     orbit.rings.forEach((ring) => {
-      const radius = shortEdge * ring.radius;
-      const rotation = ring.phase + (ring.speed * speedMultiplier * elapsed * Math.PI) / 180;
+      // 累加旋转角（弧度）：转速平滑变化时角度连续，无跳变；radiusFactor 实现向内收拢。
+      ring.angle += ring.speed * speedMultiplier * (Math.PI / 180) * dt;
+      const radius = shortEdge * ring.radius * radiusFactor;
+      const rotation = ring.angle;
       const count = ring.labels.length;
 
       ring.labels.forEach((label, index) => {
@@ -1467,6 +1495,7 @@ const drawTextOnInwardArc = ({
   const resume = () => {
     if (orbit.frame || document.hidden || reducedMotion.matches) return;
     orbit.startedAt = performance.now();
+    orbit.lastNow = 0; // 重置帧间隔基准，避免恢复时旋转角大跳
     orbit.frame = requestAnimationFrame((now) => {
       orbit.frame = null;
       draw(now);
@@ -1502,7 +1531,7 @@ const drawTextOnInwardArc = ({
   draw(performance.now());
   resume();
 
-  return { burst };
+  return { burst, pulse };
 }
 
 initialize();

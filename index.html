@@ -38,10 +38,14 @@
 
   <body>
     <div id="app" class="app-shell">
-      <!-- 星空粒子层：Canvas 渲染，位于背景图之下（z-index:-4） -->
+      <!-- 星空粒子层：Canvas 渲染，位于背景图之下（z-index:-5） -->
       <canvas id="starfield" aria-hidden="true"></canvas>
-      <!-- 背景层：路径将在 app.js 的 SITE_CONFIG 中统一配置 -->
+      <!-- 最底层流转呼吸光（z-index:-6） -->
+      <div class="bg-glow-layer" aria-hidden="true"></div>
+      <!-- 背景层（中景，不移动）：路径将在 app.js 的 SITE_CONFIG 中统一配置 -->
       <div class="background-layer" aria-hidden="true"></div>
+      <!-- 前景层（会移动）：比中景大 10% 的 PNG，随指针视差移动（z-index:-3） -->
+      <div class="foreground-layer" aria-hidden="true"></div>
       <div class="background-overlay" aria-hidden="true"></div>
       <div class="grain-layer" aria-hidden="true"></div>
       <!-- 全站宝石名称同心圆动效：位于背景与页面内容之间。 -->
@@ -323,7 +327,7 @@
 
 <script>
   (() => {
-    // 低开销 Canvas 星空粒子背景，位于背景图之下（z-index:-4）
+    // 低开销 Canvas 星空粒子背景，位于中景 PNG 之下（z-index:-5）
     const canvas = document.getElementById('starfield');
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
@@ -336,6 +340,75 @@
     ];
     const TAU = Math.PI * 2;
 
+    // —— 离屏精灵缓存：把星芒/星点预渲染到小 canvas，每帧用 drawImage 绘制，
+    //    避免逐颗使用 shadowBlur / 渐变（canvas 最贵的操作）。这是反向视差后保持流畅的关键优化。
+    const FLARE_SIZE = 64;   // 星芒精灵画布边长
+    const FLARE_ARM = 30;    // 精灵内星芒臂长（中心到尖端）
+    const DOT_SIZE = 32;     // 普通星点精灵画布边长
+    const flareSprites = {}; // key: flareType + '|' + color
+    const dotSprites = {};   // key: color
+
+    function makeFlareSprite(type, color) {
+      const c = document.createElement('canvas');
+      c.width = c.height = FLARE_SIZE;
+      const g = c.getContext('2d');
+      const cx = FLARE_SIZE / 2, cy = FLARE_SIZE / 2;
+      const rays = type === 'six' ? 6 : 4;
+      const len = FLARE_ARM;
+      const half = 2.2;
+      const spread = rays === 6 ? 0.16 : 0.2;
+      g.translate(cx, cy);
+      for (let r = 0; r < rays; r++) {
+        const ang = (TAU / rays) * r;
+        const tipX = Math.cos(ang) * len, tipY = Math.sin(ang) * len;
+        const lx = Math.cos(ang - spread) * half, ly = Math.sin(ang - spread) * half;
+        const rx = Math.cos(ang + spread) * half, ry = Math.sin(ang + spread) * half;
+        const grad = g.createLinearGradient(0, 0, tipX, tipY);
+        grad.addColorStop(0, hexToRgba(color, 1));
+        grad.addColorStop(1, hexToRgba(color, 0));
+        g.fillStyle = grad;
+        g.beginPath();
+        g.moveTo(0, 0); g.lineTo(lx, ly); g.lineTo(tipX, tipY); g.lineTo(rx, ry);
+        g.closePath(); g.fill();
+      }
+      // 亮核：径向渐变（白心 → 彩色 → 透明），替代 shadowBlur 的辉光
+      const core = g.createRadialGradient(0, 0, 0, 0, 0, len * 0.5);
+      core.addColorStop(0, 'rgba(255,255,255,1)');
+      core.addColorStop(0.4, hexToRgba(color, 0.9));
+      core.addColorStop(1, hexToRgba(color, 0));
+      g.fillStyle = core;
+      g.beginPath(); g.arc(0, 0, len * 0.5, 0, TAU); g.fill();
+      return c;
+    }
+
+    function makeDotSprite(color) {
+      const c = document.createElement('canvas');
+      c.width = c.height = DOT_SIZE;
+      const g = c.getContext('2d');
+      const cx = DOT_SIZE / 2, cy = DOT_SIZE / 2;
+      const halo = g.createRadialGradient(cx, cy, 0, cx, cy, cx);
+      halo.addColorStop(0, hexToRgba(color, 1));
+      halo.addColorStop(0.35, hexToRgba(color, 0.45));
+      halo.addColorStop(1, hexToRgba(color, 0));
+      g.fillStyle = halo;
+      g.beginPath(); g.arc(cx, cy, cx, 0, TAU); g.fill();
+      // 更亮的白色小核
+      const core = g.createRadialGradient(cx, cy, 0, cx, cy, cx * 0.3);
+      core.addColorStop(0, 'rgba(255,255,255,1)');
+      core.addColorStop(1, 'rgba(255,255,255,0)');
+      g.fillStyle = core;
+      g.beginPath(); g.arc(cx, cy, cx * 0.3, 0, TAU); g.fill();
+      return c;
+    }
+
+    function buildSprites() {
+      colorPalette.forEach((color) => {
+        dotSprites[color] = makeDotSprite(color);
+        flareSprites['cross|' + color] = makeFlareSprite('cross', color);
+        flareSprites['six|' + color] = makeFlareSprite('six', color);
+      });
+    }
+
     function hexToRgba(hex, a) {
       const h = hex.replace('#', '');
       const r = parseInt(h.substring(0, 2), 16);
@@ -346,26 +419,37 @@
 
     let width = 0, height = 0, stars = [], nebulae = [];
 
-    // 远处流转的星云：大片柔光团，缓慢漂移 + 明暗呼吸
+    // 鼠标/指针动态交互：指针位置驱动多层视差（景深）
+    let pTargetX = 0, pTargetY = 0;   // 指针目标偏移，归一化到 [-1, 1]
+    let pX = 0, pY = 0;               // 平滑后的当前偏移
+    let lastFgX = 0, lastFgY = 0;     // 上次写入前景 CSS 变量的偏移（用于跳过微小变化）
+    const nebulaParallax = 8;         // 氛围星云视差位移(px)
+    const starParallax = 22;          // 星点最大视差位移(px，乘以各自景深)
+    const foregroundParallax = 24;    // 前景 PNG 视差位移(px)，限额较小：图仅比中景大 10%
+    const fgEl = document.querySelector('.foreground-layer');
+
+    // 远处氛围星云：大片柔光团，缓慢漂移 + 明暗呼吸（衬托主星系，比之前更明显）
     const nebulaPalette = ['#7c3aed', '#2563eb', '#0d9488', '#db2777', '#4f46e5'];
     function initNebulae() {
       nebulae = [];
       const base = Math.min(width, height) || 800;
-      const count = 5;
+      const count = 3;
       for (let i = 0; i < count; i++) {
         nebulae.push({
           x: Math.random() * width,
           y: Math.random() * height,
-          r: base * (0.28 + Math.random() * 0.24),
+          r: base * (0.22 + Math.random() * 0.18),
           color: nebulaPalette[i % nebulaPalette.length],
-          alpha: 0.10 + Math.random() * 0.09,
-          driftX: (Math.random() - 0.5) * 0.06,
-          driftY: (Math.random() - 0.5) * 0.05,
+          alpha: 0.16 + Math.random() * 0.10,
+          driftX: (Math.random() - 0.5) * 0.05,
+          driftY: (Math.random() - 0.5) * 0.04,
           speed: 0.00018 + Math.random() * 0.0003,
           phase: Math.random() * TAU
         });
       }
     }
+
+    // （已移除旋转星系；星点 + 氛围星云保留，作为会移动的星空层）
 
     function resize() {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -393,6 +477,8 @@
                    : isTiny ? (Math.random() * 0.35 + 0.25)
                    : (Math.random() * 1.0 + 0.5);
         const baseAlpha = isTiny ? (Math.random() * 0.35 + 0.25) : Math.random();
+        // 景深：用于鼠标视差。远星(极小)动得少，近的星芒动得多
+        const depth = isFlare ? 1.0 : (isTiny ? 0.3 : 0.55);
         stars.push({
           x: Math.random() * width,
           y: Math.random() * height,
@@ -405,6 +491,7 @@
           direction: Math.random() > 0.5 ? 1 : -1,
           isFlare,
           isTiny,
+          depth,
           // 'cross' = 四芒十字闪烁星；'six' = 六条射线的星芒
           flareType: isFlare ? (Math.random() < 0.5 ? 'cross' : 'six') : null,
           twinklePhase: Math.random() * TAU,
@@ -413,64 +500,31 @@
       }
     }
 
-    // 普通星点：亮核 + 一圈淡光晕，避免逐星 shadowBlur 拖慢性能
-    function drawDot(p) {
-      ctx.fillStyle = p.color;
-      ctx.globalAlpha = p.alpha * 0.32;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.size * 2.2, 0, TAU);
-      ctx.fill();
+    // 普通星点：用预渲染精灵 drawImage（无 shadowBlur，极快）
+    function drawDot(p, x, y) {
+      const sprite = dotSprites[p.color];
+      if (!sprite) return;
+      const d = p.size * 4.4; // 光晕直径 ≈ 原 size*2.2 半径
       ctx.globalAlpha = p.alpha;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.size, 0, TAU);
-      ctx.fill();
+      ctx.drawImage(sprite, x - d / 2, y - d / 2, d, d);
     }
 
-    // 星芒（十字 / 六射）：射线长度随闪烁伸缩，中心一颗亮核
-    function drawFlare(p, now) {
+    // 星芒（十字 / 六射）：用预渲染精灵绘制，射线长度随闪烁伸缩（无 shadowBlur）
+    function drawFlare(p, now, x, y) {
       // 防御：时间戳缺失/非有限时回退，避免 createLinearGradient 收到 NaN
       const t = (typeof now === 'number' && isFinite(now)) ? now : performance.now();
       const tw = 0.5 + 0.5 * Math.sin(t * p.twinkleSpeed + p.twinklePhase); // 0..1 闪烁
-      const len = (p.size * 3 + 8) * (0.55 + 0.45 * tw);   // 射线长度随闪烁伸缩
-      const coreR = p.size * (0.9 + 0.25 * tw);
-      const rays = p.flareType === 'six' ? 6 : 4;
-      const half = Math.max(0.5, p.size * 0.4);            // 射线根部半宽
-      const spread = rays === 6 ? 0.16 : 0.2;              // 射线张开角
-
-      ctx.save();
+      const sprite = flareSprites[p.flareType + '|' + p.color];
+      if (!sprite) return;
+      const arm = (p.size * 3 + 8) * (0.55 + 0.45 * tw); // 目标臂长随闪烁伸缩
+      const scale = arm / FLARE_ARM;
+      const d = FLARE_SIZE * scale;
       ctx.globalAlpha = p.alpha * (0.55 + 0.45 * tw);
-      ctx.translate(p.x, p.y);
-      ctx.shadowColor = p.color;
-      ctx.shadowBlur = 8;
-      for (let r = 0; r < rays; r++) {
-        const ang = (TAU / rays) * r;
-        const tipX = Math.cos(ang) * len, tipY = Math.sin(ang) * len;
-        const lx = Math.cos(ang - spread) * half, ly = Math.sin(ang - spread) * half;
-        const rx = Math.cos(ang + spread) * half, ry = Math.sin(ang + spread) * half;
-        const grad = ctx.createLinearGradient(0, 0, tipX, tipY);
-        grad.addColorStop(0, hexToRgba(p.color, 1));
-        grad.addColorStop(1, hexToRgba(p.color, 0));
-        ctx.fillStyle = grad;
-        ctx.beginPath();
-        ctx.moveTo(0, 0);
-        ctx.lineTo(lx, ly);
-        ctx.lineTo(tipX, tipY);
-        ctx.lineTo(rx, ry);
-        ctx.closePath();
-        ctx.fill();
-      }
-      // 明亮星核
-      ctx.globalAlpha = p.alpha;
-      ctx.fillStyle = '#ffffff';
-      ctx.shadowBlur = 4;
-      ctx.beginPath();
-      ctx.arc(0, 0, coreR * 0.9, 0, TAU);
-      ctx.fill();
-      ctx.restore();
+      ctx.drawImage(sprite, x - d / 2, y - d / 2, d, d);
     }
 
-    // 远处星云：加色混合画出柔光团，缓慢漂移、明暗呼吸（位于星空最底层，在背景图后方）
-    function drawNebula(now) {
+    // 远处氛围星云：加色混合画出柔光团，缓慢漂移、明暗呼吸（位于星空最底层，在背景图后方）
+    function drawNebula(now, px, py) {
       ctx.save();
       ctx.globalCompositeOperation = 'lighter'; // 加色：暗底上叠出柔润辉光
       for (let i = 0; i < nebulae.length; i++) {
@@ -482,12 +536,12 @@
         if (n.x < -m) n.x = width + m; else if (n.x > width + m) n.x = -m;
         if (n.y < -m) n.y = height + m; else if (n.y > height + m) n.y = -m;
         const a = n.alpha * (0.6 + 0.4 * Math.sin(now * n.speed + n.phase)); // 呼吸明灭
-        const g = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r);
+        const g = ctx.createRadialGradient(n.x + px, n.y + py, 0, n.x + px, n.y + py, n.r);
         g.addColorStop(0, hexToRgba(n.color, a));
         g.addColorStop(1, hexToRgba(n.color, 0));
         ctx.fillStyle = g;
         ctx.beginPath();
-        ctx.arc(n.x, n.y, n.r, 0, TAU);
+        ctx.arc(n.x + px, n.y + py, n.r, 0, TAU);
         ctx.fill();
       }
       ctx.restore();
@@ -496,7 +550,22 @@
     function draw(now) {
       ctx.clearRect(0, 0, width, height);
       const t = (typeof now === 'number' && isFinite(now)) ? now : performance.now();
-      drawNebula(t); // 先画远处星云，星星叠在其上
+      // 指针视差平滑跟随
+      pX += (pTargetX - pX) * 0.05;
+      pY += (pTargetY - pY) * 0.05;
+
+      // 星空（星点 + 星云）与前景层反向移动：前景随指针、星空逆指针，制造伪立体视差
+      drawNebula(t, -pX * nebulaParallax, -pY * nebulaParallax); // 远处氛围星云（反向）
+      // 前景 PNG 视差：仅在偏移变化明显时写入 CSS 变量，避免每帧无谓的样式计算
+      if (fgEl) {
+        const fx = pX * foregroundParallax;
+        const fy = pY * foregroundParallax;
+        if (Math.abs(fx - lastFgX) > 0.15 || Math.abs(fy - lastFgY) > 0.15) {
+          fgEl.style.setProperty('--fg-x', fx.toFixed(1) + 'px');
+          fgEl.style.setProperty('--fg-y', fy.toFixed(1) + 'px');
+          lastFgX = fx; lastFgY = fy;
+        }
+      }
       for (let i = 0; i < stars.length; i++) {
         const p = stars[i];
         p.x += p.speedX;
@@ -509,11 +578,12 @@
         if (p.alpha >= 0.9) { p.alpha = 0.9; p.direction = -1; }
         else if (p.alpha <= 0.1) { p.alpha = 0.1; p.direction = 1; }
 
-        // 单颗星绘制异常不影响整片星空（背景特效容错）
-        try {
-          if (p.isFlare) drawFlare(p, now);
-          else drawDot(p);
-        } catch (e) { /* 跳过这颗坏星，继续渲染其余 */ }
+        // 星空整体与前景反向：前景随指针位移、星空逆指针位移，近的星芒动得多、远的极小星动得少
+        const ox = -pX * starParallax * p.depth;
+        const oy = -pY * starParallax * p.depth;
+        const sx = p.x + ox, sy = p.y + oy;
+        if (p.isFlare) drawFlare(p, now, sx, sy);
+        else drawDot(p, sx, sy);
       }
       ctx.globalAlpha = 1;
       ctx.shadowBlur = 0;
@@ -532,6 +602,14 @@
       resizeTimer = setTimeout(resize, 250);
     });
 
+    // 指针移动 → 动态视差（鼠标交互）；触屏用 pointer 事件同样生效
+    window.addEventListener('pointermove', (e) => {
+      pTargetX = (e.clientX / window.innerWidth - 0.5) * 2;
+      pTargetY = (e.clientY / window.innerHeight - 0.5) * 2;
+    }, { passive: true });
+    window.addEventListener('pointerleave', () => { pTargetX = 0; pTargetY = 0; });
+
+    buildSprites(); // 预渲染星芒/星点精灵（只建一次，与分辨率无关）
     resize();
     if (reduceMotion) draw(performance.now()); // 尊重「减少动态效果」：仅静态绘制一帧
     else loop();
