@@ -440,7 +440,7 @@ const wandsCards = [
     image: "./assets/cards/wands-13.jpg",
     upright: {
       shortText: "权杖皇后正位一句话格言",
-      keywords: [],
+      keywords: ["自信", "热情", "魅力", "领导力"],
       fullInterpretation: `
         <h4>核心讯息</h4>
         <p>权杖王后正位象征自信、温暖与富有魅力的掌控力。</p>
@@ -454,7 +454,7 @@ const wandsCards = [
     },
     reversed: {
       shortText: "权杖皇后逆位一句话格言",
-      keywords: [],
+      keywords: ["嫉妒", "控制欲", "自我中心", "情绪化"],
       fullInterpretation: `
         <h4>核心讯息</h4>
         <p>逆位提示嫉妒、控制欲或自我中心。</p>

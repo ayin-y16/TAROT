@@ -1,21 +1,22 @@
 :root {
-  --bg-image: url('./assets/background-placeholder.svg');
-  --card-back-image: url('./assets/card-back-placeholder.svg');
+  --honeycomb-bg: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%2776.210%27%20height%3D%2766.000%27%20viewBox%3D%270%200%2076.210%2066.000%27%3E%3Cdefs%3E%3ClinearGradient%20id%3D%27hg%27%20x1%3D%270%27%20y1%3D%270%27%20x2%3D%270%27%20y2%3D%2766.000%27%20gradientUnits%3D%27userSpaceOnUse%27%3E%3Cstop%20offset%3D%270%25%27%20stop-color%3D%27%238fb6cf%27/%3E%3Cstop%20offset%3D%27100%25%27%20stop-color%3D%27%23486b86%27/%3E%3C/linearGradient%3E%3Cfilter%20id%3D%27hglow%27%20x%3D%27-20%25%27%20y%3D%27-20%25%27%20width%3D%27140%25%27%20height%3D%27140%25%27%3E%3CfeGaussianBlur%20stdDeviation%3D%270.4%27/%3E%3C/filter%3E%3C/defs%3E%3Cg%20fill%3D%27none%27%20stroke%3D%27url%28%23hg%29%27%20stroke-width%3D%271%27%20stroke-linejoin%3D%27round%27%20opacity%3D%270.22%27%20filter%3D%27url%28%23hglow%29%27%3E%3Cpolygon%20points%3D%27-19.05%2C-55.00%200.00%2C-44.00%200.00%2C-22.00%20-19.05%2C-11.00%20-38.11%2C-22.00%20-38.11%2C-44.00%27/%3E%3Cpolygon%20points%3D%2719.05%2C-55.00%2038.11%2C-44.00%2038.11%2C-22.00%2019.05%2C-11.00%20-0.00%2C-22.00%200.00%2C-44.00%27/%3E%3Cpolygon%20points%3D%2757.16%2C-55.00%2076.21%2C-44.00%2076.21%2C-22.00%2057.16%2C-11.00%2038.11%2C-22.00%2038.11%2C-44.00%27/%3E%3Cpolygon%20points%3D%2795.26%2C-55.00%20114.32%2C-44.00%20114.32%2C-22.00%2095.26%2C-11.00%2076.21%2C-22.00%2076.21%2C-44.00%27/%3E%3Cpolygon%20points%3D%27133.37%2C-55.00%20152.42%2C-44.00%20152.42%2C-22.00%20133.37%2C-11.00%20114.32%2C-22.00%20114.32%2C-44.00%27/%3E%3Cpolygon%20points%3D%27171.47%2C-55.00%20190.53%2C-44.00%20190.53%2C-22.00%20171.47%2C-11.00%20152.42%2C-22.00%20152.42%2C-44.00%27/%3E%3Cpolygon%20points%3D%27-38.11%2C-22.00%20-19.05%2C-11.00%20-19.05%2C11.00%20-38.11%2C22.00%20-57.16%2C11.00%20-57.16%2C-11.00%27/%3E%3Cpolygon%20points%3D%270.00%2C-22.00%2019.05%2C-11.00%2019.05%2C11.00%200.00%2C22.00%20-19.05%2C11.00%20-19.05%2C-11.00%27/%3E%3Cpolygon%20points%3D%2738.11%2C-22.00%2057.16%2C-11.00%2057.16%2C11.00%2038.11%2C22.00%2019.05%2C11.00%2019.05%2C-11.00%27/%3E%3Cpolygon%20points%3D%2776.21%2C-22.00%2095.26%2C-11.00%2095.26%2C11.00%2076.21%2C22.00%2057.16%2C11.00%2057.16%2C-11.00%27/%3E%3Cpolygon%20points%3D%27114.32%2C-22.00%20133.37%2C-11.00%20133.37%2C11.00%20114.32%2C22.00%2095.26%2C11.00%2095.26%2C-11.00%27/%3E%3Cpolygon%20points%3D%27152.42%2C-22.00%20171.47%2C-11.00%20171.47%2C11.00%20152.42%2C22.00%20133.37%2C11.00%20133.37%2C-11.00%27/%3E%3Cpolygon%20points%3D%27-19.05%2C11.00%200.00%2C22.00%200.00%2C44.00%20-19.05%2C55.00%20-38.11%2C44.00%20-38.11%2C22.00%27/%3E%3Cpolygon%20points%3D%2719.05%2C11.00%2038.11%2C22.00%2038.11%2C44.00%2019.05%2C55.00%20-0.00%2C44.00%200.00%2C22.00%27/%3E%3Cpolygon%20points%3D%2757.16%2C11.00%2076.21%2C22.00%2076.21%2C44.00%2057.16%2C55.00%2038.11%2C44.00%2038.11%2C22.00%27/%3E%3Cpolygon%20points%3D%2795.26%2C11.00%20114.32%2C22.00%20114.32%2C44.00%2095.26%2C55.00%2076.21%2C44.00%2076.21%2C22.00%27/%3E%3Cpolygon%20points%3D%27133.37%2C11.00%20152.42%2C22.00%20152.42%2C44.00%20133.37%2C55.00%20114.32%2C44.00%20114.32%2C22.00%27/%3E%3Cpolygon%20points%3D%27171.47%2C11.00%20190.53%2C22.00%20190.53%2C44.00%20171.47%2C55.00%20152.42%2C44.00%20152.42%2C22.00%27/%3E%3Cpolygon%20points%3D%27-38.11%2C44.00%20-19.05%2C55.00%20-19.05%2C77.00%20-38.11%2C88.00%20-57.16%2C77.00%20-57.16%2C55.00%27/%3E%3Cpolygon%20points%3D%270.00%2C44.00%2019.05%2C55.00%2019.05%2C77.00%200.00%2C88.00%20-19.05%2C77.00%20-19.05%2C55.00%27/%3E%3Cpolygon%20points%3D%2738.11%2C44.00%2057.16%2C55.00%2057.16%2C77.00%2038.11%2C88.00%2019.05%2C77.00%2019.05%2C55.00%27/%3E%3Cpolygon%20points%3D%2776.21%2C44.00%2095.26%2C55.00%2095.26%2C77.00%2076.21%2C88.00%2057.16%2C77.00%2057.16%2C55.00%27/%3E%3Cpolygon%20points%3D%27114.32%2C44.00%20133.37%2C55.00%20133.37%2C77.00%20114.32%2C88.00%2095.26%2C77.00%2095.26%2C55.00%27/%3E%3Cpolygon%20points%3D%27152.42%2C44.00%20171.47%2C55.00%20171.47%2C77.00%20152.42%2C88.00%20133.37%2C77.00%20133.37%2C55.00%27/%3E%3Cpolygon%20points%3D%27-19.05%2C77.00%200.00%2C88.00%200.00%2C110.00%20-19.05%2C121.00%20-38.11%2C110.00%20-38.11%2C88.00%27/%3E%3Cpolygon%20points%3D%2719.05%2C77.00%2038.11%2C88.00%2038.11%2C110.00%2019.05%2C121.00%20-0.00%2C110.00%200.00%2C88.00%27/%3E%3Cpolygon%20points%3D%2757.16%2C77.00%2076.21%2C88.00%2076.21%2C110.00%2057.16%2C121.00%2038.11%2C110.00%2038.11%2C88.00%27/%3E%3Cpolygon%20points%3D%2795.26%2C77.00%20114.32%2C88.00%20114.32%2C110.00%2095.26%2C121.00%2076.21%2C110.00%2076.21%2C88.00%27/%3E%3Cpolygon%20points%3D%27133.37%2C77.00%20152.42%2C88.00%20152.42%2C110.00%20133.37%2C121.00%20114.32%2C110.00%20114.32%2C88.00%27/%3E%3Cpolygon%20points%3D%27171.47%2C77.00%20190.53%2C88.00%20190.53%2C110.00%20171.47%2C121.00%20152.42%2C110.00%20152.42%2C88.00%27/%3E%3Cpolygon%20points%3D%27-38.11%2C110.00%20-19.05%2C121.00%20-19.05%2C143.00%20-38.11%2C154.00%20-57.16%2C143.00%20-57.16%2C121.00%27/%3E%3Cpolygon%20points%3D%270.00%2C110.00%2019.05%2C121.00%2019.05%2C143.00%200.00%2C154.00%20-19.05%2C143.00%20-19.05%2C121.00%27/%3E%3Cpolygon%20points%3D%2738.11%2C110.00%2057.16%2C121.00%2057.16%2C143.00%2038.11%2C154.00%2019.05%2C143.00%2019.05%2C121.00%27/%3E%3Cpolygon%20points%3D%2776.21%2C110.00%2095.26%2C121.00%2095.26%2C143.00%2076.21%2C154.00%2057.16%2C143.00%2057.16%2C121.00%27/%3E%3Cpolygon%20points%3D%27114.32%2C110.00%20133.37%2C121.00%20133.37%2C143.00%20114.32%2C154.00%2095.26%2C143.00%2095.26%2C121.00%27/%3E%3Cpolygon%20points%3D%27152.42%2C110.00%20171.47%2C121.00%20171.47%2C143.00%20152.42%2C154.00%20133.37%2C143.00%20133.37%2C121.00%27/%3E%3C/g%3E%3C/svg%3E");
+  --bg-image: url('./assets/background.png');
+  --card-back-image: url('./assets/card-back.jpg');
   --card-face-placeholder: url('./assets/card-face-placeholder.svg');
 
-  --ink: #f4f0ff;
-  --muted: rgba(224, 216, 241, 0.72);
-  --faint: rgba(213, 201, 237, 0.42);
-  --moon: #dfe8ff;
-  --amethyst: #a98ae0;
-  --amethyst-bright: #d9bdff;
-  --gem: #82ead7;
-  --gold: #ddc18a;
-  --gold-bright: #fff0bd;
-  --night: #090713;
-  --panel: rgba(18, 12, 34, 0.72);
-  --panel-strong: rgba(10, 6, 21, 0.9);
-  --line: rgba(211, 190, 255, 0.28);
+  --ink: rgb(241, 247, 254);
+  --muted: rgba(216, 227, 241, 0.72);
+  --faint: rgba(201, 217, 237, 0.42);
+  --moon: rgb(226, 240, 252);
+  --amethyst: rgb(138, 175, 224);
+  --amethyst-bright: rgb(195, 217, 249);
+  --gem: rgb(110, 180, 230);
+  --gold: rgb(212, 175, 92);
+  --gold-bright: rgb(245, 214, 140);
+  --night: rgb(7, 12, 19);
+  --panel: rgba(12, 22, 34, 0.72);
+  --panel-strong: rgba(6, 13, 21, 0.9);
+  --line: rgba(196, 219, 249, 0.28);
   --shadow: 0 20px 48px rgba(0, 0, 0, 0.56);
 
   --card-ratio: 1.618;
@@ -102,17 +103,20 @@ img {
 
 .background-layer {
   background: var(--bg-image) center / cover;
-  filter: brightness(1.8) saturate(0.64) contrast(1.08);
+  /* 注意：不要用 opacity，否则整张 PNG 图层会被统一压成半透明，
+     导致背后星空在「不透明」区域也透出 28%。保留 PNG 自身 alpha：
+     透明处透出星空/星云，不透明处真正遮住星空。 */
+  filter: brightness(1.5) saturate(0.66) contrast(1.05);
   transform: scale(1.04);
 }
 
 .background-overlay {
   z-index: -2;
   background:
-    radial-gradient(ellipse at 50% 5%, rgba(123, 91, 198, 0.19), transparent 35%),
-    radial-gradient(circle at 76% 72%, rgba(73, 220, 205, 0.09), transparent 22%),
-    radial-gradient(circle at 18% 80%, rgba(180, 127, 255, 0.1), transparent 22%),
-    linear-gradient(145deg, rgba(4, 3, 10, 0.92), rgba(18, 10, 38, 0.69) 52%, rgba(3, 3, 9, 0.93));
+    radial-gradient(ellipse at 50% 5%, rgba(91, 138, 198, 0.19), transparent 35%),
+    radial-gradient(circle at 76% 72%, rgba(81, 152, 212, 0.09), transparent 22%),
+    radial-gradient(circle at 18% 80%, rgba(139, 182, 243, 0.1), transparent 22%),
+    linear-gradient(145deg, rgba(4, 3, 10, 0.55), rgba(10, 23, 38, 0.32) 52%, rgba(3, 3, 9, 0.62));
 }
 
 .grain-layer {
@@ -122,6 +126,22 @@ img {
   background-size: 5px 5px;
   mix-blend-mode: soft-light;
 }
+/* ── 星空闪烁背景层：位于所有背景之下（z-index:-4），透过半透明背景图与暗化遮罩隐约闪烁 ── */
+/* ── 星空粒子层：Canvas 渲染（见 index.html 底部脚本），位于所有背景之下（z-index:-4），
+   透过半透明背景图隐约闪烁；比 CSS 渐变方案更省、且支持粒子缓慢漂移。 ── */
+#starfield {
+  position: fixed;
+  display: block;
+  inset: 0;
+  z-index: -4;
+  background: #05080f;
+  pointer-events: none;
+}
+
+
+
+
+
 
 .page {
   width: min(1440px, 100%);
@@ -148,7 +168,7 @@ img {
 
 .eyebrow {
   margin: 0;
-  color: var(--amethyst-bright);
+  color: var(--gold-bright);
   font-family: var(--display);
   font-size: 0.76rem;
   font-weight: 400;
@@ -191,7 +211,7 @@ img {
   font-weight: 300;
   letter-spacing: 0.2em;
   text-indent: 0.2em;
-  text-shadow: 0 0 32px rgba(190, 151, 255, 0.38), 0 4px 28px #000;
+  text-shadow: 0 0 32px rgba(160, 197, 246, 0.38), 0 4px 28px rgb(0, 0, 0);
 }
 
 .home-intro {
@@ -210,26 +230,21 @@ img {
 
 .spread-choice-card {
   position: relative;
+  z-index: 0;
   display: flex;
   min-height: 286px;
   padding: 34px 28px 28px;
   flex-direction: column;
   align-items: center;
   overflow: hidden;
-  border: 1px solid var(--line);
+  border: 1px solid rgba(196, 219, 249, 0.34);
   border-radius: 16px;
   color: var(--ink);
-  background: linear-gradient(145deg, rgba(59, 39, 91, 0.5), rgba(8, 6, 18, 0.86));
-  box-shadow: var(--shadow);
+  background: linear-gradient(145deg, rgba(39, 61, 91, 0.42), rgba(6, 11, 18, 0.78));
+  -webkit-backdrop-filter: blur(16px) saturate(1.15);
+  backdrop-filter: blur(16px) saturate(1.15);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22), inset 0 0 0 1px rgba(196, 219, 249, 0.15), var(--shadow);
   transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
-}
-
-.spread-choice-card::before {
-  position: absolute;
-  inset: 8px;
-  border: 1px solid rgba(213, 190, 255, 0.15);
-  border-radius: 10px;
-  content: '';
 }
 
 .spread-choice-card::after {
@@ -245,8 +260,8 @@ img {
 }
 
 .spread-choice-card:hover {
-  border-color: rgba(219, 192, 255, 0.84);
-  box-shadow: 0 0 30px rgba(174, 121, 255, 0.22), var(--shadow);
+  border-color: rgba(198, 219, 249, 0.84);
+  box-shadow: 0 0 30px rgba(133, 180, 243, 0.22), var(--shadow);
   transform: translateY(-7px);
 }
 
@@ -270,7 +285,7 @@ img {
 
 .spread-choice-card__count {
   margin-top: 20px;
-  color: var(--amethyst-bright);
+  color: var(--gold-bright);
   font-family: var(--display);
   font-size: 0.73rem;
   letter-spacing: 0.2em;
@@ -294,14 +309,14 @@ img {
   display: flex;
   margin-top: auto;
   gap: 7px;
-  color: rgba(239, 232, 255, 0.7);
+  color: rgba(234, 242, 253, 0.7);
   font-size: 0.72rem;
 }
 
 .spread-choice-card__positions i {
   min-width: 45px;
   padding: 5px 7px;
-  border: 1px solid rgba(205, 185, 255, 0.26);
+  border: 1px solid rgba(191, 217, 249, 0.26);
   border-radius: 999px;
   font-style: normal;
 }
@@ -311,12 +326,12 @@ img {
   padding: 8px 14px;
   color: var(--muted);
   text-decoration: underline;
-  text-decoration-color: rgba(213, 190, 255, 0.4);
+  text-decoration-color: rgba(196, 219, 249, 0.4);
   text-underline-offset: 6px;
 }
 
 .home-library-link:hover {
-  color: var(--amethyst-bright);
+  color: var(--gold-bright);
 }
 
 /* Shared header */
@@ -325,6 +340,8 @@ img {
   min-height: 48px;
   grid-template-columns: 48px 1fr 48px;
   align-items: center;
+  padding-block: 8px;
+  background: transparent;
 }
 
 .icon-button {
@@ -332,18 +349,18 @@ img {
   width: 42px;
   height: 42px;
   place-items: center;
-  border: 1px solid var(--line);
+  border: 1px solid rgba(196, 219, 249, 0.32);
   border-radius: 50%;
-  background: rgba(11, 7, 24, 0.42);
+  background: rgba(7, 15, 24, 0.38);
   font-size: 1.2rem;
   transition: 0.25s ease;
 }
 
 .icon-button:hover {
-  border-color: var(--amethyst-bright);
+  border-color: var(--gold-bright);
   color: var(--gold-bright);
-  background: rgba(81, 55, 120, 0.45);
-  box-shadow: 0 0 18px rgba(178, 129, 255, 0.22);
+  background: rgba(55, 82, 120, 0.45);
+  box-shadow: 0 0 18px rgba(245, 214, 140, 0.22);
   transform: translateY(-2px);
 }
 
@@ -394,7 +411,7 @@ img {
   touch-action: pan-y;
   user-select: none;
   -webkit-user-select: none;
-  mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+  mask-image: linear-gradient(to right, transparent, rgb(0, 0, 0) 12%, rgb(0, 0, 0) 88%, transparent);
 }
 
 .deck-track {
@@ -410,9 +427,9 @@ img {
   width: var(--deck-card-w);
   aspect-ratio: 1 / var(--card-ratio);
   overflow: hidden;
-  border: 1px solid rgba(231, 216, 255, 0.54);
+  border: 1px solid rgba(220, 233, 251, 0.54);
   border-radius: 9px;
-  background-color: #1d1336;
+  background-color: rgb(19, 34, 54);
   background-image: var(--card-back-image);
   background-size: cover;
   background-position: center;
@@ -431,7 +448,7 @@ img {
   position: absolute;
   z-index: 1;
   inset: 5px;
-  border: 1px solid rgba(222, 202, 255, 0.37);
+  border: 1px solid rgba(207, 225, 250, 0.37);
   border-radius: 5px;
   content: '';
   pointer-events: none;
@@ -452,42 +469,20 @@ img {
   width: 39%;
   aspect-ratio: 1;
   place-items: center;
-  border: 1px solid rgba(235, 222, 255, 0.68);
+  border: 1px solid rgba(225, 236, 252, 0.68);
   border-radius: 50%;
-  color: #f7efff;
-  background: rgba(13, 8, 27, 0.64);
-  box-shadow: 0 0 13px rgba(166, 112, 255, 0.28);
+  color: rgb(240, 246, 254);
+  background: rgba(8, 17, 27, 0.64);
+  box-shadow: 0 0 13px rgba(125, 175, 242, 0.28);
   font-family: var(--display);
   font-size: clamp(0.9rem, 2.3vw, 1.38rem);
   font-weight: 500;
 }
 
-.deck-card.is-active {
-  border-color: var(--gold-bright);
-  filter: brightness(1.2) saturate(1.15);
-  box-shadow:
-    0 0 0 2px rgba(227, 196, 255, 0.28),
-    0 17px 38px rgba(0, 0, 0, 0.68),
-    0 0 22px rgba(137, 232, 215, 0.42),
-    0 0 60px rgba(176, 123, 255, 0.31);
-  animation: selected-card-glow 2.2s ease-in-out infinite;
-}
-
-@keyframes selected-card-glow {
-  0%,
-  100% {
-    filter: brightness(1.15) saturate(1.08);
-  }
-
-  50% {
-    filter: brightness(1.32) saturate(1.22);
-  }
-}
-
 /* 已抽走的牌：原位留一个空位（虚线框、透明），模拟现实中抽牌后的缺口。 */
 .deck-card.is-empty {
   background: transparent;
-  border: 1px dashed rgba(231, 216, 255, 0.3);
+  border: 1px dashed rgba(220, 233, 251, 0.3);
   box-shadow: none;
 }
 
@@ -497,47 +492,20 @@ img {
 }
 
 .deck-card.is-empty.is-active {
-  border-color: rgba(231, 216, 255, 0.3);
+  border-color: rgba(220, 233, 251, 0.3);
   filter: none;
   box-shadow: none;
   animation: none;
 }
 
-.deck-viewport.is-dragging .deck-card {
-  transition-duration: 0.07s;
-}
-
-.deck-viewport.is-bumping {
-  animation: deck-bump 0.26s ease-out;
-}
-
-@keyframes deck-bump {
-  0% { transform: translateX(0); }
-  35% { transform: translateX(7px); }
-  100% { transform: translateX(0); }
-}
-
-.deck-focus-ring {
-  position: absolute;
-  top: 38%;
-  left: 50%;
-  width: calc(var(--deck-card-w) + 19px);
-  aspect-ratio: 1 / var(--card-ratio);
-  border: 1px solid rgba(244, 228, 188, 0.5);
-  border-radius: 12px;
-  opacity: 0.55;
-  transform: translate(-50%, -50%) translateY(-35px);
-  box-shadow: 0 0 22px rgba(137, 232, 215, 0.18);
-  pointer-events: none;
-}
-
 .draw-control-panel {
   z-index: 5;
   display: flex;
-  padding: 8px 0 14px;
+  padding: 16px 20px;
   flex-direction: column;
   align-items: center;
   gap: 10px;
+  background: transparent;
 }
 
 .draw-prompt {
@@ -552,13 +520,13 @@ img {
   margin-bottom: 5px;
   color: var(--gem);
   font-size: 1rem;
-  text-shadow: 0 0 10px var(--gem), 0 0 22px rgba(130, 234, 215, 0.45);
+  text-shadow: 0 0 10px var(--gem), 0 0 22px rgba(138, 186, 226, 0.45);
   animation: gem-pulse 2.8s ease-in-out infinite;
 }
 
 .draw-prompt p {
   margin: 0;
-  color: rgba(246, 241, 255, 0.92);
+  color: rgba(242, 247, 254, 0.92);
   font-size: clamp(0.83rem, 1.5vw, 0.98rem);
   font-weight: 300;
   line-height: 1.55;
@@ -573,12 +541,6 @@ img {
   letter-spacing: 0.04em;
 }
 
-.deck-counter {
-  margin: 0;
-  color: var(--muted);
-  font-size: 0.76rem;
-}
-
 .primary-button,
 .secondary-button {
   min-height: 44px;
@@ -590,27 +552,115 @@ img {
 }
 
 .primary-button {
-  border: 1px solid rgba(227, 212, 255, 0.78);
-  color: #160d28;
-  background: linear-gradient(135deg, #f1e3ff, #bda3e7 55%, #8fd9d0);
-  box-shadow: 0 0 22px rgba(170, 118, 255, 0.25), 0 8px 23px rgba(0, 0, 0, 0.38);
+  border: 1px solid rgba(246, 210, 126, 0.55);
+  color: rgb(13, 25, 40);
+  background: linear-gradient(135deg, rgb(230, 239, 252), rgb(163, 192, 231) 55%, rgb(143, 183, 217));
+  box-shadow: 0 0 22px rgba(246, 210, 126, 0.20), 0 8px 23px rgba(0, 0, 0, 0.38);
 }
 
 .primary-button:hover:not(:disabled) {
-  filter: brightness(1.12);
+  filter: brightness(1.1);
+  border-color: rgba(246, 210, 126, 0.85);
+  box-shadow: 0 0 28px rgba(246, 210, 126, 0.34), 0 8px 23px rgba(0, 0, 0, 0.38);
   transform: translateY(-3px);
+}
+
+/* 抽牌按钮：彩色玻璃质感（仅作用于抽牌面板的抽取按钮）
+   用柔和高光 + 单向、不规则间距的细折射纹，替代原本规整交叉的菱形网格，更接近真实玻璃。 */
+.draw-control-panel .primary-button {
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  color: rgb(13, 25, 40);
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.4);
+  background-image:
+    /* 斜向高光，模拟玻璃表面的反光 */
+    linear-gradient(105deg, rgba(255, 255, 255, 0) 34%, rgba(255, 255, 255, 0.38) 48%, rgba(255, 255, 255, 0) 60%),
+    linear-gradient(138deg, rgba(255, 255, 255, 0) 58%, rgba(255, 255, 255, 0.2) 72%, rgba(255, 255, 255, 0) 84%),
+    /* 单向、不规则间距的极淡折射细纹（不交叉成菱形网格） */
+    repeating-linear-gradient(73deg, rgba(255, 255, 255, 0) 0px, rgba(255, 255, 255, 0) 21px, rgba(255, 255, 255, 0.07) 23px, rgba(255, 255, 255, 0) 28px),
+    /* 彩色玻璃底色 */
+    linear-gradient(120deg, #9fe0ff 0%, #c4b5ff 16%, #ffc2e6 32%, #fff1b0 48%, #b6ffd6 64%, #aee6ff 80%, #c4b5ff 100%);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 230% 230%;
+  background-position: 0 0, 0 0, 0 0, 0% 50%;
+  background-blend-mode: screen, screen, screen, normal;
+  box-shadow: 0 0 22px rgba(190, 215, 255, 0.45), 0 8px 23px rgba(0, 0, 0, 0.32);
+  animation: prismatic-shift 7s ease-in-out infinite;
+}
+
+.draw-control-panel .primary-button:hover:not(:disabled) {
+  filter: brightness(1.12) saturate(1.15);
+  border-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 30px rgba(200, 225, 255, 0.6), 0 8px 23px rgba(0, 0, 0, 0.34);
+  transform: translateY(-3px);
+}
+
+@keyframes prismatic-shift {
+  0%   { background-position: 0 0, 0 0, 0 0, 0% 50%; }
+  50%  { background-position: 0 0, 0 0, 0 0, 100% 50%; }
+  100% { background-position: 0 0, 0 0, 0 0, 0% 50%; }
 }
 
 .secondary-button {
-  border: 1px solid var(--line);
+  border: 1px solid rgba(196, 219, 249, 0.3);
   color: var(--ink);
-  background: rgba(21, 13, 39, 0.6);
+  background: rgba(13, 24, 39, 0.5);
 }
 
 .secondary-button:hover {
-  border-color: var(--amethyst-bright);
-  box-shadow: 0 0 18px rgba(176, 123, 255, 0.18);
+  border-color: var(--gold-bright);
+  box-shadow: 0 0 18px rgba(245, 214, 140, 0.18);
   transform: translateY(-3px);
+}
+
+/* 牌库选项卡：蜂窝网格静态纹理（不再用电路底纹），已调淡 */
+.library-item::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: var(--honeycomb-bg);
+  background-size: 96px 83px;
+  background-repeat: repeat;
+  mix-blend-mode: screen;
+  opacity: 0.28;
+}
+
+/* 选牌阵页：柔和发光电路底纹（含随机变暗层），静态不漂移。
+   中央加径向渐变遮罩：文字区域（卡片中部）不显示电路，边缘保留，提升可读性。
+   两张卡片由 JS 分配不同变体，并见下方 :nth-child 规则错开底纹相位。 */
+.spread-choice-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: var(--circuit-bg);
+  background-size: var(--circuit-size, 360px 360px);
+  background-repeat: repeat;
+  background-position: 0 0;
+  mix-blend-mode: screen;
+  opacity: var(--circuit-opacity, 0.5);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 46%, transparent 42%, rgba(0, 0, 0, 0.92) 88%);
+  mask-image: radial-gradient(ellipse at 50% 46%, transparent 42%, rgba(0, 0, 0, 0.92) 88%);
+}
+
+/* 两张选牌阵卡片：错开底纹相位（180px / 96px），避免两张看起来太像 */
+.spread-choice-grid > .spread-choice-card:nth-child(1)::before {
+  background-position: 0 0;
+}
+.spread-choice-grid > .spread-choice-card:nth-child(2)::before {
+  background-position: 180px 96px;
+}
+
+/* 电路纹理变体：由 JS 随机分配给 library-item / spread-choice-card */
+.circuit-radial   { --circuit-bg: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27800%27%20height%3D%27800%27%20viewBox%3D%270%200%20800%20800%27%3E%3Cdefs%3E%3ClinearGradient%20id%3D%27circuitGradient%27%20x1%3D%270%27%20y1%3D%270%27%20x2%3D%27800%27%20y2%3D%27800%27%20gradientUnits%3D%27userSpaceOnUse%27%3E%3Cstop%20offset%3D%270%25%27%20stop-color%3D%27%2316d9ff%27/%3E%3Cstop%20offset%3D%2742%25%27%20stop-color%3D%27%2300a6c7%27/%3E%3Cstop%20offset%3D%2772%25%27%20stop-color%3D%27%2300d6b4%27/%3E%3Cstop%20offset%3D%27100%25%27%20stop-color%3D%27%2378ffe5%27/%3E%3C/linearGradient%3E%3ClinearGradient%20id%3D%27dimGradient%27%20x1%3D%27800%27%20y1%3D%270%27%20x2%3D%270%27%20y2%3D%27800%27%20gradientUnits%3D%27userSpaceOnUse%27%3E%3Cstop%20offset%3D%270%25%27%20stop-color%3D%27%230c87b0%27/%3E%3Cstop%20offset%3D%2750%25%27%20stop-color%3D%27%23078e9e%27/%3E%3Cstop%20offset%3D%27100%25%27%20stop-color%3D%27%2312d2bf%27/%3E%3C/linearGradient%3E%3Cfilter%20id%3D%27softGlow%27%20x%3D%27-50%25%27%20y%3D%27-50%25%27%20width%3D%27200%25%27%20height%3D%27200%25%27%3E%3CfeGaussianBlur%20stdDeviation%3D%273%27%20result%3D%27blur%27/%3E%3CfeColorMatrix%20in%3D%27blur%27%20type%3D%27matrix%27%20values%3D%270%200%200%200%200.00%200%200%200%200%200.85%200%200%200%200%200.95%200%200%200%200.75%200%27/%3E%3CfeMerge%3E%3CfeMergeNode/%3E%3CfeMergeNode%20in%3D%27SourceGraphic%27/%3E%3C/feMerge%3E%3C/filter%3E%3Cpattern%20id%3D%27microGrid%27%20width%3D%2740%27%20height%3D%2740%27%20patternUnits%3D%27userSpaceOnUse%27%3E%3Cpath%20d%3D%27M40%200H0V40%27%20fill%3D%27none%27%20stroke%3D%27%230b7892%27%20stroke-width%3D%270.7%27%20opacity%3D%270.13%27/%3E%3Ccircle%20cx%3D%270%27%20cy%3D%270%27%20r%3D%271.2%27%20fill%3D%27%2319d5d2%27%20opacity%3D%270.18%27/%3E%3C/pattern%3E%3C/defs%3E%3Cg%3E%3Crect%20width%3D%27800%27%20height%3D%27800%27%20fill%3D%27url%28%23microGrid%29%27%20opacity%3D%270.7%27/%3E%3Cg%20fill%3D%27none%27%20stroke%3D%27url%28%23circuitGradient%29%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%20filter%3D%27url%28%23softGlow%29%27%3E%3Cpath%20d%3D%27M-20%20118H72V168H132V218H212V270H292V270%27/%3E%3Cpath%20d%3D%27M820%20118H728V168H668V218H588V270H508V270%27/%3E%3Cpath%20d%3D%27M-20%20574H96V534H166V482H248V436H320%27/%3E%3Cpath%20d%3D%27M820%20574H704V534H634V482H552V436H480%27/%3E%3Cpath%20d%3D%27M148%20-20V68H204V122H252V186H252V244%27/%3E%3Cpath%20d%3D%27M148%20820V732H204V678H252V614H252V556%27/%3E%3Cpath%20d%3D%27M632%20-20V78H584V136H548V206H548V286%27/%3E%3Cpath%20d%3D%27M632%20820V722H584V664H548V594H548V514%27/%3E%3Cpath%20d%3D%27M78%2042H180V84H236V128H302%27/%3E%3Cpath%20d%3D%27M42%20226H104V188H154V154%27/%3E%3Cpath%20d%3D%27M304%2036V92H354V132H396%27/%3E%3Cpath%20d%3D%27M26%20350H84V314H140V278H190%27/%3E%3Cpath%20d%3D%27M292%20270H350V232H420V188H486%27/%3E%3Cpath%20d%3D%27M350%20232V304H398V356H456V410H520%27/%3E%3Cpath%20d%3D%27M292%20270V338H338V382H386V438H438%27/%3E%3Cpath%20d%3D%27M456%20410V362H504V316H562V272%27/%3E%3Cpath%20d%3D%27M438%20438H492V478H548V528H604%27/%3E%3Cpath%20d%3D%27M320%20436H278V478H226V522H182%27/%3E%3Cpath%20d%3D%27M386%20438V504H344V560H292%27/%3E%3Cpath%20d%3D%27M548%20286H612V330H656V382H716%27/%3E%3Cpath%20d%3D%27M252%20244H214V302H174V348H126%27/%3E%3Cpath%20d%3D%27M398%20356H430V324H466%27/%3E%3Cpath%20d%3D%27M398%20356V382H430V406%27/%3E%3Cpath%20d%3D%27M492%20478H522V452H552%27/%3E%3Cpath%20d%3D%27M338%20382H310V408H282%27/%3E%3Cpath%20d%3D%27M504%20316H532V292H556%27/%3E%3Cpath%20d%3D%27M716%20742H614V704H558V666H502%27/%3E%3Cpath%20d%3D%27M764%20602H704V638H652V682%27/%3E%3Cpath%20d%3D%27M486%20764V708H444V664H404%27/%3E%3Cpath%20d%3D%27M764%20418H704V454H660V490%27/%3E%3Cpath%20d%3D%27M678%20356H734V324H778%27/%3E%3Cpath%20d%3D%27M82%20470H132V438H178%27/%3E%3Cpath%20d%3D%27M610%2086H668V54H726%27/%3E%3Cpath%20d%3D%27M96%20692H148V662H202%27/%3E%3Cpath%20d%3D%27M604%20724H652V752H714%27/%3E%3C/g%3E%3Cg%20fill%3D%27none%27%20stroke%3D%27url%28%23dimGradient%29%27%20stroke-width%3D%272%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%20opacity%3D%270.72%27%3E%3Cpath%20d%3D%27M0%20304H58V276H104%27/%3E%3Cpath%20d%3D%27M800%20304H742V276H696%27/%3E%3Cpath%20d%3D%27M0%20650H74V620H116V584%27/%3E%3Cpath%20d%3D%27M800%20650H726V620H684V584%27/%3E%3Cpath%20d%3D%27M214%200V42H264V72%27/%3E%3Cpath%20d%3D%27M214%20800V758H264V728%27/%3E%3Cpath%20d%3D%27M706%200V46H666V88%27/%3E%3Cpath%20d%3D%27M706%20800V754H666V712%27/%3E%3Cpath%20d%3D%27M118%20382H164V414H204%27/%3E%3Cpath%20d%3D%27M682%20382H636V414H596%27/%3E%3Cpath%20d%3D%27M276%20644H326V612H368%27/%3E%3Cpath%20d%3D%27M524%20644H474V612H432%27/%3E%3C/g%3E%3Cg%20fill%3D%27%23071c2c%27%20stroke%3D%27url%28%23circuitGradient%29%27%20stroke-width%3D%273%27%20filter%3D%27url%28%23softGlow%29%27%3E%3Ccircle%20cx%3D%27132%27%20cy%3D%27218%27%20r%3D%277%27/%3E%3Ccircle%20cx%3D%27292%27%20cy%3D%27270%27%20r%3D%277%27/%3E%3Ccircle%20cx%3D%27252%27%20cy%3D%27244%27%20r%3D%276%27/%3E%3Ccircle%20cx%3D%27350%27%20cy%3D%27232%27%20r%3D%277%27/%3E%3Ccircle%20cx%3D%27398%27%20cy%3D%27356%27%20r%3D%278%27/%3E%3Ccircle%20cx%3D%27456%27%20cy%3D%27410%27%20r%3D%277%27/%3E%3Ccircle%20cx%3D%27438%27%20cy%3D%27438%27%20r%3D%276%27/%3E%3Ccircle%20cx%3D%27548%27%20cy%3D%27286%27%20r%3D%277%27/%3E%3Ccircle%20cx%3D%27548%27%20cy%3D%27528%27%20r%3D%277%27/%3E%3Ccircle%20cx%3D%27320%27%20cy%3D%27436%27%20r%3D%276%27/%3E%3Ccircle%20cx%3D%27182%27%20cy%3D%27522%27%20r%3D%276%27/%3E%3Ccircle%20cx%3D%27604%27%20cy%3D%27724%27%20r%3D%276%27/%3E%3Ccircle%20cx%3D%27502%27%20cy%3D%27666%27%20r%3D%276%27/%3E%3Ccircle%20cx%3D%27148%27%20cy%3D%27662%27%20r%3D%276%27/%3E%3Ccircle%20cx%3D%27668%27%20cy%3D%2754%27%20r%3D%276%27/%3E%3C/g%3E%3Cg%20fill%3D%27%2391fff0%27%3E%3Ccircle%20cx%3D%27132%27%20cy%3D%27218%27%20r%3D%272%27/%3E%3Ccircle%20cx%3D%27292%27%20cy%3D%27270%27%20r%3D%272%27/%3E%3Ccircle%20cx%3D%27398%27%20cy%3D%27356%27%20r%3D%272.5%27/%3E%3Ccircle%20cx%3D%27456%27%20cy%3D%27410%27%20r%3D%272%27/%3E%3Ccircle%20cx%3D%27548%27%20cy%3D%27286%27%20r%3D%272%27/%3E%3Ccircle%20cx%3D%27548%27%20cy%3D%27528%27%20r%3D%272%27/%3E%3Ccircle%20cx%3D%27604%27%20cy%3D%27724%27%20r%3D%272%27/%3E%3C/g%3E%3Cg%20fill%3D%27%23071c2c%27%20stroke%3D%27url%28%23circuitGradient%29%27%20stroke-width%3D%272%27%20opacity%3D%270.92%27%3E%3Crect%20x%3D%2768%27%20y%3D%27330%27%20width%3D%2774%27%20height%3D%2742%27%20rx%3D%273%27/%3E%3Crect%20x%3D%27654%27%20y%3D%27232%27%20width%3D%2778%27%20height%3D%2746%27%20rx%3D%273%27/%3E%3Crect%20x%3D%27340%27%20y%3D%2792%27%20width%3D%2772%27%20height%3D%2742%27%20rx%3D%273%27/%3E%3Crect%20x%3D%27366%27%20y%3D%27604%27%20width%3D%2782%27%20height%3D%2744%27%20rx%3D%273%27/%3E%3C/g%3E%3Cg%20fill%3D%27none%27%20stroke%3D%27%234ceee0%27%20stroke-width%3D%271.5%27%20opacity%3D%270.8%27%3E%3Cpath%20d%3D%27M82%20344H128M82%20356H116M82%20368H128%27/%3E%3Cpath%20d%3D%27M668%20246H718M668%20258H706M668%20270H718%27/%3E%3Cpath%20d%3D%27M354%20106H398M354%20118H388%27/%3E%3Cpath%20d%3D%27M382%20618H432M382%20630H420%27/%3E%3C/g%3E%3Cg%20fill%3D%27%2320d7d0%27%20opacity%3D%270.72%27%3E%3Ccircle%20cx%3D%2754%27%20cy%3D%2792%27%20r%3D%272%27/%3E%3Ccircle%20cx%3D%27742%27%20cy%3D%2792%27%20r%3D%272%27/%3E%3Ccircle%20cx%3D%2754%27%20cy%3D%27710%27%20r%3D%272%27/%3E%3Ccircle%20cx%3D%27742%27%20cy%3D%27710%27%20r%3D%272%27/%3E%3Ccircle%20cx%3D%27302%27%20cy%3D%27734%27%20r%3D%272%27/%3E%3Ccircle%20cx%3D%27496%27%20cy%3D%2762%27%20r%3D%272%27/%3E%3C/g%3E%3C%21--%20%E9%9A%8F%E6%9C%BA%E5%8F%98%E6%9A%97%E5%B1%82%EF%BC%9A%E5%8F%96%E4%B8%BB%E7%BA%BF%E8%B7%AF%E7%9A%84%E4%B8%80%E9%83%A8%E5%88%86%E4%BB%A5%E5%BE%88%E4%BD%8E%E9%80%8F%E6%98%8E%E5%BA%A6%E9%87%8D%E7%BB%98%EF%BC%8C%E5%88%B6%E9%80%A0%E6%98%8E%E6%9A%97%E6%96%91%E9%A9%B3%E3%80%81%E5%BC%B1%E5%8C%96%E5%B9%B3%E9%93%BA%E6%84%9F%20--%3E%3Cg%20fill%3D%27none%27%20stroke%3D%27url%28%23dimGradient%29%27%20stroke-width%3D%272.4%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%20opacity%3D%270.26%27%20filter%3D%27url%28%23softGlow%29%27%3E%3Cpath%20d%3D%27M78%2042H180V84H236V128H302%27/%3E%3Cpath%20d%3D%27M292%20270H350V232H420V188H486%27/%3E%3Cpath%20d%3D%27M350%20232V304H398V356H456V410H520%27/%3E%3Cpath%20d%3D%27M456%20410V362H504V316H562V272%27/%3E%3Cpath%20d%3D%27M438%20438H492V478H548V528H604%27/%3E%3Cpath%20d%3D%27M716%20742H614V704H558V666H502%27/%3E%3Cpath%20d%3D%27M486%20764V708H444V664H404%27/%3E%3Cpath%20d%3D%27M82%20470H132V438H178%27/%3E%3Cpath%20d%3D%27M604%20724H652V752H714%27/%3E%3Cpath%20d%3D%27M678%20356H734V324H778%27/%3E%3Cpath%20d%3D%27M252%20244H214V302H174V348H126%27/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");    --circuit-size: 360px 360px; --circuit-opacity: 0.5; --circuit-drift: 24s; }
+.circuit-vertical { --circuit-bg: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27800%27%20height%3D%27800%27%20viewBox%3D%270%200%20800%20800%27%3E%3Cdefs%3E%3ClinearGradient%20id%3D%27circuitGradient%27%20x1%3D%270%27%20y1%3D%270%27%20x2%3D%27800%27%20y2%3D%27800%27%20gradientUnits%3D%27userSpaceOnUse%27%3E%3Cstop%20offset%3D%270%25%27%20stop-color%3D%27%2316d9ff%27/%3E%3Cstop%20offset%3D%2742%25%27%20stop-color%3D%27%2300a6c7%27/%3E%3Cstop%20offset%3D%2772%25%27%20stop-color%3D%27%2300d6b4%27/%3E%3Cstop%20offset%3D%27100%25%27%20stop-color%3D%27%2378ffe5%27/%3E%3C/linearGradient%3E%3ClinearGradient%20id%3D%27dimGradient%27%20x1%3D%27800%27%20y1%3D%270%27%20x2%3D%270%27%20y2%3D%27800%27%20gradientUnits%3D%27userSpaceOnUse%27%3E%3Cstop%20offset%3D%270%25%27%20stop-color%3D%27%230c87b0%27/%3E%3Cstop%20offset%3D%2750%25%27%20stop-color%3D%27%23078e9e%27/%3E%3Cstop%20offset%3D%27100%25%27%20stop-color%3D%27%2312d2bf%27/%3E%3C/linearGradient%3E%3Cfilter%20id%3D%27softGlow%27%20x%3D%27-50%25%27%20y%3D%27-50%25%27%20width%3D%27200%25%27%20height%3D%27200%25%27%3E%3CfeGaussianBlur%20stdDeviation%3D%273%27%20result%3D%27blur%27/%3E%3CfeColorMatrix%20in%3D%27blur%27%20type%3D%27matrix%27%20values%3D%270%200%200%200%200.00%200%200%200%200%200.85%200%200%200%200%200.95%200%200%200%200.75%200%27/%3E%3CfeMerge%3E%3CfeMergeNode/%3E%3CfeMergeNode%20in%3D%27SourceGraphic%27/%3E%3C/feMerge%3E%3C/filter%3E%3Cpattern%20id%3D%27microGrid%27%20width%3D%2740%27%20height%3D%2740%27%20patternUnits%3D%27userSpaceOnUse%27%3E%3Cpath%20d%3D%27M40%200H0V40%27%20fill%3D%27none%27%20stroke%3D%27%230b7892%27%20stroke-width%3D%270.7%27%20opacity%3D%270.13%27/%3E%3Ccircle%20cx%3D%270%27%20cy%3D%270%27%20r%3D%271.2%27%20fill%3D%27%2319d5d2%27%20opacity%3D%270.18%27/%3E%3C/pattern%3E%3C/defs%3E%3Cg%20transform%3D%27scale%28-1%2C1%29%20translate%28-800%2C0%29%27%3E%3Crect%20width%3D%27800%27%20height%3D%27800%27%20fill%3D%27url%28%23microGrid%29%27%20opacity%3D%270.7%27/%3E%3Cg%20fill%3D%27none%27%20stroke%3D%27url%28%23circuitGradient%29%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%20filter%3D%27url%28%23softGlow%29%27%3E%3Cpath%20d%3D%27M-20%20118H72V168H132V218H212V270H292V270%27/%3E%3Cpath%20d%3D%27M820%20118H728V168H668V218H588V270H508V270%27/%3E%3Cpath%20d%3D%27M-20%20574H96V534H166V482H248V436H320%27/%3E%3Cpath%20d%3D%27M820%20574H704V534H634V482H552V436H480%27/%3E%3Cpath%20d%3D%27M148%20-20V68H204V122H252V186H252V244%27/%3E%3Cpath%20d%3D%27M148%20820V732H204V678H252V614H252V556%27/%3E%3Cpath%20d%3D%27M632%20-20V78H584V136H548V206H548V286%27/%3E%3Cpath%20d%3D%27M632%20820V722H584V664H548V594H548V514%27/%3E%3Cpath%20d%3D%27M78%2042H180V84H236V128H302%27/%3E%3Cpath%20d%3D%27M42%20226H104V188H154V154%27/%3E%3Cpath%20d%3D%27M304%2036V92H354V132H396%27/%3E%3Cpath%20d%3D%27M26%20350H84V314H140V278H190%27/%3E%3Cpath%20d%3D%27M292%20270H350V232H420V188H486%27/%3E%3Cpath%20d%3D%27M350%20232V304H398V356H456V410H520%27/%3E%3Cpath%20d%3D%27M292%20270V338H338V382H386V438H438%27/%3E%3Cpath%20d%3D%27M456%20410V362H504V316H562V272%27/%3E%3Cpath%20d%3D%27M438%20438H492V478H548V528H604%27/%3E%3Cpath%20d%3D%27M320%20436H278V478H226V522H182%27/%3E%3Cpath%20d%3D%27M386%20438V504H344V560H292%27/%3E%3Cpath%20d%3D%27M548%20286H612V330H656V382H716%27/%3E%3Cpath%20d%3D%27M252%20244H214V302H174V348H126%27/%3E%3Cpath%20d%3D%27M398%20356H430V324H466%27/%3E%3Cpath%20d%3D%27M398%20356V382H430V406%27/%3E%3Cpath%20d%3D%27M492%20478H522V452H552%27/%3E%3Cpath%20d%3D%27M338%20382H310V408H282%27/%3E%3Cpath%20d%3D%27M504%20316H532V292H556%27/%3E%3Cpath%20d%3D%27M716%20742H614V704H558V666H502%27/%3E%3Cpath%20d%3D%27M764%20602H704V638H652V682%27/%3E%3Cpath%20d%3D%27M486%20764V708H444V664H404%27/%3E%3Cpath%20d%3D%27M764%20418H704V454H660V490%27/%3E%3Cpath%20d%3D%27M678%20356H734V324H778%27/%3E%3Cpath%20d%3D%27M82%20470H132V438H178%27/%3E%3Cpath%20d%3D%27M610%2086H668V54H726%27/%3E%3Cpath%20d%3D%27M96%20692H148V662H202%27/%3E%3Cpath%20d%3D%27M604%20724H652V752H714%27/%3E%3C/g%3E%3Cg%20fill%3D%27none%27%20stroke%3D%27url%28%23dimGradient%29%27%20stroke-width%3D%272%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%20opacity%3D%270.72%27%3E%3Cpath%20d%3D%27M0%20304H58V276H104%27/%3E%3Cpath%20d%3D%27M800%20304H742V276H696%27/%3E%3Cpath%20d%3D%27M0%20650H74V620H116V584%27/%3E%3Cpath%20d%3D%27M800%20650H726V620H684V584%27/%3E%3Cpath%20d%3D%27M214%200V42H264V72%27/%3E%3Cpath%20d%3D%27M214%20800V758H264V728%27/%3E%3Cpath%20d%3D%27M706%200V46H666V88%27/%3E%3Cpath%20d%3D%27M706%20800V754H666V712%27/%3E%3Cpath%20d%3D%27M118%20382H164V414H204%27/%3E%3Cpath%20d%3D%27M682%20382H636V414H596%27/%3E%3Cpath%20d%3D%27M276%20644H326V612H368%27/%3E%3Cpath%20d%3D%27M524%20644H474V612H432%27/%3E%3C/g%3E%3Cg%20fill%3D%27%23071c2c%27%20stroke%3D%27url%28%23circuitGradient%29%27%20stroke-width%3D%273%27%20filter%3D%27url%28%23softGlow%29%27%3E%3Ccircle%20cx%3D%27132%27%20cy%3D%27218%27%20r%3D%277%27/%3E%3Ccircle%20cx%3D%27292%27%20cy%3D%27270%27%20r%3D%277%27/%3E%3Ccircle%20cx%3D%27252%27%20cy%3D%27244%27%20r%3D%276%27/%3E%3Ccircle%20cx%3D%27350%27%20cy%3D%27232%27%20r%3D%277%27/%3E%3Ccircle%20cx%3D%27398%27%20cy%3D%27356%27%20r%3D%278%27/%3E%3Ccircle%20cx%3D%27456%27%20cy%3D%27410%27%20r%3D%277%27/%3E%3Ccircle%20cx%3D%27438%27%20cy%3D%27438%27%20r%3D%276%27/%3E%3Ccircle%20cx%3D%27548%27%20cy%3D%27286%27%20r%3D%277%27/%3E%3Ccircle%20cx%3D%27548%27%20cy%3D%27528%27%20r%3D%277%27/%3E%3Ccircle%20cx%3D%27320%27%20cy%3D%27436%27%20r%3D%276%27/%3E%3Ccircle%20cx%3D%27182%27%20cy%3D%27522%27%20r%3D%276%27/%3E%3Ccircle%20cx%3D%27604%27%20cy%3D%27724%27%20r%3D%276%27/%3E%3Ccircle%20cx%3D%27502%27%20cy%3D%27666%27%20r%3D%276%27/%3E%3Ccircle%20cx%3D%27148%27%20cy%3D%27662%27%20r%3D%276%27/%3E%3Ccircle%20cx%3D%27668%27%20cy%3D%2754%27%20r%3D%276%27/%3E%3C/g%3E%3Cg%20fill%3D%27%2391fff0%27%3E%3Ccircle%20cx%3D%27132%27%20cy%3D%27218%27%20r%3D%272%27/%3E%3Ccircle%20cx%3D%27292%27%20cy%3D%27270%27%20r%3D%272%27/%3E%3Ccircle%20cx%3D%27398%27%20cy%3D%27356%27%20r%3D%272.5%27/%3E%3Ccircle%20cx%3D%27456%27%20cy%3D%27410%27%20r%3D%272%27/%3E%3Ccircle%20cx%3D%27548%27%20cy%3D%27286%27%20r%3D%272%27/%3E%3Ccircle%20cx%3D%27548%27%20cy%3D%27528%27%20r%3D%272%27/%3E%3Ccircle%20cx%3D%27604%27%20cy%3D%27724%27%20r%3D%272%27/%3E%3C/g%3E%3Cg%20fill%3D%27%23071c2c%27%20stroke%3D%27url%28%23circuitGradient%29%27%20stroke-width%3D%272%27%20opacity%3D%270.92%27%3E%3Crect%20x%3D%2768%27%20y%3D%27330%27%20width%3D%2774%27%20height%3D%2742%27%20rx%3D%273%27/%3E%3Crect%20x%3D%27654%27%20y%3D%27232%27%20width%3D%2778%27%20height%3D%2746%27%20rx%3D%273%27/%3E%3Crect%20x%3D%27340%27%20y%3D%2792%27%20width%3D%2772%27%20height%3D%2742%27%20rx%3D%273%27/%3E%3Crect%20x%3D%27366%27%20y%3D%27604%27%20width%3D%2782%27%20height%3D%2744%27%20rx%3D%273%27/%3E%3C/g%3E%3Cg%20fill%3D%27none%27%20stroke%3D%27%234ceee0%27%20stroke-width%3D%271.5%27%20opacity%3D%270.8%27%3E%3Cpath%20d%3D%27M82%20344H128M82%20356H116M82%20368H128%27/%3E%3Cpath%20d%3D%27M668%20246H718M668%20258H706M668%20270H718%27/%3E%3Cpath%20d%3D%27M354%20106H398M354%20118H388%27/%3E%3Cpath%20d%3D%27M382%20618H432M382%20630H420%27/%3E%3C/g%3E%3Cg%20fill%3D%27%2320d7d0%27%20opacity%3D%270.72%27%3E%3Ccircle%20cx%3D%2754%27%20cy%3D%2792%27%20r%3D%272%27/%3E%3Ccircle%20cx%3D%27742%27%20cy%3D%2792%27%20r%3D%272%27/%3E%3Ccircle%20cx%3D%2754%27%20cy%3D%27710%27%20r%3D%272%27/%3E%3Ccircle%20cx%3D%27742%27%20cy%3D%27710%27%20r%3D%272%27/%3E%3Ccircle%20cx%3D%27302%27%20cy%3D%27734%27%20r%3D%272%27/%3E%3Ccircle%20cx%3D%27496%27%20cy%3D%2762%27%20r%3D%272%27/%3E%3C/g%3E%3C%21--%20%E9%9A%8F%E6%9C%BA%E5%8F%98%E6%9A%97%E5%B1%82%EF%BC%9A%E5%8F%96%E4%B8%BB%E7%BA%BF%E8%B7%AF%E7%9A%84%E4%B8%80%E9%83%A8%E5%88%86%E4%BB%A5%E5%BE%88%E4%BD%8E%E9%80%8F%E6%98%8E%E5%BA%A6%E9%87%8D%E7%BB%98%EF%BC%8C%E5%88%B6%E9%80%A0%E6%98%8E%E6%9A%97%E6%96%91%E9%A9%B3%E3%80%81%E5%BC%B1%E5%8C%96%E5%B9%B3%E9%93%BA%E6%84%9F%20--%3E%3Cg%20fill%3D%27none%27%20stroke%3D%27url%28%23dimGradient%29%27%20stroke-width%3D%272.4%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%20opacity%3D%270.26%27%20filter%3D%27url%28%23softGlow%29%27%3E%3Cpath%20d%3D%27M78%2042H180V84H236V128H302%27/%3E%3Cpath%20d%3D%27M292%20270H350V232H420V188H486%27/%3E%3Cpath%20d%3D%27M350%20232V304H398V356H456V410H520%27/%3E%3Cpath%20d%3D%27M456%20410V362H504V316H562V272%27/%3E%3Cpath%20d%3D%27M438%20438H492V478H548V528H604%27/%3E%3Cpath%20d%3D%27M716%20742H614V704H558V666H502%27/%3E%3Cpath%20d%3D%27M486%20764V708H444V664H404%27/%3E%3Cpath%20d%3D%27M82%20470H132V438H178%27/%3E%3Cpath%20d%3D%27M604%20724H652V752H714%27/%3E%3Cpath%20d%3D%27M678%20356H734V324H778%27/%3E%3Cpath%20d%3D%27M252%20244H214V302H174V348H126%27/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");  --circuit-size: 360px 360px; --circuit-opacity: 0.5; --circuit-drift: 30s; }
+.circuit-corner   { --circuit-bg: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27800%27%20height%3D%27800%27%20viewBox%3D%270%200%20800%20800%27%3E%3Cdefs%3E%3ClinearGradient%20id%3D%27circuitGradient%27%20x1%3D%270%27%20y1%3D%270%27%20x2%3D%27800%27%20y2%3D%27800%27%20gradientUnits%3D%27userSpaceOnUse%27%3E%3Cstop%20offset%3D%270%25%27%20stop-color%3D%27%2316d9ff%27/%3E%3Cstop%20offset%3D%2742%25%27%20stop-color%3D%27%2300a6c7%27/%3E%3Cstop%20offset%3D%2772%25%27%20stop-color%3D%27%2300d6b4%27/%3E%3Cstop%20offset%3D%27100%25%27%20stop-color%3D%27%2378ffe5%27/%3E%3C/linearGradient%3E%3ClinearGradient%20id%3D%27dimGradient%27%20x1%3D%27800%27%20y1%3D%270%27%20x2%3D%270%27%20y2%3D%27800%27%20gradientUnits%3D%27userSpaceOnUse%27%3E%3Cstop%20offset%3D%270%25%27%20stop-color%3D%27%230c87b0%27/%3E%3Cstop%20offset%3D%2750%25%27%20stop-color%3D%27%23078e9e%27/%3E%3Cstop%20offset%3D%27100%25%27%20stop-color%3D%27%2312d2bf%27/%3E%3C/linearGradient%3E%3Cfilter%20id%3D%27softGlow%27%20x%3D%27-50%25%27%20y%3D%27-50%25%27%20width%3D%27200%25%27%20height%3D%27200%25%27%3E%3CfeGaussianBlur%20stdDeviation%3D%273%27%20result%3D%27blur%27/%3E%3CfeColorMatrix%20in%3D%27blur%27%20type%3D%27matrix%27%20values%3D%270%200%200%200%200.00%200%200%200%200%200.85%200%200%200%200%200.95%200%200%200%200.75%200%27/%3E%3CfeMerge%3E%3CfeMergeNode/%3E%3CfeMergeNode%20in%3D%27SourceGraphic%27/%3E%3C/feMerge%3E%3C/filter%3E%3Cpattern%20id%3D%27microGrid%27%20width%3D%2740%27%20height%3D%2740%27%20patternUnits%3D%27userSpaceOnUse%27%3E%3Cpath%20d%3D%27M40%200H0V40%27%20fill%3D%27none%27%20stroke%3D%27%230b7892%27%20stroke-width%3D%270.7%27%20opacity%3D%270.13%27/%3E%3Ccircle%20cx%3D%270%27%20cy%3D%270%27%20r%3D%271.2%27%20fill%3D%27%2319d5d2%27%20opacity%3D%270.18%27/%3E%3C/pattern%3E%3C/defs%3E%3Cg%20transform%3D%27scale%281%2C-1%29%20translate%280%2C-800%29%27%3E%3Crect%20width%3D%27800%27%20height%3D%27800%27%20fill%3D%27url%28%23microGrid%29%27%20opacity%3D%270.7%27/%3E%3Cg%20fill%3D%27none%27%20stroke%3D%27url%28%23circuitGradient%29%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%20filter%3D%27url%28%23softGlow%29%27%3E%3Cpath%20d%3D%27M-20%20118H72V168H132V218H212V270H292V270%27/%3E%3Cpath%20d%3D%27M820%20118H728V168H668V218H588V270H508V270%27/%3E%3Cpath%20d%3D%27M-20%20574H96V534H166V482H248V436H320%27/%3E%3Cpath%20d%3D%27M820%20574H704V534H634V482H552V436H480%27/%3E%3Cpath%20d%3D%27M148%20-20V68H204V122H252V186H252V244%27/%3E%3Cpath%20d%3D%27M148%20820V732H204V678H252V614H252V556%27/%3E%3Cpath%20d%3D%27M632%20-20V78H584V136H548V206H548V286%27/%3E%3Cpath%20d%3D%27M632%20820V722H584V664H548V594H548V514%27/%3E%3Cpath%20d%3D%27M78%2042H180V84H236V128H302%27/%3E%3Cpath%20d%3D%27M42%20226H104V188H154V154%27/%3E%3Cpath%20d%3D%27M304%2036V92H354V132H396%27/%3E%3Cpath%20d%3D%27M26%20350H84V314H140V278H190%27/%3E%3Cpath%20d%3D%27M292%20270H350V232H420V188H486%27/%3E%3Cpath%20d%3D%27M350%20232V304H398V356H456V410H520%27/%3E%3Cpath%20d%3D%27M292%20270V338H338V382H386V438H438%27/%3E%3Cpath%20d%3D%27M456%20410V362H504V316H562V272%27/%3E%3Cpath%20d%3D%27M438%20438H492V478H548V528H604%27/%3E%3Cpath%20d%3D%27M320%20436H278V478H226V522H182%27/%3E%3Cpath%20d%3D%27M386%20438V504H344V560H292%27/%3E%3Cpath%20d%3D%27M548%20286H612V330H656V382H716%27/%3E%3Cpath%20d%3D%27M252%20244H214V302H174V348H126%27/%3E%3Cpath%20d%3D%27M398%20356H430V324H466%27/%3E%3Cpath%20d%3D%27M398%20356V382H430V406%27/%3E%3Cpath%20d%3D%27M492%20478H522V452H552%27/%3E%3Cpath%20d%3D%27M338%20382H310V408H282%27/%3E%3Cpath%20d%3D%27M504%20316H532V292H556%27/%3E%3Cpath%20d%3D%27M716%20742H614V704H558V666H502%27/%3E%3Cpath%20d%3D%27M764%20602H704V638H652V682%27/%3E%3Cpath%20d%3D%27M486%20764V708H444V664H404%27/%3E%3Cpath%20d%3D%27M764%20418H704V454H660V490%27/%3E%3Cpath%20d%3D%27M678%20356H734V324H778%27/%3E%3Cpath%20d%3D%27M82%20470H132V438H178%27/%3E%3Cpath%20d%3D%27M610%2086H668V54H726%27/%3E%3Cpath%20d%3D%27M96%20692H148V662H202%27/%3E%3Cpath%20d%3D%27M604%20724H652V752H714%27/%3E%3C/g%3E%3Cg%20fill%3D%27none%27%20stroke%3D%27url%28%23dimGradient%29%27%20stroke-width%3D%272%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%20opacity%3D%270.72%27%3E%3Cpath%20d%3D%27M0%20304H58V276H104%27/%3E%3Cpath%20d%3D%27M800%20304H742V276H696%27/%3E%3Cpath%20d%3D%27M0%20650H74V620H116V584%27/%3E%3Cpath%20d%3D%27M800%20650H726V620H684V584%27/%3E%3Cpath%20d%3D%27M214%200V42H264V72%27/%3E%3Cpath%20d%3D%27M214%20800V758H264V728%27/%3E%3Cpath%20d%3D%27M706%200V46H666V88%27/%3E%3Cpath%20d%3D%27M706%20800V754H666V712%27/%3E%3Cpath%20d%3D%27M118%20382H164V414H204%27/%3E%3Cpath%20d%3D%27M682%20382H636V414H596%27/%3E%3Cpath%20d%3D%27M276%20644H326V612H368%27/%3E%3Cpath%20d%3D%27M524%20644H474V612H432%27/%3E%3C/g%3E%3Cg%20fill%3D%27%23071c2c%27%20stroke%3D%27url%28%23circuitGradient%29%27%20stroke-width%3D%273%27%20filter%3D%27url%28%23softGlow%29%27%3E%3Ccircle%20cx%3D%27132%27%20cy%3D%27218%27%20r%3D%277%27/%3E%3Ccircle%20cx%3D%27292%27%20cy%3D%27270%27%20r%3D%277%27/%3E%3Ccircle%20cx%3D%27252%27%20cy%3D%27244%27%20r%3D%276%27/%3E%3Ccircle%20cx%3D%27350%27%20cy%3D%27232%27%20r%3D%277%27/%3E%3Ccircle%20cx%3D%27398%27%20cy%3D%27356%27%20r%3D%278%27/%3E%3Ccircle%20cx%3D%27456%27%20cy%3D%27410%27%20r%3D%277%27/%3E%3Ccircle%20cx%3D%27438%27%20cy%3D%27438%27%20r%3D%276%27/%3E%3Ccircle%20cx%3D%27548%27%20cy%3D%27286%27%20r%3D%277%27/%3E%3Ccircle%20cx%3D%27548%27%20cy%3D%27528%27%20r%3D%277%27/%3E%3Ccircle%20cx%3D%27320%27%20cy%3D%27436%27%20r%3D%276%27/%3E%3Ccircle%20cx%3D%27182%27%20cy%3D%27522%27%20r%3D%276%27/%3E%3Ccircle%20cx%3D%27604%27%20cy%3D%27724%27%20r%3D%276%27/%3E%3Ccircle%20cx%3D%27502%27%20cy%3D%27666%27%20r%3D%276%27/%3E%3Ccircle%20cx%3D%27148%27%20cy%3D%27662%27%20r%3D%276%27/%3E%3Ccircle%20cx%3D%27668%27%20cy%3D%2754%27%20r%3D%276%27/%3E%3C/g%3E%3Cg%20fill%3D%27%2391fff0%27%3E%3Ccircle%20cx%3D%27132%27%20cy%3D%27218%27%20r%3D%272%27/%3E%3Ccircle%20cx%3D%27292%27%20cy%3D%27270%27%20r%3D%272%27/%3E%3Ccircle%20cx%3D%27398%27%20cy%3D%27356%27%20r%3D%272.5%27/%3E%3Ccircle%20cx%3D%27456%27%20cy%3D%27410%27%20r%3D%272%27/%3E%3Ccircle%20cx%3D%27548%27%20cy%3D%27286%27%20r%3D%272%27/%3E%3Ccircle%20cx%3D%27548%27%20cy%3D%27528%27%20r%3D%272%27/%3E%3Ccircle%20cx%3D%27604%27%20cy%3D%27724%27%20r%3D%272%27/%3E%3C/g%3E%3Cg%20fill%3D%27%23071c2c%27%20stroke%3D%27url%28%23circuitGradient%29%27%20stroke-width%3D%272%27%20opacity%3D%270.92%27%3E%3Crect%20x%3D%2768%27%20y%3D%27330%27%20width%3D%2774%27%20height%3D%2742%27%20rx%3D%273%27/%3E%3Crect%20x%3D%27654%27%20y%3D%27232%27%20width%3D%2778%27%20height%3D%2746%27%20rx%3D%273%27/%3E%3Crect%20x%3D%27340%27%20y%3D%2792%27%20width%3D%2772%27%20height%3D%2742%27%20rx%3D%273%27/%3E%3Crect%20x%3D%27366%27%20y%3D%27604%27%20width%3D%2782%27%20height%3D%2744%27%20rx%3D%273%27/%3E%3C/g%3E%3Cg%20fill%3D%27none%27%20stroke%3D%27%234ceee0%27%20stroke-width%3D%271.5%27%20opacity%3D%270.8%27%3E%3Cpath%20d%3D%27M82%20344H128M82%20356H116M82%20368H128%27/%3E%3Cpath%20d%3D%27M668%20246H718M668%20258H706M668%20270H718%27/%3E%3Cpath%20d%3D%27M354%20106H398M354%20118H388%27/%3E%3Cpath%20d%3D%27M382%20618H432M382%20630H420%27/%3E%3C/g%3E%3Cg%20fill%3D%27%2320d7d0%27%20opacity%3D%270.72%27%3E%3Ccircle%20cx%3D%2754%27%20cy%3D%2792%27%20r%3D%272%27/%3E%3Ccircle%20cx%3D%27742%27%20cy%3D%2792%27%20r%3D%272%27/%3E%3Ccircle%20cx%3D%2754%27%20cy%3D%27710%27%20r%3D%272%27/%3E%3Ccircle%20cx%3D%27742%27%20cy%3D%27710%27%20r%3D%272%27/%3E%3Ccircle%20cx%3D%27302%27%20cy%3D%27734%27%20r%3D%272%27/%3E%3Ccircle%20cx%3D%27496%27%20cy%3D%2762%27%20r%3D%272%27/%3E%3C/g%3E%3C%21--%20%E9%9A%8F%E6%9C%BA%E5%8F%98%E6%9A%97%E5%B1%82%EF%BC%9A%E5%8F%96%E4%B8%BB%E7%BA%BF%E8%B7%AF%E7%9A%84%E4%B8%80%E9%83%A8%E5%88%86%E4%BB%A5%E5%BE%88%E4%BD%8E%E9%80%8F%E6%98%8E%E5%BA%A6%E9%87%8D%E7%BB%98%EF%BC%8C%E5%88%B6%E9%80%A0%E6%98%8E%E6%9A%97%E6%96%91%E9%A9%B3%E3%80%81%E5%BC%B1%E5%8C%96%E5%B9%B3%E9%93%BA%E6%84%9F%20--%3E%3Cg%20fill%3D%27none%27%20stroke%3D%27url%28%23dimGradient%29%27%20stroke-width%3D%272.4%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%20opacity%3D%270.26%27%20filter%3D%27url%28%23softGlow%29%27%3E%3Cpath%20d%3D%27M78%2042H180V84H236V128H302%27/%3E%3Cpath%20d%3D%27M292%20270H350V232H420V188H486%27/%3E%3Cpath%20d%3D%27M350%20232V304H398V356H456V410H520%27/%3E%3Cpath%20d%3D%27M456%20410V362H504V316H562V272%27/%3E%3Cpath%20d%3D%27M438%20438H492V478H548V528H604%27/%3E%3Cpath%20d%3D%27M716%20742H614V704H558V666H502%27/%3E%3Cpath%20d%3D%27M486%20764V708H444V664H404%27/%3E%3Cpath%20d%3D%27M82%20470H132V438H178%27/%3E%3Cpath%20d%3D%27M604%20724H652V752H714%27/%3E%3Cpath%20d%3D%27M678%20356H734V324H778%27/%3E%3Cpath%20d%3D%27M252%20244H214V302H174V348H126%27/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");    --circuit-size: 360px 360px; --circuit-opacity: 0.5; --circuit-drift: 26s; }
+.circuit-hex      { --circuit-bg: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27800%27%20height%3D%27800%27%20viewBox%3D%270%200%20800%20800%27%3E%3Cdefs%3E%3ClinearGradient%20id%3D%27circuitGradient%27%20x1%3D%270%27%20y1%3D%270%27%20x2%3D%27800%27%20y2%3D%27800%27%20gradientUnits%3D%27userSpaceOnUse%27%3E%3Cstop%20offset%3D%270%25%27%20stop-color%3D%27%2316d9ff%27/%3E%3Cstop%20offset%3D%2742%25%27%20stop-color%3D%27%2300a6c7%27/%3E%3Cstop%20offset%3D%2772%25%27%20stop-color%3D%27%2300d6b4%27/%3E%3Cstop%20offset%3D%27100%25%27%20stop-color%3D%27%2378ffe5%27/%3E%3C/linearGradient%3E%3ClinearGradient%20id%3D%27dimGradient%27%20x1%3D%27800%27%20y1%3D%270%27%20x2%3D%270%27%20y2%3D%27800%27%20gradientUnits%3D%27userSpaceOnUse%27%3E%3Cstop%20offset%3D%270%25%27%20stop-color%3D%27%230c87b0%27/%3E%3Cstop%20offset%3D%2750%25%27%20stop-color%3D%27%23078e9e%27/%3E%3Cstop%20offset%3D%27100%25%27%20stop-color%3D%27%2312d2bf%27/%3E%3C/linearGradient%3E%3Cfilter%20id%3D%27softGlow%27%20x%3D%27-50%25%27%20y%3D%27-50%25%27%20width%3D%27200%25%27%20height%3D%27200%25%27%3E%3CfeGaussianBlur%20stdDeviation%3D%273%27%20result%3D%27blur%27/%3E%3CfeColorMatrix%20in%3D%27blur%27%20type%3D%27matrix%27%20values%3D%270%200%200%200%200.00%200%200%200%200%200.85%200%200%200%200%200.95%200%200%200%200.75%200%27/%3E%3CfeMerge%3E%3CfeMergeNode/%3E%3CfeMergeNode%20in%3D%27SourceGraphic%27/%3E%3C/feMerge%3E%3C/filter%3E%3Cpattern%20id%3D%27microGrid%27%20width%3D%2740%27%20height%3D%2740%27%20patternUnits%3D%27userSpaceOnUse%27%3E%3Cpath%20d%3D%27M40%200H0V40%27%20fill%3D%27none%27%20stroke%3D%27%230b7892%27%20stroke-width%3D%270.7%27%20opacity%3D%270.13%27/%3E%3Ccircle%20cx%3D%270%27%20cy%3D%270%27%20r%3D%271.2%27%20fill%3D%27%2319d5d2%27%20opacity%3D%270.18%27/%3E%3C/pattern%3E%3C/defs%3E%3Cg%20transform%3D%27translate%28800%2C800%29%20scale%28-1%2C-1%29%27%3E%3Crect%20width%3D%27800%27%20height%3D%27800%27%20fill%3D%27url%28%23microGrid%29%27%20opacity%3D%270.7%27/%3E%3Cg%20fill%3D%27none%27%20stroke%3D%27url%28%23circuitGradient%29%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%20filter%3D%27url%28%23softGlow%29%27%3E%3Cpath%20d%3D%27M-20%20118H72V168H132V218H212V270H292V270%27/%3E%3Cpath%20d%3D%27M820%20118H728V168H668V218H588V270H508V270%27/%3E%3Cpath%20d%3D%27M-20%20574H96V534H166V482H248V436H320%27/%3E%3Cpath%20d%3D%27M820%20574H704V534H634V482H552V436H480%27/%3E%3Cpath%20d%3D%27M148%20-20V68H204V122H252V186H252V244%27/%3E%3Cpath%20d%3D%27M148%20820V732H204V678H252V614H252V556%27/%3E%3Cpath%20d%3D%27M632%20-20V78H584V136H548V206H548V286%27/%3E%3Cpath%20d%3D%27M632%20820V722H584V664H548V594H548V514%27/%3E%3Cpath%20d%3D%27M78%2042H180V84H236V128H302%27/%3E%3Cpath%20d%3D%27M42%20226H104V188H154V154%27/%3E%3Cpath%20d%3D%27M304%2036V92H354V132H396%27/%3E%3Cpath%20d%3D%27M26%20350H84V314H140V278H190%27/%3E%3Cpath%20d%3D%27M292%20270H350V232H420V188H486%27/%3E%3Cpath%20d%3D%27M350%20232V304H398V356H456V410H520%27/%3E%3Cpath%20d%3D%27M292%20270V338H338V382H386V438H438%27/%3E%3Cpath%20d%3D%27M456%20410V362H504V316H562V272%27/%3E%3Cpath%20d%3D%27M438%20438H492V478H548V528H604%27/%3E%3Cpath%20d%3D%27M320%20436H278V478H226V522H182%27/%3E%3Cpath%20d%3D%27M386%20438V504H344V560H292%27/%3E%3Cpath%20d%3D%27M548%20286H612V330H656V382H716%27/%3E%3Cpath%20d%3D%27M252%20244H214V302H174V348H126%27/%3E%3Cpath%20d%3D%27M398%20356H430V324H466%27/%3E%3Cpath%20d%3D%27M398%20356V382H430V406%27/%3E%3Cpath%20d%3D%27M492%20478H522V452H552%27/%3E%3Cpath%20d%3D%27M338%20382H310V408H282%27/%3E%3Cpath%20d%3D%27M504%20316H532V292H556%27/%3E%3Cpath%20d%3D%27M716%20742H614V704H558V666H502%27/%3E%3Cpath%20d%3D%27M764%20602H704V638H652V682%27/%3E%3Cpath%20d%3D%27M486%20764V708H444V664H404%27/%3E%3Cpath%20d%3D%27M764%20418H704V454H660V490%27/%3E%3Cpath%20d%3D%27M678%20356H734V324H778%27/%3E%3Cpath%20d%3D%27M82%20470H132V438H178%27/%3E%3Cpath%20d%3D%27M610%2086H668V54H726%27/%3E%3Cpath%20d%3D%27M96%20692H148V662H202%27/%3E%3Cpath%20d%3D%27M604%20724H652V752H714%27/%3E%3C/g%3E%3Cg%20fill%3D%27none%27%20stroke%3D%27url%28%23dimGradient%29%27%20stroke-width%3D%272%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%20opacity%3D%270.72%27%3E%3Cpath%20d%3D%27M0%20304H58V276H104%27/%3E%3Cpath%20d%3D%27M800%20304H742V276H696%27/%3E%3Cpath%20d%3D%27M0%20650H74V620H116V584%27/%3E%3Cpath%20d%3D%27M800%20650H726V620H684V584%27/%3E%3Cpath%20d%3D%27M214%200V42H264V72%27/%3E%3Cpath%20d%3D%27M214%20800V758H264V728%27/%3E%3Cpath%20d%3D%27M706%200V46H666V88%27/%3E%3Cpath%20d%3D%27M706%20800V754H666V712%27/%3E%3Cpath%20d%3D%27M118%20382H164V414H204%27/%3E%3Cpath%20d%3D%27M682%20382H636V414H596%27/%3E%3Cpath%20d%3D%27M276%20644H326V612H368%27/%3E%3Cpath%20d%3D%27M524%20644H474V612H432%27/%3E%3C/g%3E%3Cg%20fill%3D%27%23071c2c%27%20stroke%3D%27url%28%23circuitGradient%29%27%20stroke-width%3D%273%27%20filter%3D%27url%28%23softGlow%29%27%3E%3Ccircle%20cx%3D%27132%27%20cy%3D%27218%27%20r%3D%277%27/%3E%3Ccircle%20cx%3D%27292%27%20cy%3D%27270%27%20r%3D%277%27/%3E%3Ccircle%20cx%3D%27252%27%20cy%3D%27244%27%20r%3D%276%27/%3E%3Ccircle%20cx%3D%27350%27%20cy%3D%27232%27%20r%3D%277%27/%3E%3Ccircle%20cx%3D%27398%27%20cy%3D%27356%27%20r%3D%278%27/%3E%3Ccircle%20cx%3D%27456%27%20cy%3D%27410%27%20r%3D%277%27/%3E%3Ccircle%20cx%3D%27438%27%20cy%3D%27438%27%20r%3D%276%27/%3E%3Ccircle%20cx%3D%27548%27%20cy%3D%27286%27%20r%3D%277%27/%3E%3Ccircle%20cx%3D%27548%27%20cy%3D%27528%27%20r%3D%277%27/%3E%3Ccircle%20cx%3D%27320%27%20cy%3D%27436%27%20r%3D%276%27/%3E%3Ccircle%20cx%3D%27182%27%20cy%3D%27522%27%20r%3D%276%27/%3E%3Ccircle%20cx%3D%27604%27%20cy%3D%27724%27%20r%3D%276%27/%3E%3Ccircle%20cx%3D%27502%27%20cy%3D%27666%27%20r%3D%276%27/%3E%3Ccircle%20cx%3D%27148%27%20cy%3D%27662%27%20r%3D%276%27/%3E%3Ccircle%20cx%3D%27668%27%20cy%3D%2754%27%20r%3D%276%27/%3E%3C/g%3E%3Cg%20fill%3D%27%2391fff0%27%3E%3Ccircle%20cx%3D%27132%27%20cy%3D%27218%27%20r%3D%272%27/%3E%3Ccircle%20cx%3D%27292%27%20cy%3D%27270%27%20r%3D%272%27/%3E%3Ccircle%20cx%3D%27398%27%20cy%3D%27356%27%20r%3D%272.5%27/%3E%3Ccircle%20cx%3D%27456%27%20cy%3D%27410%27%20r%3D%272%27/%3E%3Ccircle%20cx%3D%27548%27%20cy%3D%27286%27%20r%3D%272%27/%3E%3Ccircle%20cx%3D%27548%27%20cy%3D%27528%27%20r%3D%272%27/%3E%3Ccircle%20cx%3D%27604%27%20cy%3D%27724%27%20r%3D%272%27/%3E%3C/g%3E%3Cg%20fill%3D%27%23071c2c%27%20stroke%3D%27url%28%23circuitGradient%29%27%20stroke-width%3D%272%27%20opacity%3D%270.92%27%3E%3Crect%20x%3D%2768%27%20y%3D%27330%27%20width%3D%2774%27%20height%3D%2742%27%20rx%3D%273%27/%3E%3Crect%20x%3D%27654%27%20y%3D%27232%27%20width%3D%2778%27%20height%3D%2746%27%20rx%3D%273%27/%3E%3Crect%20x%3D%27340%27%20y%3D%2792%27%20width%3D%2772%27%20height%3D%2742%27%20rx%3D%273%27/%3E%3Crect%20x%3D%27366%27%20y%3D%27604%27%20width%3D%2782%27%20height%3D%2744%27%20rx%3D%273%27/%3E%3C/g%3E%3Cg%20fill%3D%27none%27%20stroke%3D%27%234ceee0%27%20stroke-width%3D%271.5%27%20opacity%3D%270.8%27%3E%3Cpath%20d%3D%27M82%20344H128M82%20356H116M82%20368H128%27/%3E%3Cpath%20d%3D%27M668%20246H718M668%20258H706M668%20270H718%27/%3E%3Cpath%20d%3D%27M354%20106H398M354%20118H388%27/%3E%3Cpath%20d%3D%27M382%20618H432M382%20630H420%27/%3E%3C/g%3E%3Cg%20fill%3D%27%2320d7d0%27%20opacity%3D%270.72%27%3E%3Ccircle%20cx%3D%2754%27%20cy%3D%2792%27%20r%3D%272%27/%3E%3Ccircle%20cx%3D%27742%27%20cy%3D%2792%27%20r%3D%272%27/%3E%3Ccircle%20cx%3D%2754%27%20cy%3D%27710%27%20r%3D%272%27/%3E%3Ccircle%20cx%3D%27742%27%20cy%3D%27710%27%20r%3D%272%27/%3E%3Ccircle%20cx%3D%27302%27%20cy%3D%27734%27%20r%3D%272%27/%3E%3Ccircle%20cx%3D%27496%27%20cy%3D%2762%27%20r%3D%272%27/%3E%3C/g%3E%3C%21--%20%E9%9A%8F%E6%9C%BA%E5%8F%98%E6%9A%97%E5%B1%82%EF%BC%9A%E5%8F%96%E4%B8%BB%E7%BA%BF%E8%B7%AF%E7%9A%84%E4%B8%80%E9%83%A8%E5%88%86%E4%BB%A5%E5%BE%88%E4%BD%8E%E9%80%8F%E6%98%8E%E5%BA%A6%E9%87%8D%E7%BB%98%EF%BC%8C%E5%88%B6%E9%80%A0%E6%98%8E%E6%9A%97%E6%96%91%E9%A9%B3%E3%80%81%E5%BC%B1%E5%8C%96%E5%B9%B3%E9%93%BA%E6%84%9F%20--%3E%3Cg%20fill%3D%27none%27%20stroke%3D%27url%28%23dimGradient%29%27%20stroke-width%3D%272.4%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%20opacity%3D%270.26%27%20filter%3D%27url%28%23softGlow%29%27%3E%3Cpath%20d%3D%27M78%2042H180V84H236V128H302%27/%3E%3Cpath%20d%3D%27M292%20270H350V232H420V188H486%27/%3E%3Cpath%20d%3D%27M350%20232V304H398V356H456V410H520%27/%3E%3Cpath%20d%3D%27M456%20410V362H504V316H562V272%27/%3E%3Cpath%20d%3D%27M438%20438H492V478H548V528H604%27/%3E%3Cpath%20d%3D%27M716%20742H614V704H558V666H502%27/%3E%3Cpath%20d%3D%27M486%20764V708H444V664H404%27/%3E%3Cpath%20d%3D%27M82%20470H132V438H178%27/%3E%3Cpath%20d%3D%27M604%20724H652V752H714%27/%3E%3Cpath%20d%3D%27M678%20356H734V324H778%27/%3E%3Cpath%20d%3D%27M252%20244H214V302H174V348H126%27/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");       --circuit-size: 360px 360px; --circuit-opacity: 0.5; --circuit-drift: 32s; }
+@keyframes circuit-drift {
+  from { background-position: 0 0; }
+  to   { background-position: 200px 200px; }
 }
 
 .drawn-area {
@@ -640,17 +690,17 @@ img {
   width: 100%;
   aspect-ratio: 1 / var(--card-ratio);
   overflow: hidden;
-  border: 1px solid rgba(227, 211, 255, 0.64);
+  border: 1px solid rgba(215, 230, 251, 0.64);
   border-radius: 9px;
   background: var(--card-back-image) center / cover;
-  box-shadow: 0 0 20px rgba(140, 232, 215, 0.15), var(--shadow);
+  box-shadow: 0 0 20px rgba(145, 190, 227, 0.15), var(--shadow);
   
 }
 
 .drawn-slot__card::after {
   position: absolute;
   inset: 5px;
-  border: 1px solid rgba(224, 204, 255, 0.36);
+  border: 1px solid rgba(209, 226, 250, 0.36);
   border-radius: 5px;
   content: '';
 }
@@ -731,13 +781,17 @@ img {
 .result-card__position {
   min-height: 24px;
   margin: 0 0 12px;
-  color: var(--amethyst-bright);
+  color: var(--gold-bright);
   font-family: var(--display);
   font-size: 0.78rem;
   letter-spacing: 0.14em;
 }
 
 .tarot-flip-card {
+  position: relative; /* 容纳背面溢光层 .overflow-glow */
+  /* 能量溢出光效配色（青 / teal，贴合站点主色） */
+  --glow-color: #00f0ff;
+  --accent-color: #78ffe5;
   width: var(--result-card-w);
   max-width: 100%;
   aspect-ratio: 1 / var(--card-ratio);
@@ -760,14 +814,98 @@ img {
   to { transform: rotateY(180deg); }
 }
 
+/* ── 翻牌「能量溢出」光效（参考 能量溢出 3D 翻牌 demo）──
+   两层叠加，均在 0.9s 翻牌过程中同步进行，落定即收：
+   1) .overflow-glow 卡牌背后（z-index:-1），翻转时从边缘溢出光晕；
+   2) .energy-layer 正面卡面内，color-dodge 做「爆光 → 斜向扫光」，
+      闪光发生在翻转途中，不延迟到翻完才亮。 */
+
+/* 1) 边缘溢光层：翻牌时从卡牌四周溢出光晕 */
+.overflow-glow {
+  position: absolute;
+  top: -10%;
+  left: -10%;
+  width: 120%;
+  height: 120%;
+  background: radial-gradient(circle, var(--glow-color) 0%, transparent 70%);
+  opacity: 0;
+  filter: blur(40px);
+  pointer-events: none;
+  z-index: -1;
+  transition: opacity 0.3s;
+}
+
+.tarot-flip-card.is-revealed .overflow-glow {
+  animation: spillOut 0.9s ease-in-out forwards;
+}
+
+@keyframes spillOut {
+  0%   { opacity: 0;   transform: scale(0.8); }
+  40%  { opacity: 0.6; transform: scale(1.2); }
+  100% { opacity: 0;   transform: scale(1.4); }
+}
+
+/* 2) 卡面能量叠加层：color-dodge 比 screen 更绚丽猛烈 */
+.energy-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  pointer-events: none;
+  opacity: 0;
+  mix-blend-mode: color-dodge;
+  border-radius: 11px;
+  will-change: opacity, transform;
+}
+
+.tarot-flip-card.is-revealed .energy-layer {
+  /* 0.05s 起跳、0.9s 收尾，与 0.9s 翻牌同步，落定即淡尽 */
+  animation: energyReaction 0.9s ease-out 0.05s forwards;
+}
+
+@keyframes energyReaction {
+  0% {
+    opacity: 0;
+    background: radial-gradient(circle at 50% 50%, white 0%, var(--glow-color) 20%, transparent 60%);
+    transform: scale(0.8);
+  }
+  20% {
+    opacity: 1;
+    /* 瞬间极强光爆 */
+    background: radial-gradient(circle at 50% 50%, white 0%, var(--accent-color) 40%, #000 80%);
+    transform: scale(1.1);
+  }
+  40% {
+    opacity: 0.8;
+    /* 转化为斜向扫光（左上到右下） */
+    background: linear-gradient(135deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0) 20%,
+      rgba(255, 255, 255, 0.8) 45%,
+      var(--glow-color) 50%,
+      rgba(255, 255, 255, 0.8) 55%,
+      transparent 80%);
+    background-size: 300% 300%;
+    background-position: 100% 100%;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    background-position: 0% 0%;
+    transform: scale(1);
+  }
+}
+
 .tarot-flip-card__face {
   position: absolute;
   inset: 0;
   overflow: hidden;
-  border: 1px solid rgba(232, 217, 255, 0.7);
+  border: 1px solid rgba(220, 234, 252, 0.7);
   border-radius: 11px;
   backface-visibility: hidden;
-  box-shadow: 0 0 24px rgba(140, 232, 215, 0.14), var(--shadow);
+  box-shadow: 0 0 24px rgba(145, 190, 227, 0.14), var(--shadow);
 }
 
 .tarot-flip-card__back {
@@ -775,7 +913,7 @@ img {
 }
 
 .tarot-flip-card__front {
-  background: #21163a;
+  background: rgb(22, 38, 58);
   transform: rotateY(180deg);
 }
 
@@ -811,13 +949,13 @@ img {
 }
 
 .moon-phase--full {
-  color: #f5f1ff;
-  text-shadow: 0 0 8px #e5dcff, 0 0 18px rgba(175, 205, 255, 0.7);
+  color: rgb(242, 247, 254);
+  text-shadow: 0 0 8px rgb(223, 236, 252), 0 0 18px rgba(182, 219, 248, 0.7);
 }
 
 .moon-phase--new {
-  color: #171020;
-  text-shadow: 0 0 0 1px #cbb7ed, 0 0 8px rgba(201, 172, 245, 0.4);
+  color: rgb(16, 23, 32);
+  text-shadow: 0 0 0 1px rgb(183, 206, 237), 0 0 8px rgba(172, 203, 245, 0.4);
 }
 
 .result-card__name {
@@ -834,7 +972,7 @@ img {
 
 .result-card__short-text {
   margin: 0;
-  color: rgba(246, 241, 255, 0.92);
+  color: rgba(242, 247, 254, 0.92);
   font-size: 0.86rem;
   line-height: 1.85;
 }
@@ -849,20 +987,20 @@ img {
 
 .keyword-chip {
   padding: 6px 13px;
-  border: 1px solid rgba(142, 233, 217, 0.48);
+  border: 1px solid rgba(212, 175, 92, 0.5);
   border-radius: 999px;
-  color: var(--moon);
-  background: rgba(46, 33, 75, 0.56);
+  color: var(--gold-bright);
+  background: rgba(33, 26, 11, 0.5);
   font-size: 0.75rem;
   transition: 0.22s ease;
 }
 
 .keyword-chip:hover,
 .keyword-list.is-selected .keyword-chip {
-  border-color: var(--gem);
-  color: #111022;
-  background: var(--gem);
-  box-shadow: 0 0 18px rgba(130, 234, 215, 0.4);
+  border-color: var(--gold-bright);
+  color: rgb(20, 14, 3);
+  background: linear-gradient(135deg, var(--gold-bright), var(--gold));
+  box-shadow: 0 0 18px rgba(245, 214, 140, 0.45);
 }
 
 .full-interpretation {
@@ -913,11 +1051,11 @@ img {
 .search-field input {
   width: 100%;
   padding: 12px 42px 12px 16px;
-  border: 1px solid var(--line);
+  border: 1px solid rgba(196, 219, 249, 0.3);
   border-radius: 999px;
   outline: 0;
   color: var(--ink);
-  background: rgba(10, 7, 23, 0.72);
+  background: rgba(7, 14, 23, 0.5);
 }
 
 .search-field input::placeholder {
@@ -949,17 +1087,18 @@ img {
 .filter-chip {
   flex: 0 0 auto;
   padding: 7px 11px;
-  border: 1px solid var(--line);
+  border: 1px solid rgba(196, 219, 249, 0.24);
   border-radius: 999px;
   color: var(--muted);
   font-size: 0.73rem;
+  background: rgba(12, 22, 36, 0.5);
 }
 
 .filter-chip:hover,
 .filter-chip.is-active {
-  border-color: var(--amethyst-bright);
-  color: #170d28;
-  background: var(--amethyst-bright);
+  border-color: var(--gold-bright);
+  color: rgb(13, 24, 40);
+  background: var(--gold-bright);
 }
 
 .library-list {
@@ -975,18 +1114,24 @@ img {
   grid-template-columns: 60px 1fr auto;
   align-items: center;
   gap: 13px;
-  border: 1px solid rgba(207, 185, 250, 0.2);
+  border: 1px solid rgba(187, 213, 248, 0.28);
   border-radius: 12px;
   color: var(--ink);
-  background: rgba(15, 10, 30, 0.66);
+  background: rgba(10, 19, 30, 0.5);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14), 0 0 20px rgba(112, 164, 235, 0.08);
   text-align: left;
+  position: relative;
+  z-index: 0;
+  overflow: hidden;
   transition: 0.25s ease;
 }
 
 .library-item:hover {
-  border-color: rgba(213, 190, 255, 0.78);
-  background: rgba(52, 34, 81, 0.7);
-  box-shadow: 0 0 20px rgba(160, 112, 235, 0.13);
+  border-color: rgba(196, 219, 249, 0.78);
+  background: rgba(34, 54, 81, 0.7);
+  box-shadow: 0 0 20px rgba(112, 164, 235, 0.13);
   transform: translateY(-3px);
 }
 
@@ -994,9 +1139,9 @@ img {
   width: 60px;
   aspect-ratio: 1 / var(--card-ratio);
   overflow: hidden;
-  border: 1px solid rgba(225, 209, 255, 0.38);
+  border: 1px solid rgba(213, 229, 251, 0.38);
   border-radius: 6px;
-  background: #21163a;
+  background: rgb(22, 38, 58);
 }
 
 .library-item__image img {
@@ -1007,7 +1152,7 @@ img {
 
 .library-item__category {
   margin: 0 0 4px;
-  color: var(--amethyst-bright);
+  color: var(--gold-bright);
   font-size: 0.64rem;
 }
 
@@ -1057,9 +1202,9 @@ img {
   margin: 0 auto;
   aspect-ratio: 1 / var(--card-ratio);
   overflow: hidden;
-  border: 1px solid rgba(230, 214, 255, 0.7);
+  border: 1px solid rgba(218, 232, 251, 0.7);
   border-radius: 11px;
-  box-shadow: 0 0 26px rgba(138, 231, 215, 0.12), var(--shadow);
+  box-shadow: 0 0 26px rgba(142, 188, 227, 0.12), var(--shadow);
 }
 
 .detail-card-summary__image img {
@@ -1070,7 +1215,7 @@ img {
 
 .detail-card-summary__category {
   margin: 17px 0 4px;
-  color: var(--amethyst-bright);
+  color: var(--gold-bright);
   font-size: 0.72rem;
 }
 
@@ -1086,19 +1231,21 @@ img {
 }
 
 .detail-meaning-panel {
+  position: relative;
   min-height: 100%;
   padding: clamp(19px, 3vw, 30px);
-  border: 1px solid var(--line);
+  border: 1px solid rgba(196, 219, 249, 0.3);
   border-radius: 14px;
-  background: rgba(15, 10, 31, 0.66);
+  background: rgba(10, 19, 31, 0.5);
+  box-shadow: 0 0 26px rgba(166, 213, 246, 0.08);
 }
 
 .detail-meaning-panel--upright {
-  box-shadow: inset 0 1px 0 rgba(235, 227, 255, 0.1), 0 0 22px rgba(157, 211, 255, 0.05);
+  box-shadow: inset 0 1px 0 rgba(230, 239, 252, 0.1), 0 0 22px rgba(166, 213, 246, 0.05);
 }
 
 .detail-meaning-panel--reversed {
-  background: rgba(27, 15, 42, 0.74);
+  background: rgba(15, 26, 42, 0.74);
 }
 
 .detail-meaning-panel__label {
@@ -1126,14 +1273,14 @@ img {
 
 .detail-meaning-panel__keywords span {
   padding: 5px 10px;
-  border: 1px solid rgba(130, 234, 215, 0.35);
+  border: 1px solid rgba(138, 186, 226, 0.35);
   border-radius: 999px;
   color: var(--gem);
   font-size: 0.72rem;
 }
 
 .detail-meaning-panel__full {
-  margin: 0;
+  margin: 18px 0 0;
   color: var(--muted);
   font-size: 0.89rem;
   line-height: 1.95;
@@ -1148,12 +1295,12 @@ img {
   left: 50%;
   max-width: min(90vw, 430px);
   padding: 10px 16px;
-  border: 1px solid rgba(216, 193, 255, 0.5);
+  border: 1px solid rgba(199, 220, 249, 0.5);
   border-radius: 999px;
   color: var(--ink);
   opacity: 0;
-  background: rgba(13, 8, 28, 0.93);
-  box-shadow: 0 0 18px rgba(138, 231, 215, 0.15), var(--shadow);
+  background: rgba(8, 17, 28, 0.78);
+  box-shadow: 0 0 18px rgba(142, 188, 227, 0.18), var(--shadow);
   text-align: center;
   transform: translate(-50%, 18px);
   transition: 0.25s ease;
@@ -1198,18 +1345,12 @@ img {
     min-height: 0;
     grid-row: 1 / 3;
     touch-action: pan-x;
-    mask-image: linear-gradient(to bottom, transparent, #000 9%, #000 91%, transparent);
+    mask-image: linear-gradient(to bottom, transparent, rgb(0, 0, 0) 9%, rgb(0, 0, 0) 91%, transparent);
   }
 
   .deck-track {
     top: 50%;
     left: 50%;
-  }
-
-  .deck-focus-ring {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) translateX(12px);
   }
 
   .draw-control-panel {
@@ -1223,8 +1364,7 @@ img {
     max-width: 96vw;
   }
 
-  .draw-prompt__hint,
-  .deck-counter {
+  .draw-prompt__hint {
     display: none;
   }
 
@@ -1301,7 +1441,7 @@ img {
     right: 0;
     bottom: 0;
     height: 172px;
-    background: linear-gradient(to top, rgba(9, 7, 19, 0.98) 54%, rgba(9, 7, 19, 0) 100%);
+    background: linear-gradient(to top, rgba(7, 12, 19, 0.98) 54%, rgba(7, 12, 19, 0) 100%);
     z-index: -1;
     pointer-events: none;
   }
@@ -1447,17 +1587,17 @@ html.is-draw-page .page--draw * {
 /* 背景使用稳定的大视口高度，避免地址栏变化导致背景缩放 */
 .background-layer {
   position: fixed;
-  z-index: -4;
+  z-index: -3;
   inset: 0;
   width: 100%;
   height: 100%;
   pointer-events: none;
-  background-color: #000;
+  background-color: transparent;
   background-image: var(--bg-image);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  filter: brightness(1.8) saturate(0.64) contrast(1.08);
+  filter: brightness(1.5) saturate(0.66) contrast(1.05);
   transform: none;
   will-change: auto;
 }
@@ -1536,18 +1676,18 @@ html.is-draw-page .page--draw * {
   0%,
   100% {
     box-shadow:
-      0 0 0 2px rgba(227, 196, 255, 0.28),
+      0 0 0 2px rgba(201, 221, 250, 0.28),
       0 17px 38px rgba(0, 0, 0, 0.68),
-      0 0 22px rgba(137, 232, 215, 0.34),
-      0 0 42px rgba(176, 123, 255, 0.24);
+      0 0 22px rgba(142, 188, 227, 0.34),
+      0 0 42px rgba(135, 180, 243, 0.24);
   }
 
   50% {
     box-shadow:
-      0 0 0 2px rgba(227, 196, 255, 0.42),
+      0 0 0 2px rgba(201, 221, 250, 0.42),
       0 17px 38px rgba(0, 0, 0, 0.68),
-      0 0 30px rgba(137, 232, 215, 0.58),
-      0 0 70px rgba(176, 123, 255, 0.42);
+      0 0 30px rgba(142, 188, 227, 0.58),
+      0 0 70px rgba(135, 180, 243, 0.42);
   }
 }
 
@@ -1577,7 +1717,7 @@ html.is-draw-page .page--draw * {
   aspect-ratio: auto;
   border: 0;
   border-radius: 0;
-  color: #4a4a4a;
+  color: rgb(52, 76, 96);
   background: transparent;
   box-shadow: none;
   font-family: Georgia, "Times New Roman", serif;
@@ -1732,12 +1872,6 @@ html.is-draw-page .page--draw * {
     transform: translateY(68px);
   }
 
-  .deck-focus-ring {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) translateX(12px);
-  }
-
   .drawn-area {
     min-height: 0;
     padding: 5px 5px 90px;
@@ -1803,8 +1937,7 @@ html.is-draw-page .page--draw * {
     font-size: 0.8rem;
   }
 
-  .draw-prompt__hint,
-  .deck-counter {
+  .draw-prompt__hint {
     display: none;
   }
 
@@ -1889,7 +2022,7 @@ html.is-draw-page .page--draw * {
     right: 0;
     bottom: 0;
     height: 172px;
-    background: linear-gradient(to top, rgba(9, 7, 19, 0.98) 54%, rgba(9, 7, 19, 0) 100%);
+    background: linear-gradient(to top, rgba(7, 12, 19, 0.98) 54%, rgba(7, 12, 19, 0) 100%);
     z-index: -1;
     pointer-events: none;
   }
@@ -1950,10 +2083,10 @@ html.is-draw-page .page--draw * {
   height: 42px;
   place-items: center;
   padding: 0;
-  border: 1px solid rgba(217, 189, 255, 0.46);
+  border: 1px solid rgba(195, 217, 249, 0.46);
   border-radius: 50%;
   color: var(--ink);
-  background: rgba(9, 7, 19, 0.78);
+  background: rgba(7, 12, 19, 0.6);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.36);
   cursor: pointer;
   /* 提升为独立合成层，规避 iOS 上 fixed 元素在页面滚动/回弹时的漂移 */
@@ -1968,7 +2101,7 @@ html.is-draw-page .page--draw * {
 .music-toggle.is-playing {
   border-color: var(--gem);
   color: var(--gem);
-  background: rgba(28, 20, 48, 0.94);
+  background: rgba(20, 33, 48, 0.94);
 }
 
 @media (max-width: 767px) {
@@ -2025,4 +2158,87 @@ html.is-draw-page .page--draw * {
     filter: none;
     -webkit-filter: none;
   }
+}
+
+/* 解读页：关键词展开后的释义框 —— 金色边框 + 蜂窝底纹（保留，仅用于解读页） */
+.full-interpretation__frame {
+  position: relative;
+  margin-top: 0;
+  padding: 16px 18px;
+  border: 1px solid rgba(212, 175, 92, 0.5);
+  border-radius: 12px;
+  background: rgba(8, 16, 26, 0.72);
+  box-shadow: inset 0 0 24px rgba(0, 180, 200, 0.08);
+}
+.full-interpretation__frame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background-image: var(--honeycomb-bg);
+  background-size: 88px 76px;
+  background-repeat: repeat;
+  opacity: 0.3;
+  mix-blend-mode: screen;
+}
+.full-interpretation__frame > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* 牌库详情页：释义文字不再单独描边/底纹；整张释义卡（正/逆位两张独立卡片）
+   统一铺一层蜂窝底纹，文字压在底纹之上（由 .detail-meaning-panel > * 抬升层级）。 */
+.detail-meaning-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background-image: var(--honeycomb-bg);
+  background-size: 90px 78px;
+  background-repeat: repeat;
+  opacity: 0.24;
+  mix-blend-mode: screen;
+}
+.detail-meaning-panel > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* 六边形（蜂窝）网格 UI：在边框内侧加一抹「短促的渐变光」，
+   强化晶体 / 玻璃边缘的透光感，克制不过曝。
+   - 光层置于蜂窝底纹之上、文字内容之下；
+   - 渐变只往下 / 往角快速淡出（reach ~30%），即「短一点」的光；
+   - 各容器层级不同，z-index 在下方分别修正。 */
+.library-item::after,
+.full-interpretation__frame::after,
+.detail-meaning-panel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 0;
+  mix-blend-mode: screen;
+  background:
+    /* 左上角晶光（边缘透光提示） */
+    radial-gradient(85% 70% at 2% 0%,
+      rgba(120, 255, 229, 0.10) 0%,
+      transparent 42%),
+    /* 底部一道短促的小反光 */
+    linear-gradient(0deg,
+      rgba(150, 230, 255, 0.12) 0%,
+      rgba(120, 255, 229, 0.05) 9%,
+      transparent 20%);
+}
+
+/* 牌库卡片的底纹在 z-index:-1，令光层同处该层（位于底纹之上、卡片内容之下）。
+   卡片 overflow:hidden，光自然被裁在边框内侧。 */
+.library-item::after {
+  z-index: -1;
+}
+
+.full-interpretation.is-open {
+  max-height: 780px;
 }

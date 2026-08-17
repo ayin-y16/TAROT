@@ -440,7 +440,7 @@ const cupsCards = [
     image: "./assets/cards/cups-13.jpg",
     upright: {
       shortText: "圣杯皇后正位一句话格言",
-      keywords: [],
+      keywords: ["同理心", "直觉", "情感支持", "温柔"],
       fullInterpretation: `
         <h4>核心讯息</h4>
         <p>圣杯王后正位象征同理心、直觉与丰沛的情感支持。</p>
@@ -454,7 +454,7 @@ const cupsCards = [
     },
     reversed: {
       shortText: "圣杯皇后逆位一句话格言",
-      keywords: [],
+      keywords: ["情绪不稳", "过度依赖", "边界模糊", "情绪化"],
       fullInterpretation: `
         <h4>核心讯息</h4>
         <p>逆位提示情绪不稳或过度依赖，边界模糊。</p>

@@ -440,7 +440,7 @@ const swordsCards = [
     image: "./assets/cards/swords-13.jpg",
     upright: {
       shortText: "宝剑皇后正位一句话格言",
-      keywords: [],
+      keywords: ["智慧", "独立", "清醒", "洞察力"],
       fullInterpretation: `
         <h4>核心讯息</h4>
         <p>宝剑王后正位象征智慧、独立与清醒诚实的眼光。</p>
@@ -454,7 +454,7 @@ const swordsCards = [
     },
     reversed: {
       shortText: "宝剑皇后逆位一句话格言",
-      keywords: [],
+      keywords: ["冷漠", "刻薄", "缺乏同情", "过度批判"],
       fullInterpretation: `
         <h4>核心讯息</h4>
         <p>逆位提示冷漠、刻薄或缺乏同情，刀锋朝内。</p>

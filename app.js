@@ -44,6 +44,23 @@ const CATEGORY_LABELS = {
   pentacles: '星币',
 };
 
+const CIRCUIT_VARIANTS = ['circuit-radial', 'circuit-vertical', 'circuit-corner', 'circuit-hex'];
+
+function randomCircuitClass() {
+  return CIRCUIT_VARIANTS[Math.floor(Math.random() * CIRCUIT_VARIANTS.length)];
+}
+
+function assignCircuitPatterns(root = document) {
+  // 选牌阵页：两张卡片固定分配两个明显不同的电路变体（radial / hex），
+  // 并由 CSS 错开底纹相位，避免两张看起来太相似。底纹为静态，不再漂移。
+  const spreadVariants = ['circuit-radial', 'circuit-hex'];
+  const cards = root.querySelectorAll('.spread-choice-card');
+  cards.forEach((el, i) => {
+    CIRCUIT_VARIANTS.forEach((v) => el.classList.remove(v));
+    el.classList.add(spreadVariants[i % spreadVariants.length]);
+  });
+}
+
 const state = {
   page: 'home',
 
@@ -93,11 +110,24 @@ const elements = {
 backgroundMusic: document.querySelector('#background-music'),
 };
 
+/* 提前预热图片到浏览器缓存，避免抽牌/翻牌时图片延迟显示。 */
+function preloadImage(src) {
+  if (!src) return;
+  const img = new Image();
+  img.decoding = 'async';
+  img.src = src;
+}
+
 function initialize() {
   document.title = SITE_CONFIG.title;
   document.documentElement.style.setProperty('--bg-image', `url("${SITE_CONFIG.backgroundImage}")`);
   document.documentElement.style.setProperty('--card-back-image', `url("${SITE_CONFIG.cardBackImage}")`);
 
+  // 提前加载牌背与背景，点开抽牌页时即时显示，不再有空白延迟。
+  preloadImage(SITE_CONFIG.cardBackImage);
+  if (SITE_CONFIG.backgroundImage) preloadImage(SITE_CONFIG.backgroundImage);
+
+  assignCircuitPatterns();
   initializeGemstoneOrbit();
   bindEvents();
   goToPage('home');
@@ -680,6 +710,9 @@ function drawCurrentCard() {
     position: positions[state.drawnCards.length],
   });
 
+  // 抽到的牌面立即提前加载，点击「解读」翻牌时直接显示，无加载延迟。
+  preloadImage(selected.image);
+
   // 仅标记本次刚抽出的牌；下一次渲染时，只有它会播放抽牌动画。
   state.newestDrawnCardIndex = state.drawnCards.length - 1;
 
@@ -750,6 +783,7 @@ function renderResults() {
         <p class="result-card__position">${escapeHtml(card.position)}</p>
 
         <div class="tarot-flip-card" data-result-card="${index}">
+          <div class="overflow-glow" aria-hidden="true"></div>
           <div class="tarot-flip-card__inner">
             <div class="tarot-flip-card__face tarot-flip-card__back"></div>
             <div class="tarot-flip-card__face tarot-flip-card__front">
@@ -759,6 +793,7 @@ function renderResults() {
                 class="${card.orientation === 'reversed' ? 'is-reversed' : ''}"
                 data-fallback-image
               >
+              <div class="energy-layer" aria-hidden="true"></div>
             </div>
           </div>
         </div>
@@ -775,7 +810,7 @@ function renderResults() {
             `).join('')}
           </div>
 
-          <div class="full-interpretation">${meaning.fullInterpretation}</div>
+          <div class="full-interpretation"><div class="full-interpretation__frame">${meaning.fullInterpretation}</div></div>
         </div>
       </article>
     `;

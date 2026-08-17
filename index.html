@@ -38,6 +38,8 @@
 
   <body>
     <div id="app" class="app-shell">
+      <!-- 星空粒子层：Canvas 渲染，位于背景图之下（z-index:-4） -->
+      <canvas id="starfield" aria-hidden="true"></canvas>
       <!-- 背景层：路径将在 app.js 的 SITE_CONFIG 中统一配置 -->
       <div class="background-layer" aria-hidden="true"></div>
       <div class="background-overlay" aria-hidden="true"></div>
@@ -316,6 +318,223 @@
     ['gesturestart', 'gesturechange', 'gestureend'].forEach((type) => {
       document.addEventListener(type, blockGesture, { passive: false });
     });
+  })();
+</script>
+
+<script>
+  (() => {
+    // 低开销 Canvas 星空粒子背景，位于背景图之下（z-index:-4）
+    const canvas = document.getElementById('starfield');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // 丰富星光色板：青/绿/蓝/紫/金/粉，赋予每颗星不同颜色的星光
+    const colorPalette = [
+      '#ffffff', '#d1fae5', '#a5f3fc', '#38bdf8', '#6ee7b7',
+      '#c4b5ff', '#a78bfa', '#f0abfc', '#fcd34d', '#fda4af', '#7dd3fc'
+    ];
+    const TAU = Math.PI * 2;
+
+    function hexToRgba(hex, a) {
+      const h = hex.replace('#', '');
+      const r = parseInt(h.substring(0, 2), 16);
+      const g = parseInt(h.substring(2, 4), 16);
+      const b = parseInt(h.substring(4, 6), 16);
+      return `rgba(${r}, ${g}, ${b}, ${a})`;
+    }
+
+    let width = 0, height = 0, stars = [], nebulae = [];
+
+    // 远处流转的星云：大片柔光团，缓慢漂移 + 明暗呼吸
+    const nebulaPalette = ['#7c3aed', '#2563eb', '#0d9488', '#db2777', '#4f46e5'];
+    function initNebulae() {
+      nebulae = [];
+      const base = Math.min(width, height) || 800;
+      const count = 5;
+      for (let i = 0; i < count; i++) {
+        nebulae.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          r: base * (0.28 + Math.random() * 0.24),
+          color: nebulaPalette[i % nebulaPalette.length],
+          alpha: 0.10 + Math.random() * 0.09,
+          driftX: (Math.random() - 0.5) * 0.06,
+          driftY: (Math.random() - 0.5) * 0.05,
+          speed: 0.00018 + Math.random() * 0.0003,
+          phase: Math.random() * TAU
+        });
+      }
+    }
+
+    function resize() {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = Math.floor(width * dpr);
+      canvas.height = Math.floor(height * dpr);
+      canvas.style.width = width + 'px';
+      canvas.style.height = height + 'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0); // 之后按 CSS 像素绘制，高清屏更锐利
+      initStars();
+      initNebulae();
+    }
+
+    function initStars() {
+      stars = [];
+      const count = Math.floor((width * height) / 4000); // 密度调高：星更密
+      for (let i = 0; i < count; i++) {
+        // 约 18% 的星化为「星芒」：四芒十字(cross) 或 六条射线(six)
+        // 其余约 32% 为「极小的远星」(isTiny)，再其余为普通星点
+        const roll = Math.random();
+        const isFlare = roll < 0.18;
+        const isTiny = !isFlare && roll < 0.50;
+        const size = isFlare ? (Math.random() * 1.2 + 1.4)
+                   : isTiny ? (Math.random() * 0.35 + 0.25)
+                   : (Math.random() * 1.0 + 0.5);
+        const baseAlpha = isTiny ? (Math.random() * 0.35 + 0.25) : Math.random();
+        stars.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          size,
+          color: colorPalette[Math.floor(Math.random() * colorPalette.length)],
+          speedY: Math.random() * 0.05 + 0.02,
+          speedX: (Math.random() - 0.5) * 0.02,
+          blinkSpeed: Math.random() * 0.015 + 0.005,
+          alpha: baseAlpha,
+          direction: Math.random() > 0.5 ? 1 : -1,
+          isFlare,
+          isTiny,
+          // 'cross' = 四芒十字闪烁星；'six' = 六条射线的星芒
+          flareType: isFlare ? (Math.random() < 0.5 ? 'cross' : 'six') : null,
+          twinklePhase: Math.random() * TAU,
+          twinkleSpeed: Math.random() * 0.003 + 0.0015
+        });
+      }
+    }
+
+    // 普通星点：亮核 + 一圈淡光晕，避免逐星 shadowBlur 拖慢性能
+    function drawDot(p) {
+      ctx.fillStyle = p.color;
+      ctx.globalAlpha = p.alpha * 0.32;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size * 2.2, 0, TAU);
+      ctx.fill();
+      ctx.globalAlpha = p.alpha;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, TAU);
+      ctx.fill();
+    }
+
+    // 星芒（十字 / 六射）：射线长度随闪烁伸缩，中心一颗亮核
+    function drawFlare(p, now) {
+      // 防御：时间戳缺失/非有限时回退，避免 createLinearGradient 收到 NaN
+      const t = (typeof now === 'number' && isFinite(now)) ? now : performance.now();
+      const tw = 0.5 + 0.5 * Math.sin(t * p.twinkleSpeed + p.twinklePhase); // 0..1 闪烁
+      const len = (p.size * 3 + 8) * (0.55 + 0.45 * tw);   // 射线长度随闪烁伸缩
+      const coreR = p.size * (0.9 + 0.25 * tw);
+      const rays = p.flareType === 'six' ? 6 : 4;
+      const half = Math.max(0.5, p.size * 0.4);            // 射线根部半宽
+      const spread = rays === 6 ? 0.16 : 0.2;              // 射线张开角
+
+      ctx.save();
+      ctx.globalAlpha = p.alpha * (0.55 + 0.45 * tw);
+      ctx.translate(p.x, p.y);
+      ctx.shadowColor = p.color;
+      ctx.shadowBlur = 8;
+      for (let r = 0; r < rays; r++) {
+        const ang = (TAU / rays) * r;
+        const tipX = Math.cos(ang) * len, tipY = Math.sin(ang) * len;
+        const lx = Math.cos(ang - spread) * half, ly = Math.sin(ang - spread) * half;
+        const rx = Math.cos(ang + spread) * half, ry = Math.sin(ang + spread) * half;
+        const grad = ctx.createLinearGradient(0, 0, tipX, tipY);
+        grad.addColorStop(0, hexToRgba(p.color, 1));
+        grad.addColorStop(1, hexToRgba(p.color, 0));
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.lineTo(lx, ly);
+        ctx.lineTo(tipX, tipY);
+        ctx.lineTo(rx, ry);
+        ctx.closePath();
+        ctx.fill();
+      }
+      // 明亮星核
+      ctx.globalAlpha = p.alpha;
+      ctx.fillStyle = '#ffffff';
+      ctx.shadowBlur = 4;
+      ctx.beginPath();
+      ctx.arc(0, 0, coreR * 0.9, 0, TAU);
+      ctx.fill();
+      ctx.restore();
+    }
+
+    // 远处星云：加色混合画出柔光团，缓慢漂移、明暗呼吸（位于星空最底层，在背景图后方）
+    function drawNebula(now) {
+      ctx.save();
+      ctx.globalCompositeOperation = 'lighter'; // 加色：暗底上叠出柔润辉光
+      for (let i = 0; i < nebulae.length; i++) {
+        const n = nebulae[i];
+        n.x += n.driftX;
+        n.y += n.driftY;
+        const m = n.r;
+        // 漂出边界后从对侧回绕，形成无尽流转
+        if (n.x < -m) n.x = width + m; else if (n.x > width + m) n.x = -m;
+        if (n.y < -m) n.y = height + m; else if (n.y > height + m) n.y = -m;
+        const a = n.alpha * (0.6 + 0.4 * Math.sin(now * n.speed + n.phase)); // 呼吸明灭
+        const g = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r);
+        g.addColorStop(0, hexToRgba(n.color, a));
+        g.addColorStop(1, hexToRgba(n.color, 0));
+        ctx.fillStyle = g;
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, n.r, 0, TAU);
+        ctx.fill();
+      }
+      ctx.restore();
+    }
+
+    function draw(now) {
+      ctx.clearRect(0, 0, width, height);
+      const t = (typeof now === 'number' && isFinite(now)) ? now : performance.now();
+      drawNebula(t); // 先画远处星云，星星叠在其上
+      for (let i = 0; i < stars.length; i++) {
+        const p = stars[i];
+        p.x += p.speedX;
+        p.y += p.speedY;
+        if (p.y > height) { p.y = 0; p.x = Math.random() * width; }
+        if (p.x < 0) p.x = width;
+        if (p.x > width) p.x = 0;
+
+        p.alpha += p.blinkSpeed * p.direction;
+        if (p.alpha >= 0.9) { p.alpha = 0.9; p.direction = -1; }
+        else if (p.alpha <= 0.1) { p.alpha = 0.1; p.direction = 1; }
+
+        // 单颗星绘制异常不影响整片星空（背景特效容错）
+        try {
+          if (p.isFlare) drawFlare(p, now);
+          else drawDot(p);
+        } catch (e) { /* 跳过这颗坏星，继续渲染其余 */ }
+      }
+      ctx.globalAlpha = 1;
+      ctx.shadowBlur = 0;
+    }
+
+    function loop(t) {
+      // 首次直接调用 loop() 时 rAF 尚未注入时间戳，需兜底，否则 now 为 undefined → NaN 报错
+      draw((typeof t === 'number' && isFinite(t)) ? t : performance.now());
+      requestAnimationFrame(loop);
+    }
+
+    // 防抖：避免调整窗口时频繁重绘
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(resize, 250);
+    });
+
+    resize();
+    if (reduceMotion) draw(performance.now()); // 尊重「减少动态效果」：仅静态绘制一帧
+    else loop();
   })();
 </script>
   </body>

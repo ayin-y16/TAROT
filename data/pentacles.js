@@ -440,7 +440,7 @@ const pentaclesCards = [
     image: "./assets/cards/pentacles-13.jpg",
     upright: {
       shortText: "星币皇后正位一句话格言",
-      keywords: [],
+      keywords: ["务实", "培育", "安稳", "丰盈"],
       fullInterpretation: `
         <h4>核心讯息</h4>
         <p>星币王后正位象征培育、实用与安稳丰盈的母性力量。</p>
@@ -454,7 +454,7 @@ const pentaclesCards = [
     },
     reversed: {
       shortText: "星币皇后逆位一句话格言",
-      keywords: [],
+      keywords: ["窒息", "物质主义", "自我怀疑", "过度照顾"],
       fullInterpretation: `
         <h4>核心讯息</h4>
         <p>逆位提示窒息、物质主义或自我怀疑，丰盛失衡。</p>
