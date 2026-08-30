@@ -147,7 +147,7 @@ const cupsCards = [
     id: "cups-05",
     order: 41,
     name: "圣杯五",
-    gemstoneName: "堇青石 41",
+    gemstoneName: "石 41",
     category: "cups",
     image: "./assets/cards/cups-05.jpg",
     upright: {
@@ -183,11 +183,11 @@ const cupsCards = [
     id: "cups-06",
     order: 42,
     name: "圣杯六",
-    gemstoneName: "托帕石 42",
+    gemstoneName: "堇青石 1881",
     category: "cups",
     image: "./assets/cards/cups-06.jpg",
     upright: {
-      shortText: "圣杯六正位一句话格言",
+      shortText: "我们可以一同前进，体验时间的流逝，去向未来的彼方。",
       keywords: ["怀旧", "童年记忆", "纯真"],
       fullInterpretation: `
         <h4>核心讯息</h4>
@@ -201,7 +201,7 @@ const cupsCards = [
       `,
     },
     reversed: {
-      shortText: "圣杯六逆位一句话格言",
+      shortText: "只要一直这样旋转下去就好......",
       keywords: ["执着过去", "不成熟"],
       fullInterpretation: `
         <h4>核心讯息</h4>
