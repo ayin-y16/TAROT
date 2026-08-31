@@ -3,7 +3,7 @@ const majorCards = [
     id: "major-00",
     order: 1,
     name: "愚者",
-    gemstoneName: "钴尖晶0365",
+    gemstoneName: "钴尖晶 0365",
     category: "major",
     image: "./assets/cards/major-00.jpg",
     upright: {
@@ -39,7 +39,7 @@ const majorCards = [
     id: "major-01",
     order: 2,
     name: "魔术师",
-    gemstoneName: "翠榴石0570",
+    gemstoneName: "翠榴石 0570",
     category: "major",
     image: "./assets/cards/major-01.jpg",
     upright: {
@@ -75,7 +75,7 @@ const majorCards = [
     id: "major-02",
     order: 3,
     name: "女祭司",
-    gemstoneName: "闪灵钻0419",
+    gemstoneName: "闪灵钻 0419",
     category: "major",
     image: "./assets/cards/major-02.jpg",
     upright: {
@@ -111,7 +111,7 @@ const majorCards = [
     id: "major-03",
     order: 4,
     name: "皇后",
-    gemstoneName: "黑钻1000",
+    gemstoneName: "黑钻 1000",
     category: "major",
     image: "./assets/cards/major-03.jpg",
     upright: {
@@ -147,7 +147,7 @@ const majorCards = [
     id: "major-04",
     order: 5,
     name: "皇帝",
-    gemstoneName: "合金钻石包裹淡红银矿 777",
+    gemstoneName: "合金钻石包裹淡红银矿 0777",
     category: "major",
     image: "./assets/cards/major-04.jpg",
     upright: {
@@ -183,7 +183,7 @@ const majorCards = [
     id: "major-05",
     order: 6,
     name: "教皇",
-    gemstoneName: "粉钻0111",
+    gemstoneName: "粉钻 0111",
     category: "major",
     image: "./assets/cards/major-05.jpg",
     upright: {
@@ -219,7 +219,7 @@ const majorCards = [
     id: "major-06",
     order: 7,
     name: "恋人",
-    gemstoneName: "血玉髓0127",
+    gemstoneName: "血玉髓 0127",
     category: "major",
     image: "./assets/cards/major-06.jpg",
     upright: {
@@ -255,7 +255,7 @@ const majorCards = [
     id: "major-07",
     order: 8,
     name: "战车",
-    gemstoneName: "黑金刚石0812",
+    gemstoneName: "黑金刚石 0812",
     category: "major",
     image: "./assets/cards/major-07.jpg",
     upright: {
@@ -291,7 +291,7 @@ const majorCards = [
     id: "major-08",
     order: 9,
     name: "力量",
-    gemstoneName: "柠檬黄方解石0169",
+    gemstoneName: "柠檬黄方解石 0169",
     category: "major",
     image: "./assets/cards/major-08.jpg",
     upright: {
@@ -327,7 +327,7 @@ const majorCards = [
     id: "major-09",
     order: 10,
     name: "隐士",
-    gemstoneName: "蓝黑色玻璃陨石0006",
+    gemstoneName: "蓝黑色玻璃陨石 0006",
     category: "major",
     image: "./assets/cards/major-09.jpg",
     upright: {
@@ -363,7 +363,7 @@ const majorCards = [
     id: "major-10",
     order: 11,
     name: "命运之轮",
-    gemstoneName: "海蓝宝999",
+    gemstoneName: "海蓝宝 0999",
     category: "major",
     image: "./assets/cards/major-10.jpg",
     upright: {
@@ -399,11 +399,11 @@ const majorCards = [
     id: "major-11",
     order: 12,
     name: "正义",
-    gemstoneName: "蓝纹玛瑙 12",
+    gemstoneName: "银1024",
     category: "major",
     image: "./assets/cards/major-11.jpg",
     upright: {
-      shortText: "正义正位一句话格言",
+      shortText: "真理只在大炮射程之内",
       keywords: ["公平", "真理", "因果报应", "法律裁决"],
       fullInterpretation: `
         <h4>核心讯息</h4>
@@ -417,7 +417,7 @@ const majorCards = [
       `,
     },
     reversed: {
-      shortText: "正义逆位一句话格言",
+      shortText: "鲁莽和愚蠢可不能称为正义",
       keywords: ["不公平", "推卸责任", "不诚实", "偏颇"],
       fullInterpretation: `
         <h4>核心讯息</h4>
@@ -435,7 +435,7 @@ const majorCards = [
     id: "major-12",
     order: 13,
     name: "倒吊人",
-    gemstoneName: "钻石0114",
+    gemstoneName: "钻石 0114",
     category: "major",
     image: "./assets/cards/major-12.jpg",
     upright: {
@@ -471,7 +471,7 @@ const majorCards = [
     id: "major-13",
     order: 14,
     name: "死神",
-    gemstoneName: "堇青石0404",
+    gemstoneName: "堇青石 0404",
     category: "major",
     image: "./assets/cards/major-13.jpg",
     upright: {
@@ -507,7 +507,7 @@ const majorCards = [
     id: "major-14",
     order: 15,
     name: "节制",
-    gemstoneName: "黑篮宝石0527",
+    gemstoneName: "黑蓝宝石 0527",
     category: "major",
     image: "./assets/cards/major-14.jpg",
     upright: {
@@ -543,7 +543,7 @@ const majorCards = [
     id: "major-15",
     order: 16,
     name: "恶魔",
-    gemstoneName: "石英玻璃，0814",
+    gemstoneName: "石英玻璃 0814",
     category: "major",
     image: "./assets/cards/major-15.jpg",
     upright: {
@@ -579,7 +579,7 @@ const majorCards = [
     id: "major-16",
     order: 17,
     name: "高塔",
-    gemstoneName: "淡红银矿0425",
+    gemstoneName: "淡红银矿 0425",
     category: "major",
     image: "./assets/cards/major-16.jpg",
     upright: {
@@ -597,7 +597,7 @@ const majorCards = [
       `,
     },
     reversed: {
-      shortText: "高塔逆位一句话格言",
+      shortText: " ",
       keywords: ["抗拒改变", "避免灾难", "勉强维持现状"],
       fullInterpretation: `
         <h4>核心讯息</h4>
@@ -615,7 +615,7 @@ const majorCards = [
     id: "major-17",
     order: 18,
     name: "星星",
-    gemstoneName: "红绿柱石0601",
+    gemstoneName: "红绿柱石 0601",
     category: "major",
     image: "./assets/cards/major-17.jpg",
     upright: {
@@ -651,7 +651,7 @@ const majorCards = [
     id: "major-18",
     order: 19,
     name: "月亮",
-    gemstoneName: "蓝线石0714",
+    gemstoneName: "蓝线石 0714",
     category: "major",
     image: "./assets/cards/major-18.jpg",
     upright: {
@@ -687,7 +687,7 @@ const majorCards = [
     id: "major-19",
     order: 20,
     name: "太阳",
-    gemstoneName: "紫黄晶0625",
+    gemstoneName: "紫黄晶 0625",
     category: "major",
     image: "./assets/cards/major-19.jpg",
     upright: {
@@ -723,7 +723,7 @@ const majorCards = [
     id: "major-20",
     order: 21,
     name: "审判",
-    gemstoneName: "蓝铜矿0369",
+    gemstoneName: "蓝铜矿 0369",
     category: "major",
     image: "./assets/cards/major-20.jpg",
     upright: {
@@ -759,7 +759,7 @@ const majorCards = [
     id: "major-21",
     order: 22,
     name: "世界",
-    gemstoneName: "四季幽灵0004",
+    gemstoneName: "四季幽灵 0004",
     category: "major",
     image: "./assets/cards/major-21.jpg",
     upright: {
